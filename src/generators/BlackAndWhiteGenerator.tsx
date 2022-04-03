@@ -2,12 +2,9 @@ import { ReactNode } from 'react';
 import { Generator } from './Generator';
 
 export class BlackAndWhiteGenerator extends Generator {
-  route = '/b-and-w';
+  static route = '/b-and-w';
+  static title = 'Black and white';
   requiresUserImage = true;
-
-  constructor() {
-    super();
-  }
 
   renderConfigurator = (generate: () => void): ReactNode => {
     return <div>Configurator</div>;

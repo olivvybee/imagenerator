@@ -1,7 +1,9 @@
 import React from 'react';
 
 export abstract class Generator {
-  abstract route: string;
+  static route: string;
+  static title: string;
+
   abstract requiresUserImage: boolean;
 
   getCanvasSize(image: HTMLImageElement): { width: number; height: number } {
