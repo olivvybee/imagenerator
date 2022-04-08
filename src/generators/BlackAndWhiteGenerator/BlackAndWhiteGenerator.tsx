@@ -13,10 +13,10 @@ export const BlackAndWhiteGenerator: Generator<BlackAndWhiteConfig> = {
     percentage: 50,
   },
 
-  getCanvasSize: (image) => ({ ...image }),
+  getCanvasSize: (image) => ({ width: image.width, height: image.height }),
 
   generate: (image, ctx, config) => {
-    ctx.filter = `grayscale(${config.percentage})`;
+    ctx.filter = `grayscale(${config.percentage / 100})`;
     ctx.drawImage(image, 0, 0);
   },
 };
