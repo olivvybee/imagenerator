@@ -1,11 +1,7 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  BrowserRouter,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { generators } from './generators';
+import { GeneratorPage } from './pages/GeneratorPage';
 
 const App = () => (
   <Router>
@@ -13,7 +9,7 @@ const App = () => (
       {generators.map((generator) => (
         <Route
           path={generator.route}
-          element={<div>Generator {generator.title}</div>}
+          element={<GeneratorPage generator={generator} />}
         />
       ))}
 
