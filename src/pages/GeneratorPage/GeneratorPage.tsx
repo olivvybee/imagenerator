@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
+import classNames from 'classnames';
 
 import { ImageSelector } from '../../components';
 import { Generator } from '../../generators/types';
 
-import './GeneratorPage.module.css';
+import styles from './GeneratorPage.module.css';
 
 interface GeneratorPageProps {
   generator: Generator<any>;
@@ -53,10 +54,25 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   return (
     <div>
       <ImageSelector file={file} setFile={setFile} />
-      <div>{generator.name} generator</div>
-      <generator.Configurator config={config} setConfig={setConfig} />
-      <canvas ref={canvas} />
-      {result && <img src={result} />}
+
+      <div className={styles.generator}>
+        {result ? (
+          <img className={classNames(styles.result)} src={result} />
+        ) : (
+          <div className={styles.placeholder} />
+        )}
+
+        <div className={styles.spacer} />
+
+        {!!file && (
+          <div className={styles.configurator}>
+            <span className={styles.configuratorTitle}>Settings</span>
+            <generator.Configurator config={config} setConfig={setConfig} />
+          </div>
+        )}
+      </div>
+
+      <canvas className={styles.canvas} ref={canvas} />
     </div>
   );
 };

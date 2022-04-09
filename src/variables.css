@@ -1,5 +1,7 @@
 :root {
-  --primary: #b79aff;
-  --primary-hover: #c2a9ff;
-  --primary-active: #ac8aff;
+  --primary: rgb(183, 154, 255);
+  --primary-hover: rgb(194, 169, 255);
+  --primary-active: rgb(172, 139, 255);
+
+  --primary-translucent: rgba(183, 154, 255, 0.33);
 }

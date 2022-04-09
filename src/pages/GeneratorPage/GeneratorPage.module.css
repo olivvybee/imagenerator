@@ -1,3 +1,41 @@
-canvas {
+@import '../../variables.css';
+
+.generator {
+  margin-top: 32px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.canvas {
   display: none;
+}
+
+.result {
+  min-width: 0;
+  width: 100%;
+  height: auto;
+}
+
+.placeholder {
+  width: 100%;
+}
+
+.configurator {
+  flex: 1 0;
+  min-width: 300px;
+  border: 1px solid var(--primary-translucent);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.configuratorTitle {
+  display: block;
+  font-size: 1.25rem;
+  margin-bottom: 24px;
+}
+
+.spacer {
+  width: 32px;
 }
