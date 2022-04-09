@@ -52,7 +52,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
   return (
     <div>
-      <ImageSelector setFile={setFile} />
+      <ImageSelector file={file} setFile={setFile} />
       <div>{generator.name} generator</div>
       <generator.Configurator config={config} setConfig={setConfig} />
       <canvas ref={canvas} />

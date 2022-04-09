@@ -1,0 +1,17 @@
+@import '../../variables.css';
+
+.button {
+  background-color: var(--primary);
+  cursor: pointer;
+  color: #000000;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.button:hover {
+  background-color: var(--primary-hover);
+}
+
+.button:active {
+  background-color: var(--primary-active);
+}

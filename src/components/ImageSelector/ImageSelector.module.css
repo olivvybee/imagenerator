@@ -1,6 +1,24 @@
+@import '../../variables.css';
+
+.dropzone {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .preview {
   width: 48px;
   height: 48px;
   object-fit: cover;
   margin-right: 16px;
+}
+
+.iconWrapper {
+  margin-right: 16px;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
