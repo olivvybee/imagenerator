@@ -1,0 +1,62 @@
+@import '../../variables.css';
+
+.navbar {
+  background-color: #221627;
+  margin-bottom: 24px;
+  padding: 16px 32px;
+}
+
+.navbarContent {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.staticContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.homeLink {
+  color: unset;
+  text-decoration: none;
+}
+
+.siteName {
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  color: unset;
+  font-family: unset;
+  font-size: unset;
+  cursor: pointer;
+}
+
+.expandableSection {
+  overflow: hidden;
+  transition: max-height 0.25s;
+}
+
+.spacer {
+  height: 16px;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.link {
+  text-decoration: none;
+}
