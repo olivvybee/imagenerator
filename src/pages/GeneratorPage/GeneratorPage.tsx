@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { ImageSelector } from '../components';
-import { Generator } from '../generators/types';
+
+import { ImageSelector } from '../../components';
+import { Generator } from '../../generators/types';
+
+import './GeneratorPage.module.css';
 
 interface GeneratorPageProps {
   generator: Generator<any>;
@@ -52,7 +55,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
       <ImageSelector setFile={setFile} />
       <div>{generator.name} generator</div>
       <generator.Configurator config={config} setConfig={setConfig} />
-      <canvas style={{ display: 'none' }} ref={canvas} />
+      <canvas ref={canvas} />
       {result && <img src={result} />}
     </div>
   );

@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { generators } from './generators';
-import { GeneratorPage } from './pages/GeneratorPage';
+import { GeneratorPage } from './pages';
 
 const App = () => (
   <Router>
