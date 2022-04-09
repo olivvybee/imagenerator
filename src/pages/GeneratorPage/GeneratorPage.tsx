@@ -69,7 +69,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
           [styles.vertical]: useVerticalLayout,
         })}>
         {result ? (
-          <img className={classNames(styles.result)} src={result} />
+          <img className={classNames(styles.result)} src={result} alt="" />
         ) : (
           <div className={styles.placeholder} />
         )}

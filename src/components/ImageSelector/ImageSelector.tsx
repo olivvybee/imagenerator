@@ -21,8 +21,6 @@ export const ImageSelector: React.FC<ImageSelectorProps> = ({
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      console.log(acceptedFiles);
-
       if (acceptedFiles.length === 0) {
         return;
       }
@@ -43,7 +41,7 @@ export const ImageSelector: React.FC<ImageSelectorProps> = ({
     setPreviewUrl(url);
   }, [file, setPreviewUrl]);
 
-  const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: 'image/jpeg, image/png',
     multiple: false,
