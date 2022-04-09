@@ -3,6 +3,8 @@ import { useDropzone } from 'react-dropzone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 
+import styles from './ImageSelector.module.css';
+
 interface ImageSelectorProps {
   setFile: (file: File) => void;
 }
@@ -36,7 +38,7 @@ export const ImageSelector: React.FC<ImageSelectorProps> = ({ setFile }) => {
       <input {...getInputProps()} />
       {acceptedFiles.length > 0 ? (
         <>
-          {/* <img className="preview" src={previewUrl} alt="" /> */}
+          <img className={styles.preview} src={previewUrl} alt="" />
           <span>Change image</span>
         </>
       ) : (
