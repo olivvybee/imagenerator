@@ -51,6 +51,12 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     image.src = url;
   }, [file, generator, config]);
 
+  const previousFilename = file
+    ? file.name.substring(0, file.name.lastIndexOf('.'))
+    : 'image';
+  const generatorFilename = generator.name.toLowerCase().replaceAll(' ', '-');
+  const newFilename = `${previousFilename}-${generatorFilename}.png`;
+
   return (
     <div>
       <ImageSelector file={file} setFile={setFile} />
@@ -65,9 +71,19 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
         <div className={styles.spacer} />
 
         {!!file && (
-          <div className={styles.configurator}>
-            <span className={styles.configuratorTitle}>Settings</span>
-            <generator.Configurator config={config} setConfig={setConfig} />
+          <div className={styles.sidebar}>
+            <div className={styles.downloadInstructions}>
+              Tap and hold the image to save, or{' '}
+              <a href={result} download={newFilename}>
+                download it
+              </a>
+              .
+            </div>
+
+            <div className={styles.configurator}>
+              <span className={styles.configuratorTitle}>Settings</span>
+              <generator.Configurator config={config} setConfig={setConfig} />
+            </div>
           </div>
         )}
       </div>

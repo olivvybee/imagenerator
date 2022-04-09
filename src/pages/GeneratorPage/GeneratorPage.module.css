@@ -22,9 +22,19 @@
   width: 100%;
 }
 
-.configurator {
+.sidebar {
   flex: 1 0;
   min-width: 300px;
+}
+
+.downloadInstructions {
+  border: 1px solid var(--primary-translucent);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.configurator {
   border: 1px solid var(--primary-translucent);
   border-radius: 8px;
   padding: 16px;

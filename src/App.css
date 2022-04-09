@@ -1,3 +1,5 @@
+@import './variables.css';
+
 * {
   box-sizing: border-box;
 }
@@ -11,4 +13,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--primary);
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+a:active {
+  color: var(--primary-active);
 }
