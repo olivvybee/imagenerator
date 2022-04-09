@@ -21,7 +21,6 @@
 }
 
 .homeLink {
-  color: unset;
   text-decoration: none;
 }
 
@@ -59,4 +58,8 @@
 
 .link {
   text-decoration: none;
+}
+
+.link:hover {
+  color: #000000;
 }

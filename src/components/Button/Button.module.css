@@ -10,8 +10,10 @@
 
 .button:hover {
   background-color: var(--primary-hover);
+  color: #000000;
 }
 
 .button:active {
   background-color: var(--primary-active);
+  color: #000000;
 }
