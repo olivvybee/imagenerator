@@ -8,6 +8,11 @@
   align-items: flex-start;
 }
 
+.generator.vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
 .canvas {
   display: none;
 }
@@ -16,6 +21,7 @@
   min-width: 0;
   width: 100%;
   height: auto;
+  margin-bottom: 16px;
 }
 
 .placeholder {
@@ -24,7 +30,7 @@
 
 .sidebar {
   flex: 1 0;
-  min-width: 300px;
+  min-width: 240px;
 }
 
 .downloadInstructions {
@@ -48,4 +54,11 @@
 
 .spacer {
   width: 32px;
+}
+
+@media screen and (max-width: 760px) {
+  .generator {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

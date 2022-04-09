@@ -13,6 +13,7 @@ interface GeneratorPageProps {
 export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const canvas = useRef<HTMLCanvasElement>(null);
 
+  const [useVerticalLayout, setUseVerticalLayout] = useState(false);
   const [config, setConfig] = useState<object>(generator.defaultConfig);
   const [file, setFile] = useState<File | undefined>();
   const [result, setResult] = useState<string | undefined>();
@@ -34,6 +35,8 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
       canvas.current.width = width;
       canvas.current.height = height;
+
+      setUseVerticalLayout(width / height >= 1.5);
 
       const ctx = canvas.current.getContext('2d');
       if (!ctx) {
@@ -61,7 +64,10 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     <div>
       <ImageSelector file={file} setFile={setFile} />
 
-      <div className={styles.generator}>
+      <div
+        className={classNames(styles.generator, {
+          [styles.vertical]: useVerticalLayout,
+        })}>
         {result ? (
           <img className={classNames(styles.result)} src={result} />
         ) : (
