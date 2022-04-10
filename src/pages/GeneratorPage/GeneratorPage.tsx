@@ -23,9 +23,9 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
   // Reset when changing generators
   useEffect(() => {
-    setResult(undefined);
-    setInputUrl(undefined);
     setConfig(generator.defaultConfig);
+    setInputUrl(undefined);
+    setResult(undefined);
   }, [generator]);
 
   useEffect(() => {
@@ -33,10 +33,15 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
       return;
     }
 
+    const hasMissingConfig = Object.keys(generator.defaultConfig).some(
+      (key) => (config as any)[key] === undefined
+    );
+    if (hasMissingConfig) {
+      return;
+    }
+
     const image = new Image();
     image.onload = () => {
-      URL.revokeObjectURL(image.src);
-
       if (!canvas.current) {
         return;
       }
@@ -88,7 +93,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
         className={classNames(styles.generator, {
           [styles.vertical]: useVerticalLayout,
         })}>
-        {result ? (
+        {inputUrl && result ? (
           <img className={classNames(styles.result)} src={result} alt="" />
         ) : (
           <div className={styles.placeholder} />
