@@ -26,6 +26,7 @@
 
 .fileInputsSpacer {
   width: 16px;
+  height: 16px;
 }
 
 .randomButton {
@@ -75,5 +76,10 @@
   .generator {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .fileInputs {
+    flex-direction: column;
+    align-items: unset;
   }
 }
