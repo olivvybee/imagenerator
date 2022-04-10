@@ -63,3 +63,7 @@
 .link:hover {
   color: #000000;
 }
+
+.link:not(:last-child) {
+  margin-right: 8px;
+}

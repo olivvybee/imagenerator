@@ -21,6 +21,13 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const [inputUrl, setInputUrl] = useState<string | undefined>();
   const [result, setResult] = useState<string | undefined>();
 
+  // Reset when changing generators
+  useEffect(() => {
+    setResult(undefined);
+    setInputUrl(undefined);
+    setConfig(generator.defaultConfig);
+  }, [generator]);
+
   useEffect(() => {
     if (!inputUrl) {
       return;
@@ -64,14 +71,16 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     <div>
       <div className={styles.fileInputs}>
         <ImageSelector selectedUrl={inputUrl} setSelectedUrl={setInputUrl} />
-        <div className={styles.fileInputsSpacer} />
         {selectRandomUrl && (
-          <Button
-            className={styles.randomButton}
-            icon={faDice}
-            onClick={() => setInputUrl(selectRandomUrl())}>
-            Use random image
-          </Button>
+          <>
+            <div className={styles.fileInputsSpacer} />
+            <Button
+              className={styles.randomButton}
+              icon={faDice}
+              onClick={() => setInputUrl(selectRandomUrl())}>
+              Use random image
+            </Button>
+          </>
         )}
       </div>
 
