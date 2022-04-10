@@ -10,6 +10,7 @@ import styles from './Button.module.css';
 interface ButtonProps {
   onClick: () => void;
   className?: string;
+  disabled?: boolean;
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   icon?: FontAwesomeIconProps['icon'];
 }
@@ -18,6 +19,7 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
   className,
+  disabled,
   type = 'button',
   icon,
 }) => {
@@ -36,6 +38,7 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       className={classNames(styles.button, className)}
       onClick={onClick}
+      disabled={disabled}
       type={type}>
       {content}
     </button>

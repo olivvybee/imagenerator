@@ -10,8 +10,10 @@
   background-color: var(--primary);
   cursor: pointer;
   color: #000000;
-  padding: 8px;
+  padding: 8px 12px;
   border-radius: 8px;
+  line-height: 1.5;
+  min-width: 40px;
 }
 
 .button:hover {
@@ -22,6 +24,14 @@
 .button:active {
   background-color: var(--primary-active);
   color: #000000;
+}
+
+.button:disabled,
+.button:hover:disabled,
+.button:active:disabled {
+  opacity: 0.5;
+  cursor: default;
+  background-color: var(--primary);
 }
 
 .contentWithIcon {
