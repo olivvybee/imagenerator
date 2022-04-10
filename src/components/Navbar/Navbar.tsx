@@ -45,8 +45,6 @@ export const Navbar = () => {
           className={styles.expandableSection}
           ref={expander}
           style={{ maxHeight: isExpanded ? expanderHeight : 0 }}>
-          <div className={styles.spacer} />
-
           <div className={styles.linkList}>
             {_sortBy(generators, 'name').map((generator) => (
               <Link

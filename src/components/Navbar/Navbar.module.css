@@ -3,7 +3,7 @@
 .navbar {
   background-color: #221627;
   margin-bottom: 16px;
-  padding: 16px 32px;
+  padding: 8px 0;
 }
 
 .navbarContent {
@@ -22,6 +22,7 @@
 }
 
 .homeLink {
+  display: block;
   text-decoration: none;
   font-family: 'Fredoka One', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
@@ -42,6 +43,7 @@
   font-family: unset;
   font-size: unset;
   cursor: pointer;
+  padding: 0;
 }
 
 .expandableSection {
@@ -58,6 +60,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  margin-bottom: 8px;
 }
 
 .link {
@@ -70,4 +73,22 @@
 
 .link:not(:last-child) {
   margin-right: 8px;
+}
+
+@media screen and (max-width: 760px) {
+  .homeLink {
+    margin-bottom: 8px;
+  }
+
+  .staticContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .linkList {
+    margin-top: 8px;
+    justify-content: center;
+  }
 }
