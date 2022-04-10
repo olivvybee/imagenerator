@@ -12,6 +12,7 @@ const App = () => (
       <Routes>
         {generators.map((generator) => (
           <Route
+            key={generator.route}
             path={generator.route}
             element={<GeneratorPage generator={generator} />}
           />

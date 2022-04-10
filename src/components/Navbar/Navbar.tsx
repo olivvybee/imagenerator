@@ -50,6 +50,7 @@ export const Navbar = () => {
           <div className={styles.linkList}>
             {_sortBy(generators, 'name').map((generator) => (
               <Link
+                key={generator.route}
                 to={generator.route}
                 className={classNames(buttonStyles.button, styles.link)}>
                 {generator.name}
