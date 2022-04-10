@@ -30,7 +30,7 @@ export const Navbar = () => {
       <div className={styles.navbarContent}>
         <div className={styles.staticContent}>
           <Link to="/" className={styles.homeLink}>
-            <h1 className={styles.siteName}>Jenny</h1>
+            <h1 className={styles.siteName}>imagenerator</h1>
           </Link>
 
           <button

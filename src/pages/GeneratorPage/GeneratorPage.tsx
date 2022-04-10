@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet';
 import { faDice } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 
@@ -73,53 +74,58 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const newFilename = `${previousFilename}-${generatorFilename}.png`;
 
   return (
-    <div>
-      <div className={styles.fileInputs}>
-        <ImageSelector selectedUrl={inputUrl} setSelectedUrl={setInputUrl} />
-        {selectRandomUrl && (
-          <>
-            <div className={styles.fileInputsSpacer} />
-            <Button
-              className={styles.randomButton}
-              icon={faDice}
-              onClick={() => setInputUrl(selectRandomUrl())}>
-              Use random image
-            </Button>
-          </>
-        )}
-      </div>
+    <>
+      <Helmet>
+        <title>{name} - imagenerator</title>
+      </Helmet>
+      <div>
+        <div className={styles.fileInputs}>
+          <ImageSelector selectedUrl={inputUrl} setSelectedUrl={setInputUrl} />
+          {selectRandomUrl && (
+            <>
+              <div className={styles.fileInputsSpacer} />
+              <Button
+                className={styles.randomButton}
+                icon={faDice}
+                onClick={() => setInputUrl(selectRandomUrl())}>
+                Use random image
+              </Button>
+            </>
+          )}
+        </div>
 
-      <div
-        className={classNames(styles.generator, {
-          [styles.vertical]: useVerticalLayout,
-        })}>
-        {inputUrl && result ? (
-          <img className={classNames(styles.result)} src={result} alt="" />
-        ) : (
-          <div className={styles.placeholder} />
-        )}
+        <div
+          className={classNames(styles.generator, {
+            [styles.vertical]: useVerticalLayout,
+          })}>
+          {inputUrl && result ? (
+            <img className={classNames(styles.result)} src={result} alt="" />
+          ) : (
+            <div className={styles.placeholder} />
+          )}
 
-        <div className={styles.spacer} />
+          <div className={styles.spacer} />
 
-        {!!inputUrl && (
-          <div className={styles.sidebar}>
-            <div className={styles.downloadInstructions}>
-              Tap and hold the image to save, or{' '}
-              <a href={result} download={newFilename}>
-                download it
-              </a>
-              .
+          {!!inputUrl && (
+            <div className={styles.sidebar}>
+              <div className={styles.downloadInstructions}>
+                Tap and hold the image to save, or{' '}
+                <a href={result} download={newFilename}>
+                  download it
+                </a>
+                .
+              </div>
+
+              <div className={styles.configurator}>
+                <span className={styles.configuratorTitle}>Settings</span>
+                <Configurator config={config} setConfig={setConfig} />
+              </div>
             </div>
+          )}
+        </div>
 
-            <div className={styles.configurator}>
-              <span className={styles.configuratorTitle}>Settings</span>
-              <Configurator config={config} setConfig={setConfig} />
-            </div>
-          </div>
-        )}
+        <canvas className={styles.canvas} ref={canvas} />
       </div>
-
-      <canvas className={styles.canvas} ref={canvas} />
-    </div>
+    </>
   );
 };
