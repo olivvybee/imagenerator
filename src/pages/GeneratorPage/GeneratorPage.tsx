@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
+import { faDice } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 
-import { ImageSelector } from '../../components';
+import { Button, ImageSelector } from '../../components';
 import { Generator } from '../../generators/types';
 
 import styles from './GeneratorPage.module.css';
@@ -13,13 +14,15 @@ interface GeneratorPageProps {
 export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const canvas = useRef<HTMLCanvasElement>(null);
 
+  const { name, defaultConfig, selectRandomUrl, Configurator } = generator;
+
   const [useVerticalLayout, setUseVerticalLayout] = useState(false);
-  const [config, setConfig] = useState<object>(generator.defaultConfig);
-  const [file, setFile] = useState<File | undefined>();
+  const [config, setConfig] = useState<object>(defaultConfig);
+  const [inputUrl, setInputUrl] = useState<string | undefined>();
   const [result, setResult] = useState<string | undefined>();
 
   useEffect(() => {
-    if (!file) {
+    if (!inputUrl) {
       return;
     }
 
@@ -50,19 +53,27 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
       setResult(result);
     };
 
-    const url = URL.createObjectURL(file);
-    image.src = url;
-  }, [file, generator, config]);
+    image.src = inputUrl;
+  }, [inputUrl, generator, config]);
 
-  const previousFilename = file
-    ? file.name.substring(0, file.name.lastIndexOf('.'))
-    : 'image';
-  const generatorFilename = generator.name.toLowerCase().replaceAll(' ', '-');
+  const previousFilename = 'image';
+  const generatorFilename = name.toLowerCase().replaceAll(' ', '-');
   const newFilename = `${previousFilename}-${generatorFilename}.png`;
 
   return (
     <div>
-      <ImageSelector file={file} setFile={setFile} />
+      <div className={styles.fileInputs}>
+        <ImageSelector selectedUrl={inputUrl} setSelectedUrl={setInputUrl} />
+        <div className={styles.fileInputsSpacer} />
+        {selectRandomUrl && (
+          <Button
+            className={styles.randomButton}
+            icon={faDice}
+            onClick={() => setInputUrl(selectRandomUrl())}>
+            Use random image
+          </Button>
+        )}
+      </div>
 
       <div
         className={classNames(styles.generator, {
@@ -76,7 +87,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
         <div className={styles.spacer} />
 
-        {!!file && (
+        {!!inputUrl && (
           <div className={styles.sidebar}>
             <div className={styles.downloadInstructions}>
               Tap and hold the image to save, or{' '}
@@ -88,7 +99,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
             <div className={styles.configurator}>
               <span className={styles.configuratorTitle}>Settings</span>
-              <generator.Configurator config={config} setConfig={setConfig} />
+              <Configurator config={config} setConfig={setConfig} />
             </div>
           </div>
         )}

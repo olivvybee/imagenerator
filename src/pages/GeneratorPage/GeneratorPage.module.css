@@ -17,6 +17,21 @@
   display: none;
 }
 
+.fileInputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+.fileInputsSpacer {
+  width: 16px;
+}
+
+.randomButton {
+  flex: 1;
+}
+
 .result {
   min-width: 0;
   width: 100%;

@@ -1,24 +1,22 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 
 import buttonStyles from '../Button/Button.module.css';
 
 import styles from './ImageSelector.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface ImageSelectorProps {
-  file: File | undefined;
-  setFile: (file: File) => void;
+  selectedUrl: string | undefined;
+  setSelectedUrl: (url: string) => void;
 }
 
 export const ImageSelector: React.FC<ImageSelectorProps> = ({
-  file,
-  setFile,
+  selectedUrl,
+  setSelectedUrl,
 }) => {
-  const [previewUrl, setPreviewUrl] = useState<string>();
-
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       if (acceptedFiles.length === 0) {
@@ -26,20 +24,11 @@ export const ImageSelector: React.FC<ImageSelectorProps> = ({
       }
 
       const file = acceptedFiles[0];
-      setFile(file);
+      const url = URL.createObjectURL(file);
+      setSelectedUrl(url);
     },
-    [setFile]
+    [setSelectedUrl]
   );
-
-  useEffect(() => {
-    if (!file) {
-      setPreviewUrl(undefined);
-      return;
-    }
-
-    const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
-  }, [file, setPreviewUrl]);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -52,14 +41,14 @@ export const ImageSelector: React.FC<ImageSelectorProps> = ({
       {...getRootProps()}
       className={classNames(styles.dropzone, buttonStyles.button)}>
       <input {...getInputProps()} />
-      {!!previewUrl ? (
+      {!!selectedUrl ? (
         <>
-          <img className={styles.preview} src={previewUrl} alt="" />
+          <img className={styles.preview} src={selectedUrl} alt="" />
           <span>Change image</span>
         </>
       ) : (
         <>
-          <div className={styles.iconWrapper}>
+          <div className={buttonStyles.iconWrapper}>
             <FontAwesomeIcon icon={faImage} size="2x" />
           </div>
           <span>Choose an image</span>

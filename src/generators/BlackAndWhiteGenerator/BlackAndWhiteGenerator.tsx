@@ -6,7 +6,6 @@ import { BlackAndWhiteConfig } from './types';
 export const BlackAndWhiteGenerator: Generator<BlackAndWhiteConfig> = {
   route: '/bw',
   name: 'Black and white',
-  requiresUserImage: true,
   Configurator: BlackAndWhiteConfigurator,
 
   defaultConfig: {
@@ -14,6 +13,8 @@ export const BlackAndWhiteGenerator: Generator<BlackAndWhiteConfig> = {
   },
 
   getCanvasSize: (image) => ({ width: image.width, height: image.height }),
+
+  selectRandomUrl: () => `${process.env.PUBLIC_URL}/logo512.png`,
 
   generate: (image, ctx, config) => {
     ctx.filter = `grayscale(${config.percentage / 100})`;

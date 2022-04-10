@@ -5,6 +5,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  flex: 1;
 }
 
 .preview {
@@ -12,13 +13,4 @@
   height: 48px;
   object-fit: cover;
   margin-right: 16px;
-}
-
-.iconWrapper {
-  margin-right: 16px;
-  height: 48px;
-  width: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

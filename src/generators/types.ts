@@ -3,9 +3,9 @@ import React from 'react';
 export interface Generator<C extends {}> {
   route: string;
   name: string;
-  requiresUserImage: boolean;
 
   defaultConfig: C;
+  Configurator: ConfiguratorComponent<C>;
 
   getCanvasSize: (image: HTMLImageElement) => { width: number; height: number };
   generate: (
@@ -13,7 +13,8 @@ export interface Generator<C extends {}> {
     ctx: CanvasRenderingContext2D,
     config: C
   ) => void;
-  Configurator: ConfiguratorComponent<C>;
+
+  selectRandomUrl?: () => string;
 }
 
 export type ConfiguratorComponent<C extends {}> = React.ComponentType<{
