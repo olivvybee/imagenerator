@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import { generators } from './generators';
-import { GeneratorPage } from './pages';
+import { GeneratorPage, Homepage } from './pages';
 
 import './App.css';
 import { PageLayout } from './components/PageLayout/PageLayout';
@@ -23,7 +23,7 @@ const App = () => (
             />
           ))}
 
-          <Route path="/" element={<div>Homepage</div>} />
+          <Route path="/" element={<Homepage />} />
 
           <Route path="*" element={<div>404</div>} />
         </Routes>

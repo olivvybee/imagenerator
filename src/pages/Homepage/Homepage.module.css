@@ -1,0 +1,28 @@
+.bigText {
+  font-size: 1.75rem;
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.generatorList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 24px 0 64px;
+  list-style-type: none;
+}
+
+.generatorLink {
+  display: block;
+  text-decoration: none;
+  margin: 8px 8px 0;
+}
+
+.generatorLink:first-child {
+  margin-left: 0;
+}
+
+.twitterLink {
+  font-weight: bold;
+}
