@@ -15,7 +15,8 @@ interface GeneratorPageProps {
 export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const canvas = useRef<HTMLCanvasElement>(null);
 
-  const { name, defaultConfig, selectRandomUrl, Configurator } = generator;
+  const { name, defaultConfig, selectRandomUrl, Configurator, staticImage } =
+    generator;
 
   const [useVerticalLayout, setUseVerticalLayout] = useState(false);
   const [config, setConfig] = useState<object>(defaultConfig);
@@ -28,6 +29,13 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     setInputUrl(undefined);
     setResult(undefined);
   }, [generator]);
+
+  // Use static image if there is one
+  useEffect(() => {
+    if (staticImage) {
+      setInputUrl(staticImage);
+    }
+  }, [staticImage]);
 
   useEffect(() => {
     if (!inputUrl) {
@@ -79,20 +87,25 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
         <title>{name} - imagenerator</title>
       </Helmet>
       <div>
-        <div className={styles.fileInputs}>
-          <ImageSelector selectedUrl={inputUrl} setSelectedUrl={setInputUrl} />
-          {selectRandomUrl && (
-            <>
-              <div className={styles.fileInputsSpacer} />
-              <Button
-                className={styles.randomButton}
-                icon={faDice}
-                onClick={() => setInputUrl(selectRandomUrl())}>
-                Use random image
-              </Button>
-            </>
-          )}
-        </div>
+        {!staticImage && (
+          <div className={styles.fileInputs}>
+            <ImageSelector
+              selectedUrl={inputUrl}
+              setSelectedUrl={setInputUrl}
+            />
+            {selectRandomUrl && (
+              <>
+                <div className={styles.fileInputsSpacer} />
+                <Button
+                  className={styles.randomButton}
+                  icon={faDice}
+                  onClick={() => setInputUrl(selectRandomUrl())}>
+                  Use random image
+                </Button>
+              </>
+            )}
+          </div>
+        )}
 
         <div
           className={classNames(styles.generator, {

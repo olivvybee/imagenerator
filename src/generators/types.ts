@@ -7,6 +7,8 @@ export interface Generator<C extends {}> {
   defaultConfig: C;
   Configurator: ConfiguratorComponent<C>;
 
+  staticImage?: string;
+
   getCanvasSize: (image: HTMLImageElement) => { width: number; height: number };
   generate: (
     image: HTMLImageElement,
