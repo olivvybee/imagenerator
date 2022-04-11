@@ -50,3 +50,17 @@
   align-items: center;
   justify-content: center;
 }
+
+.smallIconWrapper {
+  margin-right: 4px;
+  height: 16px;
+  width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.smallButton {
+  font-size: 0.9em;
+  padding: 4px 6px;
+}

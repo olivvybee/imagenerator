@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
-import { faDice } from '@fortawesome/free-solid-svg-icons';
+import { faDice, faCopy, faCheck } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 
 import { Button, ImageSelector } from '../../components';
 import { Generator } from '../../generators/types';
+import useCopyToClipboard from '../../utils/useCopyToClipboard';
 
 import styles from './GeneratorPage.module.css';
 
@@ -15,13 +16,20 @@ interface GeneratorPageProps {
 export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const canvas = useRef<HTMLCanvasElement>(null);
 
-  const { name, defaultConfig, selectRandomUrl, Configurator, staticImage } =
-    generator;
+  const {
+    name,
+    defaultConfig,
+    selectRandomUrl,
+    Configurator,
+    staticImage,
+    getSuggestedAltText,
+  } = generator;
 
   const [useVerticalLayout, setUseVerticalLayout] = useState(false);
   const [config, setConfig] = useState<object>(defaultConfig);
   const [inputUrl, setInputUrl] = useState<string | undefined>();
   const [result, setResult] = useState<string | undefined>();
+  const [copiedText, copyToClipboard] = useCopyToClipboard();
 
   // Reset when changing generators
   useEffect(() => {
@@ -81,6 +89,8 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const generatorFilename = name.toLowerCase().replaceAll(' ', '-');
   const newFilename = `${previousFilename}-${generatorFilename}.png`;
 
+  const altText = getSuggestedAltText ? getSuggestedAltText(config) : '';
+
   return (
     <>
       <Helmet>
@@ -136,6 +146,21 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
             </div>
           )}
         </div>
+
+        {altText && (
+          <div className={styles.altText}>
+            <div className={styles.altTextTitleWrapper}>
+              <div className={styles.altTextTitle}>Suggested alt text</div>
+              <Button
+                onClick={() => copyToClipboard(altText)}
+                small={true}
+                icon={!!copiedText ? faCheck : faCopy}>
+                {!!copiedText ? 'Copied' : 'Copy'}
+              </Button>
+            </div>
+            <p>{altText}</p>
+          </div>
+        )}
 
         <canvas className={styles.canvas} ref={canvas} />
       </div>

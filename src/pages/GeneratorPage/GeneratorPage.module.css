@@ -72,6 +72,26 @@
   width: 32px;
 }
 
+.altText {
+  border: 1px solid var(--primary-translucent);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.altTextTitle {
+  display: block;
+  font-size: 1.25rem;
+  margin-right: 16px;
+}
+
+.altTextTitleWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
 @media screen and (max-width: 760px) {
   .generator {
     flex-direction: column;

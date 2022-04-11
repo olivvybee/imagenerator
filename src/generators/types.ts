@@ -16,6 +16,7 @@ export interface Generator<C extends {}> {
     config: C
   ) => void;
 
+  getSuggestedAltText?: (config: C) => string;
   selectRandomUrl?: () => string;
 }
 

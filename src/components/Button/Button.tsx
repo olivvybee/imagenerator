@@ -13,6 +13,7 @@ interface ButtonProps {
   disabled?: boolean;
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   icon?: FontAwesomeIconProps['icon'];
+  small?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -22,11 +23,12 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   type = 'button',
   icon,
+  small,
 }) => {
   const content = icon ? (
     <div className={styles.contentWithIcon}>
-      <div className={styles.iconWrapper}>
-        <FontAwesomeIcon icon={icon} size="2x" />
+      <div className={small ? styles.smallIconWrapper : styles.iconWrapper}>
+        <FontAwesomeIcon icon={icon} size={small ? '1x' : '2x'} />
       </div>
       {children}
     </div>
@@ -36,7 +38,9 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={classNames(styles.button, className)}
+      className={classNames(styles.button, className, {
+        [styles.smallButton]: small,
+      })}
       onClick={onClick}
       disabled={disabled}
       type={type}>

@@ -18,6 +18,33 @@ export const TuxedoMaskGenerator: Generator<TuxedoMaskConfig> = {
 
   getCanvasSize: () => ({ width: 1200, height: 1588 }),
 
+  getSuggestedAltText: (config) => {
+    const roseText = config.roseLabel
+      ? `, with text on top that says "${config.roseLabel}".`
+      : '.';
+
+    const tuxedoMaskText = config.tuxedoMaskLabel
+      ? `, with text on top that says "${config.tuxedoMaskLabel}".`
+      : '.';
+
+    const sailorMoonText = config.sailorMoonLabel
+      ? `, with text on top that says "${config.sailorMoonLabel}".`
+      : '.';
+
+    return (
+      'Four panels with screenshots from the Sailor Moon anime.' +
+      ' The first shows a rose sticking out of the ground on a pink and purple background' +
+      roseText +
+      ' The second shows Tuxedo Mask' +
+      tuxedoMaskText +
+      ' There is a text box at the bottom of the second panel that says "My job here is done".' +
+      ' The third panel shows Sailor Moon looking up at Tuxedo Mask' +
+      sailorMoonText +
+      ' There is a text box that says "But you didn\'t do anything".' +
+      ' The final panel shows Tuxedo Mask sweeping his cape as he turns to leave.'
+    );
+  },
+
   generate: (image, ctx, config) => {
     ctx.drawImage(image, 0, 0);
 
