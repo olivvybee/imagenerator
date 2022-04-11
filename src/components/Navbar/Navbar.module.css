@@ -58,13 +58,16 @@
 .linkList {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-end;
   margin-bottom: 8px;
+  flex-wrap: wrap;
 }
 
 .link {
   text-decoration: none;
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 .link:hover {
