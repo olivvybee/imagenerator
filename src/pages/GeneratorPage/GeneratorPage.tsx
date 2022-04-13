@@ -25,10 +25,6 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const [copiedText, copyToClipboard] = useCopyToClipboard();
   const [hasSuggestedAltText, setHasSuggestedAltText] = useState(false);
 
-  const previousFilename = 'image';
-  const generatorFilename = name.toLowerCase().replaceAll(' ', '-');
-  const newFilename = `${previousFilename}-${generatorFilename}.png`;
-
   useEffect(() => {
     if (resultImage.current) {
       resultImage.current.src = '';
@@ -103,16 +99,6 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
           <div className={styles.spacer} />
 
           <div className={styles.sidebar}>
-            {!!resultImage.current?.src && (
-              <div className={styles.downloadInstructions}>
-                Tap and hold the image to save, or{' '}
-                <a href={resultImage.current?.src} download={newFilename}>
-                  download it
-                </a>
-                .
-              </div>
-            )}
-
             <div className={styles.configurator}>
               <span className={styles.configuratorTitle}>Settings</span>
               {renderer}
