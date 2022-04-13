@@ -40,10 +40,6 @@
   margin-bottom: 16px;
 }
 
-.placeholder {
-  width: 100%;
-}
-
 .sidebar {
   flex: 1 0;
   min-width: 240px;
@@ -77,6 +73,11 @@
   border-radius: 8px;
   padding: 16px;
   margin-top: 16px;
+  display: none;
+}
+
+.visibleAltText {
+  display: block;
 }
 
 .altTextTitle {

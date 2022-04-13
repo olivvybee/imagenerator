@@ -1,95 +1,69 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef, useMemo, useCallback, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { faDice, faCopy, faCheck } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 
 import { Button, ImageSelector } from '../../components';
-import { Generator } from '../../generators/types';
+import { GeneratorMetadata, UpdateOptions } from '../../generators/types';
 import useCopyToClipboard from '../../utils/useCopyToClipboard';
 
 import styles from './GeneratorPage.module.css';
 
 interface GeneratorPageProps {
-  generator: Generator<any>;
+  generator: GeneratorMetadata;
 }
 
 export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
+  const { name, allowsCustomImage, selectRandomImage, Renderer } = generator;
+
   const canvas = useRef<HTMLCanvasElement>(null);
+  const resultImage = useRef<HTMLImageElement>(null);
+  const altTextElement = useRef<HTMLParagraphElement>(null);
+  const altText = useRef<string>('');
 
-  const {
-    name,
-    defaultConfig,
-    selectRandomUrl,
-    Configurator,
-    staticImage,
-    getSuggestedAltText,
-  } = generator;
-
-  const [useVerticalLayout, setUseVerticalLayout] = useState(false);
-  const [config, setConfig] = useState<object>(defaultConfig);
-  const [inputUrl, setInputUrl] = useState<string | undefined>();
-  const [result, setResult] = useState<string | undefined>();
+  const [userImageUrl, setUserImageUrl] = useState('');
   const [copiedText, copyToClipboard] = useCopyToClipboard();
-
-  // Reset when changing generators
-  useEffect(() => {
-    setConfig(generator.defaultConfig);
-    setInputUrl(undefined);
-    setResult(undefined);
-  }, [generator]);
-
-  // Use static image if there is one
-  useEffect(() => {
-    if (staticImage) {
-      setInputUrl(staticImage);
-    }
-  }, [staticImage]);
-
-  useEffect(() => {
-    if (!inputUrl) {
-      return;
-    }
-
-    const hasMissingConfig = Object.keys(generator.defaultConfig).some(
-      (key) => (config as any)[key] === undefined
-    );
-    if (hasMissingConfig) {
-      return;
-    }
-
-    const image = new Image();
-    image.onload = () => {
-      if (!canvas.current) {
-        return;
-      }
-
-      const { width, height } = generator.getCanvasSize(image);
-
-      canvas.current.width = width;
-      canvas.current.height = height;
-
-      setUseVerticalLayout(width / height >= 1.5);
-
-      const ctx = canvas.current.getContext('2d');
-      if (!ctx) {
-        return;
-      }
-      ctx.clearRect(0, 0, width, height);
-
-      generator.generate(image, ctx, config);
-
-      const result = canvas.current.toDataURL('image/png');
-      setResult(result);
-    };
-
-    image.src = inputUrl;
-  }, [inputUrl, generator, config]);
+  const [hasSuggestedAltText, setHasSuggestedAltText] = useState(false);
 
   const previousFilename = 'image';
   const generatorFilename = name.toLowerCase().replaceAll(' ', '-');
   const newFilename = `${previousFilename}-${generatorFilename}.png`;
 
-  const altText = getSuggestedAltText ? getSuggestedAltText(config) : '';
+  useEffect(() => {
+    if (resultImage.current) {
+      resultImage.current.src = '';
+      resultImage.current.style.opacity = '0';
+    }
+    setUserImageUrl('');
+  }, [generator]);
+
+  const onUpdate = useCallback((options: UpdateOptions = {}) => {
+    if (!canvas.current || !resultImage.current) {
+      return;
+    }
+
+    const updatedUrl = canvas.current.toDataURL('image/png');
+    resultImage.current.src = updatedUrl;
+    resultImage.current.style.opacity = '1';
+
+    const suggestedAltText = options.suggestedAltText || '';
+    altText.current = suggestedAltText;
+    if (altTextElement.current) {
+      altTextElement.current.innerHTML = suggestedAltText;
+    }
+    setHasSuggestedAltText(!!suggestedAltText);
+  }, []);
+
+  const renderer = useMemo(
+    () => (
+      <Renderer
+        canvasRef={canvas}
+        onUpdate={onUpdate}
+        userImageUrl={userImageUrl}
+      />
+    ),
+    [canvas, onUpdate, userImageUrl, Renderer]
+  );
 
   return (
     <>
@@ -97,19 +71,19 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
         <title>{name} - imagenerator</title>
       </Helmet>
       <div>
-        {!staticImage && (
+        {allowsCustomImage && (
           <div className={styles.fileInputs}>
             <ImageSelector
-              selectedUrl={inputUrl}
-              setSelectedUrl={setInputUrl}
+              selectedUrl={userImageUrl}
+              setSelectedUrl={setUserImageUrl}
             />
-            {selectRandomUrl && (
+            {selectRandomImage && (
               <>
                 <div className={styles.fileInputsSpacer} />
                 <Button
                   className={styles.randomButton}
                   icon={faDice}
-                  onClick={() => setInputUrl(selectRandomUrl())}>
+                  onClick={() => setUserImageUrl(selectRandomImage())}>
                   Use random image
                 </Button>
               </>
@@ -117,50 +91,50 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
           </div>
         )}
 
-        <div
-          className={classNames(styles.generator, {
-            [styles.vertical]: useVerticalLayout,
-          })}>
-          {inputUrl && result ? (
-            <img className={classNames(styles.result)} src={result} alt="" />
-          ) : (
-            <div className={styles.placeholder} />
-          )}
+        <div className={styles.generator}>
+          <img
+            ref={resultImage}
+            className={classNames(styles.result)}
+            style={{ opacity: 0 }}
+            src=""
+            alt=""
+          />
 
           <div className={styles.spacer} />
 
-          {!!inputUrl && (
-            <div className={styles.sidebar}>
+          <div className={styles.sidebar}>
+            {!!resultImage.current?.src && (
               <div className={styles.downloadInstructions}>
                 Tap and hold the image to save, or{' '}
-                <a href={result} download={newFilename}>
+                <a href={resultImage.current?.src} download={newFilename}>
                   download it
                 </a>
                 .
               </div>
+            )}
 
-              <div className={styles.configurator}>
-                <span className={styles.configuratorTitle}>Settings</span>
-                <Configurator config={config} setConfig={setConfig} />
-              </div>
+            <div className={styles.configurator}>
+              <span className={styles.configuratorTitle}>Settings</span>
+              {renderer}
             </div>
-          )}
+          </div>
         </div>
 
-        {altText && (
-          <div className={styles.altText}>
-            <div className={styles.altTextTitleWrapper}>
-              <div className={styles.altTextTitle}>Suggested alt text</div>
-              <Button
-                onClick={() => copyToClipboard(altText)}
-                small={true}
-                icon={!!copiedText ? faCheck : faCopy}>
-                {!!copiedText ? 'Copied' : 'Copy'}
-              </Button>
-            </div>
-            <p>{altText}</p>
+        <div
+          className={classNames(styles.altText, {
+            [styles.visibleAltText]: hasSuggestedAltText,
+          })}>
+          <div className={styles.altTextTitleWrapper}>
+            <div className={styles.altTextTitle}>Suggested alt text</div>
+            <Button
+              onClick={() => copyToClipboard(altText.current)}
+              small={true}
+              icon={!!copiedText ? faCheck : faCopy}>
+              {!!copiedText ? 'Copied' : 'Copy'}
+            </Button>
           </div>
-        )}
+          <p ref={altTextElement}></p>
+        </div>
 
         <canvas className={styles.canvas} ref={canvas} />
       </div>

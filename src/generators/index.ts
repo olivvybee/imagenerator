@@ -1,11 +1,12 @@
-import { Generator } from './types';
+import { Generator, GeneratorMetadata } from './types';
 
 import { BlackAndWhiteGenerator } from './BlackAndWhiteGenerator/BlackAndWhiteGenerator';
-import { Retroifier } from './Retroifier/Retroifier';
 import { TuxedoMaskGenerator } from './TuxedoMaskGenerator/TuxedoMaskGenerator';
+import { GBCGenerator } from './GBCGenerator/GBCGenerator';
 
-export const generators: Generator<any>[] = [
-  BlackAndWhiteGenerator,
-  Retroifier,
+export const oldGenerators: Generator<any>[] = [BlackAndWhiteGenerator];
+
+export const generators: GeneratorMetadata[] = [
   TuxedoMaskGenerator,
+  GBCGenerator,
 ];

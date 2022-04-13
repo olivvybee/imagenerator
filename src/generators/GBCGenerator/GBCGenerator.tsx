@@ -1,37 +1,95 @@
-/**
- * This code is heavily based on the original by maple "mavica" syrup (https://maple.pet)
- * and is used under the "beerware license".
- * https://github.com/Lana-chan/webgbcam
- */
+import { useEffect, useState } from 'react';
 
-import { Generator } from '../types';
+import { Stepper } from '../../components';
+import { GeneratorMetadata, Renderer } from '../types';
 
+import { Palette } from './types';
+import styles from './GBCGenerator.module.css';
 import { PALETTES } from './palettes';
-import { RetroifierConfigurator } from './RetroifierConfigurator';
-import { bayer8 } from './constants';
-import { Palette, RetroifierConfig } from './types';
+import { bayer8, BRIGHTNESS_STEPS, CONTRAST_STEPS } from './constants';
 import { chunkString, clamp } from './utils';
 
-export const Retroifier: Generator<RetroifierConfig> = {
-  name: 'Retroifier',
-  route: '/retroifier',
+interface Config {
+  brightness: number;
+  contrast: number;
+  palette: Palette;
+}
 
-  defaultConfig: {
-    brightness: 1,
-    contrast: 1.5,
-    palette: PALETTES[0],
-  },
-  Configurator: RetroifierConfigurator,
+const GBCRenderer: Renderer = ({ canvasRef, onUpdate, userImageUrl }) => {
+  const [brightness, setBrightness] = useState(1);
+  const [contrast, setContrast] = useState(1.5);
+  const [palette, setPalette] = useState(PALETTES[0]);
 
-  getCanvasSize: () => ({ width: 512, height: 512 }),
+  useEffect(() => {
+    if (!canvasRef.current || !userImageUrl) {
+      return;
+    }
 
-  generate: (image, ctx, config) => {
-    const pixels = cropToSquare(image, ctx);
-    retroify(pixels, config.brightness, config.contrast);
-    recolour(pixels, config.palette);
+    const ctx = canvasRef.current.getContext('2d');
+    if (!ctx) {
+      return;
+    }
 
-    ctx.putImageData(upscale(pixels, 512), 0, 0);
-  },
+    canvasRef.current.width = 512;
+    canvasRef.current.height = 512;
+
+    generate(ctx, userImageUrl, onUpdate, { brightness, contrast, palette });
+  }, [userImageUrl, brightness, contrast, palette, canvasRef, onUpdate]);
+
+  return (
+    <div className={styles.wrapper}>
+      <span className={styles.settingName}>Brightness</span>
+      <Stepper
+        value={brightness}
+        possibleValues={BRIGHTNESS_STEPS}
+        onChange={setBrightness}
+        allowWrapping={false}
+        getLabel={getLabel}
+      />
+
+      <span className={styles.settingName}>Contrast</span>
+      <Stepper
+        value={contrast}
+        possibleValues={CONTRAST_STEPS}
+        onChange={setContrast}
+        allowWrapping={false}
+        getLabel={getLabel}
+      />
+
+      <span className={styles.settingName}>Colour palette</span>
+      <div className={styles.paletteWrapper}>
+        <Stepper<Palette>
+          value={palette}
+          possibleValues={PALETTES}
+          onChange={setPalette}
+          allowWrapping={true}
+          getLabel={getPalettePreview}
+        />
+        <span>{palette.name}</span>
+      </div>
+    </div>
+  );
+};
+
+const generate = async (
+  ctx: CanvasRenderingContext2D,
+  imageUrl: string,
+  onUpdate: () => void,
+  config: Config
+) => {
+  const image = new Image();
+  await new Promise((resolve) => {
+    image.onload = resolve;
+    image.src = imageUrl;
+  });
+
+  const pixels = cropToSquare(image, ctx);
+  retroify(pixels, config.brightness, config.contrast);
+  recolour(pixels, config.palette);
+
+  ctx.putImageData(upscale(pixels, 512), 0, 0);
+
+  onUpdate();
 };
 
 const cropToSquare = (
@@ -140,4 +198,28 @@ const upscale = (pixels: ImageData, targetSize: number) => {
   }
 
   return newPixels;
+};
+
+const getLabel = (_: number, currentIndex: number) => (
+  <span className={styles.stepperLabel}>{currentIndex}</span>
+);
+
+const getPalettePreview = (palette: Palette) => (
+  <div className={styles.palettePreview}>
+    {palette.colours.map((colour) => (
+      <div
+        key={colour}
+        className={styles.palettePreviewBlock}
+        title={colour}
+        style={{ backgroundColor: colour }}
+      />
+    ))}
+  </div>
+);
+
+export const GBCGenerator: GeneratorMetadata = {
+  route: '/gbc',
+  name: 'Gameboy Colour',
+  allowsCustomImage: true,
+  Renderer: GBCRenderer,
 };

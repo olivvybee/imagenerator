@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styles from './TextField.module.css';
 
 interface TextFieldProps {
-  value: string;
+  value?: string;
   onChange?: (newValue: string) => void;
   onBlur?: () => void;
   onKeyPress?: (key: string) => void;
