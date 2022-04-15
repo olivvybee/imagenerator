@@ -45,15 +45,8 @@
   min-width: 240px;
 }
 
-.downloadInstructions {
-  border: 1px solid var(--primary-translucent);
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-}
-
 .configurator {
-  border: 1px solid var(--primary-translucent);
+  border: 1px solid var(--primary-muted);
   border-radius: 8px;
   padding: 16px;
 }
@@ -69,7 +62,7 @@
 }
 
 .altText {
-  border: 1px solid var(--primary-translucent);
+  border: 1px solid var(--primary-muted);
   border-radius: 8px;
   padding: 16px;
   margin-top: 16px;

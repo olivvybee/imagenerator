@@ -1,9 +1,11 @@
 import { GeneratorMetadata } from './types';
 
-import { TuxedoMaskGenerator } from './TuxedoMaskGenerator/TuxedoMaskGenerator';
+import { EldenRingGenerator } from './EldenRingGenerator/EldenRingGenerator';
 import { GBCGenerator } from './GBCGenerator/GBCGenerator';
+import { TuxedoMaskGenerator } from './TuxedoMaskGenerator/TuxedoMaskGenerator';
 
 export const generators: GeneratorMetadata[] = [
-  TuxedoMaskGenerator,
+  EldenRingGenerator,
   GBCGenerator,
+  TuxedoMaskGenerator,
 ];

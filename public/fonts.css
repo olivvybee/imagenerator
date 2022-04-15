@@ -7,3 +7,13 @@
     url('/fonts/fredoka-one-v12-latin-regular.woff2') format('woff2'),
     url('/fonts/fredoka-one-v12-latin-regular.woff') format('woff');
 }
+
+/* eb-garamond-regular - latin */
+@font-face {
+  font-family: 'Garamond';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+    url('/fonts/eb-garamond-v24-latin-regular.woff2') format('woff2'),
+    url('/fonts/eb-garamond-v24-latin-regular.woff') format('woff');
+}

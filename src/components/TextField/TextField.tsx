@@ -1,14 +1,17 @@
 import classNames from 'classnames';
+import { InputHTMLAttributes } from 'react';
 
 import styles from './TextField.module.css';
 
-interface TextFieldProps {
+interface TextFieldProps
+  extends Omit<
+    InputHTMLAttributes<HTMLInputElement>,
+    'onChange' | 'onKeyPress'
+  > {
   value?: string;
   onChange?: (newValue: string) => void;
   onBlur?: () => void;
   onKeyPress?: (key: string) => void;
-  className?: string;
-  disabled?: boolean;
 }
 
 export const TextField: React.FC<TextFieldProps> = ({
@@ -18,14 +21,17 @@ export const TextField: React.FC<TextFieldProps> = ({
   onBlur,
   onKeyPress,
   disabled,
+  type = 'text',
+  defaultValue,
 }) => (
   <input
     className={classNames(styles.textField, className)}
-    type="text"
+    type={type}
     value={value}
     onChange={(e) => onChange?.(e.target.value)}
     onBlur={onBlur}
     onKeyPress={(e) => onKeyPress?.(e.key)}
     disabled={disabled}
+    defaultValue={defaultValue}
   />
 );

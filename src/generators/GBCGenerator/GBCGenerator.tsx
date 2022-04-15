@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { Stepper } from '../../components';
 import { GeneratorMetadata, Renderer } from '../types';
+import { clamp } from '../../utils/clamp';
 
 import { Palette } from './types';
 import styles from './GBCGenerator.module.css';
 import { PALETTES } from './palettes';
 import { bayer8, BRIGHTNESS_STEPS, CONTRAST_STEPS } from './constants';
-import { chunkString, clamp } from './utils';
+import { chunkString } from './utils';
 
 interface Config {
   brightness: number;

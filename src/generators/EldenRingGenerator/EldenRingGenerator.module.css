@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.settingName {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.settingName:not(:first-of-type) {
+  margin-top: 16px;
+}
+
+.preloadFont {
+  font-family: 'Garamond';
+  visibility: hidden;
+}
