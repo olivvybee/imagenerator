@@ -68,15 +68,23 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     [canvas, onUpdate, userImageUrl, Renderer]
   );
 
+  const pageTitle = `${name} - imagenerator`;
+  const pageUrl = `https://imagenerator.net${route}`;
+
   return (
     <>
       <Helmet>
-        <title>{name} - imagenerator</title>
+        <title>{pageTitle}</title>
+        <meta property="og:title" content={pageTitle} />
+        <meta name="twitter:title" content={pageTitle} />
+
         <meta name="description" content={description} />
-        <meta property="og:title" content={`${name} - imagenerator`} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://imagenerator.net${route}`} />
         <meta property="og:description" content={description} />
+        <meta name="twitter:description" content={description} />
+
+        <meta name="canonical" content={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta name="twitter:url" content={pageUrl} />
       </Helmet>
       <div>
         {allowsCustomImage && (
