@@ -14,7 +14,14 @@ interface GeneratorPageProps {
 }
 
 export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
-  const { name, allowsCustomImage, selectRandomImage, Renderer } = generator;
+  const {
+    route,
+    name,
+    description,
+    allowsCustomImage,
+    selectRandomImage,
+    Renderer,
+  } = generator;
 
   const canvas = useRef<HTMLCanvasElement>(null);
   const resultImage = useRef<HTMLImageElement>(null);
@@ -65,6 +72,11 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     <>
       <Helmet>
         <title>{name} - imagenerator</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={`${name} - imagenerator`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://imagenerator.net${route}`} />
+        <meta property="og:description" content={description} />
       </Helmet>
       <div>
         {allowsCustomImage && (

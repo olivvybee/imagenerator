@@ -15,6 +15,7 @@ export type Renderer = ComponentType<RendererProps>;
 export interface GeneratorMetadata {
   route: string;
   name: string;
+  description: string;
   Renderer: Renderer;
   allowsCustomImage: boolean;
   selectRandomImage?: () => string;

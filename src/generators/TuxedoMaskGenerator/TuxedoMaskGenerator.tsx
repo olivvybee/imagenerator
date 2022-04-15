@@ -140,6 +140,8 @@ const buildAltText = (config: Config) => {
 export const TuxedoMaskGenerator: GeneratorMetadata = {
   route: '/tuxedo-mask',
   name: 'Tuxedo Mask',
+  description:
+    "Make memes about all the things Tuxedo Mask hasn't done recently.",
   Renderer: TuxedoMaskRenderer,
   allowsCustomImage: false,
 };

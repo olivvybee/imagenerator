@@ -221,6 +221,7 @@ const getPalettePreview = (palette: Palette) => (
 export const GBCGenerator: GeneratorMetadata = {
   route: '/gbc',
   name: 'Gameboy Camera',
+  description: 'Make any image look like it was taken with a Gameboy Camera.',
   allowsCustomImage: true,
   Renderer: GBCRenderer,
 };
