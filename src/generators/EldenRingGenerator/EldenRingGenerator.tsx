@@ -93,7 +93,11 @@ const EldenRingRenderer: Renderer = ({ canvasRef, onUpdate, userImageUrl }) => {
       <Dropdown options={FORMATS} onChange={createOnChange('format1')} />
 
       <span className={styles.settingName}>First line text</span>
-      <TextField onChange={createOnChange('text1')} autoComplete="off" />
+      <TextField
+        onChange={createOnChange('text1')}
+        autoComplete="off"
+        autoCapitalize="off"
+      />
 
       <span className={styles.settingName}>Joining phrase</span>
       <Dropdown options={CONJUNCTIONS} onChange={onConjunctionChange} />
@@ -104,7 +108,11 @@ const EldenRingRenderer: Renderer = ({ canvasRef, onUpdate, userImageUrl }) => {
           <Dropdown options={FORMATS} onChange={createOnChange('format2')} />
 
           <span className={styles.settingName}>Second line text</span>
-          <TextField onChange={createOnChange('text2')} autoComplete="off" />
+          <TextField
+            onChange={createOnChange('text2')}
+            autoComplete="off"
+            autoCapitalize="off"
+          />
         </>
       )}
 
