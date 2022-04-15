@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
+import { MetaTags } from './components';
 import { generators } from './generators';
 import { GeneratorPage, Homepage } from './pages';
 
@@ -19,7 +20,12 @@ const App = () => (
             <Route
               key={generator.route}
               path={generator.route}
-              element={<GeneratorPage generator={generator} />}
+              element={
+                <>
+                  <MetaTags generator={generator} />
+                  <GeneratorPage generator={generator} />
+                </>
+              }
             />
           ))}
 
