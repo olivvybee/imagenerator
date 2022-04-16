@@ -1,16 +1,28 @@
 import { Helmet } from 'react-helmet';
+import { useLocation } from 'react-router';
 
-import { GeneratorMetadata } from '../../generators/types';
+import { generators } from '../../generators';
 
-interface MetaTagsProps {
-  generator: GeneratorMetadata;
-}
+export const MetaTags: React.FC = () => {
+  const { pathname } = useLocation();
 
-export const MetaTags: React.FC<MetaTagsProps> = ({ generator }) => {
-  const { route, name, description } = generator;
+  const generator = generators.find(
+    (generator) => generator.route === pathname
+  );
 
-  const pageTitle = `${name} - imagenerator`;
-  const pageUrl = `https://imagenerator.net${route}`;
+  let pageTitle, pageUrl, pageDescription;
+
+  if (generator) {
+    const { route, name, description } = generator;
+
+    pageTitle = `${name} - imagenerator`;
+    pageUrl = `https://imagenerator.net${route}`;
+    pageDescription = description;
+  } else {
+    pageTitle = 'imagenerator';
+    pageUrl = 'https://imagenerator.net';
+    pageDescription = 'hi, im a generator';
+  }
 
   return (
     <Helmet>
@@ -18,9 +30,9 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ generator }) => {
       <meta property="og:title" content={pageTitle} />
       <meta name="twitter:title" content={pageTitle} />
 
-      <meta name="description" content={description} />
-      <meta property="og:description" content={description} />
-      <meta name="twitter:description" content={description} />
+      <meta name="description" content={pageDescription} />
+      <meta property="og:description" content={pageDescription} />
+      <meta name="twitter:description" content={pageDescription} />
 
       <meta name="canonical" content={pageUrl} />
       <meta property="og:url" content={pageUrl} />

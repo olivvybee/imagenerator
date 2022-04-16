@@ -14,18 +14,14 @@ const App = () => (
       <title>imagenerator</title>
     </Helmet>
     <Router>
+      <MetaTags />
       <PageLayout>
         <Routes>
           {generators.map((generator) => (
             <Route
               key={generator.route}
               path={generator.route}
-              element={
-                <>
-                  <MetaTags generator={generator} />
-                  <GeneratorPage generator={generator} />
-                </>
-              }
+              element={<GeneratorPage generator={generator} />}
             />
           ))}
 
