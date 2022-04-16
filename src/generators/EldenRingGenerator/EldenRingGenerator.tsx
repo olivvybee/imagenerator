@@ -358,8 +358,8 @@ const drawText = (
 };
 
 export const EldenRingGenerator: GeneratorMetadata = {
-  route: '/try-finger',
-  name: 'Try Finger, But Hole',
+  route: '/try-fingers',
+  name: 'Try Fingers, But Hole',
   description: 'Create your own Elden Ring messages.',
   allowsCustomImage: true,
   Renderer: EldenRingRenderer,
