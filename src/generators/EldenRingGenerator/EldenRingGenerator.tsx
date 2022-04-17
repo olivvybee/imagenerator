@@ -89,6 +89,13 @@ const EldenRingRenderer: Renderer = ({ canvasRef, onUpdate, userImageUrl }) => {
 
   return (
     <div className={styles.wrapper}>
+      {!userImageUrl && (
+        <p className={styles.helpText}>
+          Build a standalone message, or choose an image above to use as a
+          background.
+        </p>
+      )}
+
       <span className={styles.settingName}>First line format</span>
       <Dropdown options={FORMATS} onChange={createOnChange('format1')} />
 

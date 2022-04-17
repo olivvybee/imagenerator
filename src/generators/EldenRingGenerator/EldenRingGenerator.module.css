@@ -3,6 +3,11 @@
   flex-direction: column;
 }
 
+.helpText {
+  margin: 0;
+  margin-bottom: 24px;
+}
+
 .settingName {
   display: block;
   margin-bottom: 8px;
@@ -10,9 +15,4 @@
 
 .settingName:not(:first-of-type) {
   margin-top: 16px;
-}
-
-.preloadFont {
-  font-family: 'Garamond';
-  visibility: hidden;
 }
