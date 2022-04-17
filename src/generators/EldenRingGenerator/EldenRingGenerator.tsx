@@ -350,10 +350,10 @@ const drawText = (
   const [line1, line2] = text.split('\n');
 
   if (line2) {
-    ctx.fillText(line1, x + 165, y + 35);
-    ctx.fillText(line2, x + 165, y + 75);
+    ctx.fillText(line1.trim(), x + 165, y + 35);
+    ctx.fillText(line2.trim(), x + 165, y + 75);
   } else {
-    ctx.fillText(line1, x + 165, y + 55);
+    ctx.fillText(line1.trim(), x + 165, y + 55);
   }
 };
 
