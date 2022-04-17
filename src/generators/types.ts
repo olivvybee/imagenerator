@@ -2,6 +2,7 @@ import { ComponentType, RefObject } from 'react';
 
 export interface UpdateOptions {
   suggestedAltText?: string;
+  useVerticalLayout?: boolean;
 }
 
 export interface RendererProps {

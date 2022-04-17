@@ -51,7 +51,7 @@ const EldenRingRenderer: Renderer = ({ canvasRef, onUpdate, userImageUrl }) => {
     ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
     await generate(ctx, userImageUrl, config.current);
 
-    onUpdate();
+    onUpdate({ useVerticalLayout: true });
   }, [canvasRef, onUpdate, userImageUrl]);
 
   useEffect(() => {

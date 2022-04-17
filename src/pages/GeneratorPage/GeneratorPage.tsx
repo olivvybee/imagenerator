@@ -23,6 +23,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const [userImageUrl, setUserImageUrl] = useState('');
   const [copiedText, copyToClipboard] = useCopyToClipboard();
   const [hasSuggestedAltText, setHasSuggestedAltText] = useState(false);
+  const [useVerticalLayout, setUseVerticalLayout] = useState(false);
 
   useEffect(() => {
     if (resultImage.current) {
@@ -30,6 +31,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
       resultImage.current.style.opacity = '0';
     }
     setUserImageUrl('');
+    setUseVerticalLayout(false);
   }, [generator]);
 
   const onUpdate = useCallback((options: UpdateOptions = {}) => {
@@ -47,6 +49,8 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
       altTextElement.current.innerHTML = suggestedAltText;
     }
     setHasSuggestedAltText(!!suggestedAltText);
+
+    setUseVerticalLayout(Boolean(options.useVerticalLayout));
   }, []);
 
   const renderer = useMemo(
@@ -82,7 +86,10 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
         </div>
       )}
 
-      <div className={styles.generator}>
+      <div
+        className={classNames(styles.generator, {
+          [styles.vertical]: useVerticalLayout,
+        })}>
         <img
           ref={resultImage}
           className={classNames(styles.result)}
