@@ -37,6 +37,14 @@ const GBCRenderer: Renderer = ({ canvasRef, onUpdate, userImageUrl }) => {
     generate(ctx, userImageUrl, onUpdate, { brightness, contrast, palette });
   }, [userImageUrl, brightness, contrast, palette, canvasRef, onUpdate]);
 
+  if (!userImageUrl) {
+    return (
+      <div className={styles.wrapper}>
+        <p>Choose an image to get started.</p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.wrapper}>
       <span className={styles.settingName}>Brightness</span>
