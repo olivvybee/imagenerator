@@ -22,7 +22,7 @@ const GBCRenderer: Renderer = ({ canvasRef, onUpdate, userImageUrl }) => {
   const [palette, setPalette] = useState(PALETTES[0]);
 
   useEffect(() => {
-    if (!canvasRef.current || !userImageUrl) {
+    if (!canvasRef.current) {
       return;
     }
 
@@ -33,6 +33,12 @@ const GBCRenderer: Renderer = ({ canvasRef, onUpdate, userImageUrl }) => {
 
     canvasRef.current.width = 512;
     canvasRef.current.height = 512;
+
+    if (!userImageUrl) {
+      ctx.clearRect(0, 0, 512, 512);
+      onUpdate();
+      return;
+    }
 
     generate(ctx, userImageUrl, onUpdate, { brightness, contrast, palette });
   }, [userImageUrl, brightness, contrast, palette, canvasRef, onUpdate]);
