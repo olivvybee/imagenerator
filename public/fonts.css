@@ -17,3 +17,12 @@
     url('/fonts/eb-garamond-v24-latin-regular.woff2') format('woff2'),
     url('/fonts/eb-garamond-v24-latin-regular.woff') format('woff');
 }
+
+/* Optimus Princeps */
+@font-face {
+  font-family: 'Optimus Princeps';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('/fonts/OptimusPrincepsSemiBold.woff2') format('woff2'),
+    url('/fonts/OptimusPrincepsSemiBold.woff') format('woff');
+}

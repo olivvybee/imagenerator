@@ -4,6 +4,7 @@ import { Dropdown } from '../../components';
 import { TextField } from '../../components/TextField/TextField';
 import { clamp } from '../../utils/clamp';
 import { drawImage } from '../../utils/drawImage';
+import { loadFont } from '../../utils/loadFont';
 import { randomInt } from '../../utils/randomInt';
 import { GeneratorMetadata, Renderer } from '../types';
 
@@ -141,12 +142,7 @@ const generate = async (
   imageUrl: string | undefined,
   config: Config
 ) => {
-  const garamond = new FontFace(
-    'Garamond',
-    'url("/fonts/eb-garamond-v24-latin-regular.woff2")'
-  );
-  await garamond.load();
-  document.fonts.add(garamond);
+  await loadFont('Garamond', '/fonts/eb-garamond-v24-latin-regular.woff2');
 
   if (imageUrl) {
     const image = new Image();

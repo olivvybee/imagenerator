@@ -1,3 +1,5 @@
+import { loadImage } from './loadImage';
+
 interface DrawImageOptions {
   x?: number;
   y?: number;
@@ -8,10 +10,6 @@ export const drawImage = async (
   url: string,
   options: DrawImageOptions = {}
 ) => {
-  const image = new Image();
-  await new Promise((resolve) => {
-    image.onload = resolve;
-    image.src = url;
-  });
+  const image = await loadImage(url);
   ctx.drawImage(image, options.x || 0, options.y || 0);
 };
