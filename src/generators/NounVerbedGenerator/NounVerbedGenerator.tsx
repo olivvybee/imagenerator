@@ -168,10 +168,10 @@ const drawText = (
   ctx.font = `${fontSize}px 'Optimus Princeps'`;
 
   ctx.fillStyle = `rgba(0, 0, 0, 0.6)`;
-  ctx.fillText(outputText, x + 1, y + 1);
+  ctx.fillText(outputText, x + 2, y + 2, size.width * 0.9);
 
   ctx.fillStyle = `rgba(${colour}, 0.9)`;
-  ctx.fillText(outputText, x, y);
+  ctx.fillText(outputText, x, y, size.width * 0.9);
 };
 
 export const NounVerbedGenerator: GeneratorMetadata = {
