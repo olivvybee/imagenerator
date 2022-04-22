@@ -52,7 +52,11 @@ const EldenRingRenderer: Renderer = ({ canvasRef, onUpdate, userImageUrl }) => {
     ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
     await generate(ctx, userImageUrl, config.current);
 
-    onUpdate({ useVerticalLayout: true });
+    const suggestedAltText = userImageUrl
+      ? undefined
+      : getSuggestedAltText(config.current);
+
+    onUpdate({ useVerticalLayout: true, suggestedAltText });
   }, [canvasRef, onUpdate, userImageUrl]);
 
   useEffect(() => {
@@ -307,11 +311,7 @@ const drawIcon = async (ctx: CanvasRenderingContext2D, messageRect: Rect) => {
   await drawImage(ctx, '/assets/elden-ring-icon.png', { x: x + 56, y: y + 60 });
 };
 
-const drawAppraisals = (
-  ctx: CanvasRenderingContext2D,
-  appraisals: string,
-  messageRect: Rect
-) => {
+const buildAppraisals = (appraisals: string) => {
   let count = parseInt(appraisals);
 
   if (isNaN(count)) {
@@ -320,7 +320,16 @@ const drawAppraisals = (
     count = clamp(count, 0, 999);
   }
 
+  return count;
+};
+
+const drawAppraisals = (
+  ctx: CanvasRenderingContext2D,
+  appraisals: string,
+  messageRect: Rect
+) => {
   const { x, y, width } = messageRect;
+  const count = buildAppraisals(appraisals);
 
   ctx.fillStyle = 'white';
   ctx.font = '24px Garamond';
@@ -331,13 +340,7 @@ const drawAppraisals = (
   ctx.textAlign = 'left';
 };
 
-const drawText = (
-  ctx: CanvasRenderingContext2D,
-  config: Config,
-  messageRect: Rect
-) => {
-  const { x, y } = messageRect;
-
+const buildText = (config: Config) => {
   const text1 = config.format1.replaceAll('***', config.text1 || '***');
   const text2 = config.format2.replaceAll('***', config.text2 || '***');
 
@@ -345,6 +348,18 @@ const drawText = (
     config.conjunction === CONJUNCTIONS[0]
       ? text1
       : text1 + config.conjunction + ' ' + text2;
+
+  return text;
+};
+
+const drawText = (
+  ctx: CanvasRenderingContext2D,
+  config: Config,
+  messageRect: Rect
+) => {
+  const { x, y } = messageRect;
+
+  const text = buildText(config);
 
   ctx.fillStyle = 'white';
   ctx.font = '24px Garamond';
@@ -358,6 +373,18 @@ const drawText = (
   } else {
     ctx.fillText(line1.trim(), x + 165, y + 55);
   }
+};
+
+const getSuggestedAltText = (config: Config) => {
+  if (!config.text1) {
+    return undefined;
+  }
+
+  const text = buildText(config).replaceAll('\n', ' ');
+  const appraisals = buildAppraisals(config.appraisals);
+  const unit = appraisals === 1 ? 'appraisal' : 'appraisals';
+
+  return `An Elden Ring message box that says "${text}". The message has ${appraisals} ${unit}.`;
 };
 
 export const EldenRingGenerator: GeneratorMetadata = {
