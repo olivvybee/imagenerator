@@ -18,13 +18,15 @@
 .generatorLinkWrapper {
   border: 1px solid var(--primary-muted);
   border-radius: 8px;
-  padding: 8px 12px;
 }
 
 .generatorLink {
+  padding: 8px 12px;
   text-decoration: none;
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
 .generatorName {
