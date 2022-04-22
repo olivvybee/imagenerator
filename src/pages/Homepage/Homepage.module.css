@@ -1,3 +1,5 @@
+@import '../../variables.css';
+
 .bigText {
   font-size: 1.75rem;
   margin-top: 0;
@@ -5,24 +7,47 @@
 }
 
 .generatorList {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   padding: 0;
-  margin: 24px 0 64px;
+  margin: 32px 0 64px;
   list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.generatorLinkWrapper {
+  border: 1px solid var(--primary-muted);
+  border-radius: 8px;
+  padding: 8px 12px;
 }
 
 .generatorLink {
-  display: block;
   text-decoration: none;
-  margin: 8px 8px 0;
+  display: inline-flex;
+  flex-direction: column;
 }
 
-.generatorLink:first-child {
-  margin-left: 0;
+.generatorName {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.generatorDescription {
+  color: #ffffff;
 }
 
 .twitterLink {
   font-weight: bold;
+}
+
+@media screen and (max-width: 760px) {
+  .generatorList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .generatorList {
+    grid-template-columns: 1fr;
+  }
 }

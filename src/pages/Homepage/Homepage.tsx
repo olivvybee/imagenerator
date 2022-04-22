@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom';
 import _sortBy from 'lodash/sortBy';
-import classNames from 'classnames';
 
 import { generators } from '../../generators';
 
-import buttonStyles from '../../components/Button/Button.module.css';
 import styles from './Homepage.module.css';
 
 export const Homepage = () => (
@@ -21,11 +19,12 @@ export const Homepage = () => (
 
     <ul className={styles.generatorList}>
       {_sortBy(generators, 'name').map((generator) => (
-        <li key={generator.route}>
-          <Link
-            to={generator.route}
-            className={classNames(buttonStyles.button, styles.generatorLink)}>
-            {generator.name}
+        <li className={styles.generatorLinkWrapper} key={generator.route}>
+          <Link className={styles.generatorLink} to={generator.route}>
+            <span className={styles.generatorName}>{generator.name}</span>
+            <span className={styles.generatorDescription}>
+              {generator.description}
+            </span>
           </Link>
         </li>
       ))}
