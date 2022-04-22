@@ -159,16 +159,17 @@ const drawText = (
   ctx.textBaseline = 'middle';
   ctx.textAlign = 'center';
 
-  for (let i = 1.15; i > 1; i -= 0.02) {
+  for (let i = 1.15; i > 1; i -= 0.01) {
     ctx.font = `${fontSize * i}px 'Optimus Princeps'`;
-    ctx.fillStyle = `rgba(${colour}, 0.1)`;
+    ctx.fillStyle = `rgba(${colour}, 0.05)`;
     ctx.fillText(outputText, x, y);
   }
 
-  ctx.fillStyle = `rgba(${colour}, 0.6)`;
+  ctx.font = `${fontSize}px 'Optimus Princeps'`;
+
+  ctx.fillStyle = `rgba(0, 0, 0, 0.6)`;
   ctx.fillText(outputText, x + 1, y + 1);
 
-  ctx.font = `${fontSize}px 'Optimus Princeps'`;
   ctx.fillStyle = `rgba(${colour}, 0.9)`;
   ctx.fillText(outputText, x, y);
 };
