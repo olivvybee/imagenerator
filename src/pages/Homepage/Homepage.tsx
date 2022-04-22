@@ -33,18 +33,6 @@ export const Homepage = () => (
 
     <h2>FAQs</h2>
 
-    <h3>Who made you?</h3>
-
-    <p>
-      I was made by{' '}
-      <a className={styles.twitterLink} href="https://twitter.com/olivvybee">
-        @olivvybee
-      </a>{' '}
-      because she kept coming up with ideas for image generators and needed
-      somewhere to put them. If you like them, maybe{' '}
-      <a href="https://ko-fi.com/olivvybee">buy her a coffee</a>.
-    </p>
-
     <h3>Where do images go when I upload them?</h3>
 
     <p>
@@ -68,6 +56,18 @@ export const Homepage = () => (
       alt text so that they're accessible to everyone. Some of my generators
       offer suggested alt text that you can copy and paste instead of having to
       describe the image yourself.
+    </p>
+
+    <h3>Who made you?</h3>
+
+    <p>
+      I was made by{' '}
+      <a className={styles.twitterLink} href="https://twitter.com/olivvybee">
+        @olivvybee
+      </a>{' '}
+      because she kept coming up with ideas for image generators and needed
+      somewhere to put them. If you like them, maybe{' '}
+      <a href="https://ko-fi.com/olivvybee">buy her a coffee</a>.
     </p>
   </div>
 );
