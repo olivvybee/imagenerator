@@ -45,16 +45,17 @@ export const Navbar = () => {
           className={styles.expandableSection}
           ref={expander}
           style={{ maxHeight: isExpanded ? expanderHeight : 0 }}>
-          <div className={styles.linkList}>
+          <ul className={styles.linkList}>
             {_sortBy(generators, 'name').map((generator) => (
-              <Link
-                key={generator.route}
-                to={generator.route}
-                className={classNames(buttonStyles.button, styles.link)}>
-                {generator.name}
-              </Link>
+              <li className={styles.linkWrapper} key={generator.route}>
+                <Link
+                  to={generator.route}
+                  className={classNames(buttonStyles.button, styles.link)}>
+                  {generator.name}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </div>
