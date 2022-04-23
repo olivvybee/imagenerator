@@ -30,6 +30,7 @@ export const Navbar = () => {
       <div className={styles.navbarContent}>
         <div className={styles.staticContent}>
           <Link to="/" className={styles.homeLink}>
+            <img src="/logo.png" width={40} height={40} alt="" />
             <h1 className={styles.siteName}>imagenerator</h1>
           </Link>
 
