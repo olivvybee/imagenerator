@@ -54,10 +54,10 @@ export const Navbar = () => {
           style={{ maxHeight: isExpanded ? expanderHeight : 0 }}>
           <ul className={styles.linkList}>
             {_sortBy(generators, 'name').map((generator) => (
-              <li className={styles.linkWrapper} key={generator.route}>
-                <Link
-                  to={generator.route}
-                  className={classNames(buttonStyles.button, styles.link)}>
+              <li
+                className={classNames(buttonStyles.button, styles.linkWrapper)}
+                key={generator.route}>
+                <Link to={generator.route} className={styles.link}>
                   {generator.name}
                 </Link>
               </li>
