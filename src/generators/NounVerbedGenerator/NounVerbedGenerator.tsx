@@ -1,12 +1,17 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { Dropdown } from '../../components';
+import { Dropdown, Slider } from '../../components';
 
 import { TextField } from '../../components/TextField/TextField';
 import { loadFont } from '../../utils/loadFont';
 import { loadImage } from '../../utils/loadImage';
 import { GeneratorMetadata, Renderer } from '../types';
 
-import { COLOUR_MAP, MAX_SIZE } from './constants';
+import {
+  COLOUR_MAP,
+  DEFAULT_FONT_SIZE,
+  DEFAULT_VERTICAL_POSITION,
+  MAX_SIZE,
+} from './constants';
 
 import styles from './NounVerbedGenerator.module.css';
 
@@ -20,6 +25,8 @@ type ColourName = keyof typeof COLOUR_MAP;
 interface Config {
   text: string;
   colour: string;
+  fontSize: number;
+  verticalPosition: number;
 }
 
 const NounVerbedRenderer: Renderer = ({
@@ -30,6 +37,8 @@ const NounVerbedRenderer: Renderer = ({
   const config = useRef<Config>({
     text: '',
     colour: COLOUR_MAP.Red,
+    fontSize: DEFAULT_FONT_SIZE,
+    verticalPosition: DEFAULT_VERTICAL_POSITION,
   });
 
   const regenerate = useCallback(async () => {
@@ -45,6 +54,7 @@ const NounVerbedRenderer: Renderer = ({
     ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
     if (userImageUrl) {
+      console.log(config.current);
       await generate(ctx, userImageUrl, config.current);
     }
 
@@ -62,6 +72,16 @@ const NounVerbedRenderer: Renderer = ({
 
   const onColourChange = (value: string) => {
     config.current.colour = COLOUR_MAP[value as ColourName];
+    regenerate();
+  };
+
+  const onFontSizeChange = (value: number) => {
+    config.current.fontSize = value;
+    regenerate();
+  };
+
+  const onVerticalPositionChange = (value: number) => {
+    config.current.verticalPosition = value / 100;
     regenerate();
   };
 
@@ -84,6 +104,22 @@ const NounVerbedRenderer: Renderer = ({
 
       <span className={styles.settingName}>Colour</span>
       <Dropdown options={Object.keys(COLOUR_MAP)} onChange={onColourChange} />
+
+      <span className={styles.settingName}>Font size</span>
+      <Slider
+        onChange={onFontSizeChange}
+        min={32}
+        max={128}
+        defaultValue={DEFAULT_FONT_SIZE}
+      />
+
+      <span className={styles.settingName}>Vertical position</span>
+      <Slider
+        onChange={onVerticalPositionChange}
+        min={0}
+        max={100}
+        defaultValue={DEFAULT_VERTICAL_POSITION * 100}
+      />
     </div>
   );
 };
@@ -103,8 +139,15 @@ const generate = async (
   ctx.drawImage(image, 0, 0, size.width, size.height);
 
   if (config.text) {
-    drawBanner(ctx, size);
-    drawText(ctx, config.text, config.colour, size);
+    drawBanner(ctx, config.fontSize, config.verticalPosition);
+    drawText(
+      ctx,
+      config.text,
+      config.colour,
+      config.fontSize,
+      config.verticalPosition,
+      size
+    );
   }
 };
 
@@ -130,9 +173,18 @@ const resize = (ctx: CanvasRenderingContext2D, image: HTMLImageElement) => {
   return { width: newWidth, height: newHeight };
 };
 
-const drawBanner = (ctx: CanvasRenderingContext2D, size: Rect) => {
-  const top = size.height * 0.4;
-  const bottom = size.height * 0.6;
+const drawBanner = (
+  ctx: CanvasRenderingContext2D,
+  fontSize: number,
+  verticalPosition: number
+) => {
+  const canvasHeight = ctx.canvas.height;
+  const height = fontSize * 2;
+
+  const top = canvasHeight * verticalPosition - height / 2;
+  const bottom = canvasHeight * verticalPosition + height / 2;
+
+  console.log({ fontSize, canvasHeight, height, top, bottom });
 
   const gradient = ctx.createLinearGradient(0, top, 0, bottom);
   gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
@@ -141,18 +193,19 @@ const drawBanner = (ctx: CanvasRenderingContext2D, size: Rect) => {
   gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
   ctx.fillStyle = gradient;
-  ctx.fillRect(0, top, size.width, bottom - top);
+  ctx.fillRect(0, top, ctx.canvas.width, height);
 };
 
 const drawText = (
   ctx: CanvasRenderingContext2D,
   text: string,
   colour: string,
+  fontSize: number,
+  verticalPosition: number,
   size: Rect
 ) => {
-  const fontSize = size.height * 0.1;
   const x = size.width / 2;
-  const y = size.height / 2;
+  const y = size.height * verticalPosition;
 
   const outputText = text.trim().toUpperCase();
 
@@ -161,17 +214,17 @@ const drawText = (
 
   for (let i = 1.15; i > 1; i -= 0.01) {
     ctx.font = `${fontSize * i}px 'Optimus Princeps'`;
-    ctx.fillStyle = `rgba(${colour}, 0.05)`;
+    ctx.fillStyle = `rgba(${colour}, 0.07)`;
     ctx.fillText(outputText, x, y);
   }
 
   ctx.font = `${fontSize}px 'Optimus Princeps'`;
 
   ctx.fillStyle = `rgba(0, 0, 0, 0.6)`;
-  ctx.fillText(outputText, x + 2, y + 2, size.width * 0.9);
+  ctx.fillText(outputText, x + 2, y + 2);
 
   ctx.fillStyle = `rgba(${colour}, 0.9)`;
-  ctx.fillText(outputText, x, y, size.width * 0.9);
+  ctx.fillText(outputText, x, y);
 };
 
 export const NounVerbedGenerator: GeneratorMetadata = {
