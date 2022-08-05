@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import { LegacyGeneratorPage, Homepage } from './pages';
+import { GeneratorPage, LegacyGeneratorPage, Homepage } from './pages';
 import { MetaTags, PageLayout } from './components';
 import { legacyGenerators } from './legacyGenerators';
+import { generators } from './generators';
+import { routeFromName } from './utils/routeFromName';
 
 import './App.css';
 
@@ -16,6 +18,14 @@ const App = () => (
       <MetaTags />
       <PageLayout>
         <Routes>
+          {generators.map((generator) => (
+            <Route
+              key={routeFromName(generator.name)}
+              path={routeFromName(generator.name)}
+              element={<GeneratorPage generator={generator} />}
+            />
+          ))}
+
           {legacyGenerators.map((generator) => (
             <Route
               key={generator.route}

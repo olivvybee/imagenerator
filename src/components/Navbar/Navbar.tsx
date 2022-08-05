@@ -3,10 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import _sortBy from 'lodash/sortBy';
 
+import { generators } from '../../generators';
 import { legacyGenerators } from '../../legacyGenerators';
 
 import buttonStyles from '../Button/Button.module.css';
 import styles from './Navbar.module.css';
+import { routeFromName } from '../../utils/routeFromName';
 
 export const Navbar = () => {
   const { pathname } = useLocation();
@@ -53,6 +55,18 @@ export const Navbar = () => {
           ref={expander}
           style={{ maxHeight: isExpanded ? expanderHeight : 0 }}>
           <ul className={styles.linkList}>
+            {_sortBy(generators, 'name').map((generator) => (
+              <li
+                className={classNames(buttonStyles.button, styles.linkWrapper)}
+                key={generator.name}>
+                <Link
+                  to={routeFromName(generator.name)}
+                  className={styles.link}>
+                  {generator.name}
+                </Link>
+              </li>
+            ))}
+
             {_sortBy(legacyGenerators, 'name').map((generator) => (
               <li
                 className={classNames(buttonStyles.button, styles.linkWrapper)}

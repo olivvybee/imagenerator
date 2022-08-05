@@ -1,0 +1,33 @@
+.wrapper {
+  border: 1px solid var(--primary-muted);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.generatorName {
+  display: block;
+  font-size: 1.25rem;
+  margin-bottom: 24px;
+}
+
+.helpText {
+  margin: 0;
+  margin-bottom: 24px;
+}
+
+.heading {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+}
+
+.settingName {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.settingName:not(:first-of-type) {
+  margin-top: 16px;
+}

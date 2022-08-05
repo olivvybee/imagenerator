@@ -1,0 +1,8 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas {
+  display: none;
+}
