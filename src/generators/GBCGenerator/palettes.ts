@@ -95,4 +95,8 @@ export const PALETTES: Palette[] = [
     colours: ['#2c2c96', '#7733e7', '#e78686', '#f7bef7'],
     source: 'https://lospec.com/palette-list/kirby-sgb',
   },
+  {
+    name: 'Spaghetti & Meatballs',
+    colours: ['#141414', '#da7381', '#fbe2a2', '#d4d4d4'],
+  },
 ];
