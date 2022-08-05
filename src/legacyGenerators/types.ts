@@ -13,7 +13,7 @@ export interface RendererProps {
 
 export type Renderer = ComponentType<RendererProps>;
 
-export interface GeneratorMetadata {
+export interface LegacyGenerator {
   route: string;
   name: string;
   description: string;

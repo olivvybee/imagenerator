@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import _sortBy from 'lodash/sortBy';
 
-import { generators } from '../../generators';
+import { legacyGenerators } from '../../legacyGenerators';
 
 import styles from './Homepage.module.css';
 
@@ -18,7 +18,7 @@ export const Homepage = () => (
     </p>
 
     <ul className={styles.generatorList}>
-      {_sortBy(generators, 'name').map((generator) => (
+      {_sortBy(legacyGenerators, 'name').map((generator) => (
         <li className={styles.generatorLinkWrapper} key={generator.route}>
           <Link className={styles.generatorLink} to={generator.route}>
             <span className={styles.generatorName}>{generator.name}</span>

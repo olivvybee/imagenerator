@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { TextField } from '../../components/TextField/TextField';
 import { drawImage } from '../../utils/drawImage';
 import { drawText } from '../../utils/drawText';
-import { GeneratorMetadata, Renderer } from '../types';
+import { LegacyGenerator, Renderer } from '../types';
 
 import styles from './TuxedoMaskGenerator.module.css';
 
@@ -137,7 +137,7 @@ const buildAltText = (config: Config) => {
   );
 };
 
-export const TuxedoMaskGenerator: GeneratorMetadata = {
+export const TuxedoMaskGenerator: LegacyGenerator = {
   route: '/tuxedo-mask',
   name: 'Tuxedo Mask',
   description:

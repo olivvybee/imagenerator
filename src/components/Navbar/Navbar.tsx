@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import _sortBy from 'lodash/sortBy';
 
-import { generators } from '../../generators';
+import { legacyGenerators } from '../../legacyGenerators';
 
 import buttonStyles from '../Button/Button.module.css';
 import styles from './Navbar.module.css';
@@ -20,7 +20,7 @@ export const Navbar = () => {
     setIsExpanded(false);
   }, [pathname]);
 
-  const currentGenerator = generators.find(
+  const currentGenerator = legacyGenerators.find(
     (generator) => generator.route === pathname
   );
   const dropdownText = currentGenerator?.name || 'Choose generator';
@@ -53,7 +53,7 @@ export const Navbar = () => {
           ref={expander}
           style={{ maxHeight: isExpanded ? expanderHeight : 0 }}>
           <ul className={styles.linkList}>
-            {_sortBy(generators, 'name').map((generator) => (
+            {_sortBy(legacyGenerators, 'name').map((generator) => (
               <li
                 className={classNames(buttonStyles.button, styles.linkWrapper)}
                 key={generator.route}>

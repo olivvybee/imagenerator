@@ -1,12 +1,12 @@
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router';
 
-import { generators } from '../../generators';
+import { legacyGenerators } from '../../legacyGenerators';
 
 export const MetaTags: React.FC = () => {
   const { pathname } = useLocation();
 
-  const generator = generators.find(
+  const generator = legacyGenerators.find(
     (generator) => generator.route === pathname
   );
 

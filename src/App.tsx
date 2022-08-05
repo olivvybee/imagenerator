@@ -1,12 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import { MetaTags } from './components';
-import { generators } from './generators';
-import { GeneratorPage, Homepage } from './pages';
+import { LegacyGeneratorPage, Homepage } from './pages';
+import { MetaTags, PageLayout } from './components';
+import { legacyGenerators } from './legacyGenerators';
 
 import './App.css';
-import { PageLayout } from './components/PageLayout/PageLayout';
 
 const App = () => (
   <>
@@ -17,11 +16,11 @@ const App = () => (
       <MetaTags />
       <PageLayout>
         <Routes>
-          {generators.map((generator) => (
+          {legacyGenerators.map((generator) => (
             <Route
               key={generator.route}
               path={generator.route}
-              element={<GeneratorPage generator={generator} />}
+              element={<LegacyGeneratorPage generator={generator} />}
             />
           ))}
 

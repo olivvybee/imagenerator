@@ -3,16 +3,18 @@ import { faDice, faCopy, faCheck } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 
 import { Button, ImageSelector } from '../../components';
-import { GeneratorMetadata, UpdateOptions } from '../../generators/types';
+import { LegacyGenerator, UpdateOptions } from '../../legacyGenerators/types';
 import useCopyToClipboard from '../../utils/useCopyToClipboard';
 
-import styles from './GeneratorPage.module.css';
+import styles from './LegacyGeneratorPage.module.css';
 
 interface GeneratorPageProps {
-  generator: GeneratorMetadata;
+  generator: LegacyGenerator;
 }
 
-export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
+export const LegacyGeneratorPage: React.FC<GeneratorPageProps> = ({
+  generator,
+}) => {
   const { allowsCustomImage, selectRandomImage, Renderer } = generator;
 
   const canvas = useRef<HTMLCanvasElement>(null);

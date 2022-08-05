@@ -4,7 +4,7 @@ import { Dropdown, Slider } from '../../components';
 import { TextField } from '../../components/TextField/TextField';
 import { loadFont } from '../../utils/loadFont';
 import { loadImage } from '../../utils/loadImage';
-import { GeneratorMetadata, Renderer } from '../types';
+import { LegacyGenerator, Renderer } from '../types';
 
 import {
   COLOUR_MAP,
@@ -227,7 +227,7 @@ const drawText = (
   ctx.fillText(outputText, x, y);
 };
 
-export const NounVerbedGenerator: GeneratorMetadata = {
+export const NounVerbedGenerator: LegacyGenerator = {
   route: '/noun-verbed',
   name: 'Noun Verbed',
   description: 'MEME GENERATED',

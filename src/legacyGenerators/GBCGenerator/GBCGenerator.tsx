@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Stepper } from '../../components';
-import { GeneratorMetadata, Renderer } from '../types';
+import { LegacyGenerator, Renderer } from '../types';
 import { clamp } from '../../utils/clamp';
 
 import { Palette } from './types';
@@ -232,7 +232,7 @@ const getPalettePreview = (palette: Palette) => (
   </div>
 );
 
-export const GBCGenerator: GeneratorMetadata = {
+export const GBCGenerator: LegacyGenerator = {
   route: '/gbc',
   name: 'Gameboy Camera',
   description: 'Make any image look like it was taken with a Gameboy Camera.',

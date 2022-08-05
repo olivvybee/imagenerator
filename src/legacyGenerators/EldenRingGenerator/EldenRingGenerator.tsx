@@ -6,7 +6,7 @@ import { clamp } from '../../utils/clamp';
 import { drawImage } from '../../utils/drawImage';
 import { loadFont } from '../../utils/loadFont';
 import { randomInt } from '../../utils/randomInt';
-import { GeneratorMetadata, Renderer } from '../types';
+import { LegacyGenerator, Renderer } from '../types';
 
 import { FORMATS, CONJUNCTIONS } from './constants';
 import styles from './EldenRingGenerator.module.css';
@@ -387,7 +387,7 @@ const getSuggestedAltText = (config: Config) => {
   return `An Elden Ring message box that says "${text}". The message has ${appraisals} ${unit}.`;
 };
 
-export const EldenRingGenerator: GeneratorMetadata = {
+export const EldenRingGenerator: LegacyGenerator = {
   route: '/try-fingers',
   name: 'Try Fingers, But Hole',
   description: 'Create your own Elden Ring messages.',
