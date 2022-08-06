@@ -8,46 +8,46 @@ export enum SettingType {
   Colour,
 }
 
-export interface BaseSetting<T extends SettingType, V, P extends {}> {
+export interface Setting<T extends SettingType, V, P extends {}> {
   type: T;
   name: string;
   params: P;
   defaultValue?: V;
 }
 
-export type ImageSetting = BaseSetting<SettingType.Image, HTMLImageElement, {}>;
-export type TextSetting = BaseSetting<
+export type ImageSetting = Setting<SettingType.Image, HTMLImageElement, {}>;
+export type TextSetting = Setting<
   SettingType.Text,
   string,
   { multiline?: boolean; placeholder?: string }
 >;
-export type NumberSetting = BaseSetting<
+export type NumberSetting = Setting<
   SettingType.Number,
   number,
   { min?: number; max?: number }
 >;
-export type DropdownSetting = BaseSetting<
+export type DropdownSetting = Setting<
   SettingType.Dropdown,
   string,
   { options: string[] }
 >;
-export type StepperSetting<V> = BaseSetting<
+export type StepperSetting<V> = Setting<
   SettingType.Stepper,
   V,
   { options: V[]; allowWrapping: boolean }
 >;
-export type SliderSetting = BaseSetting<
+export type SliderSetting = Setting<
   SettingType.Slider,
   number,
   { min: number; max: number; step?: number }
 >;
-export type ColourSetting = BaseSetting<
+export type ColourSetting = Setting<
   SettingType.Colour,
   string,
   { presets?: string[] }
 >;
 
-export type Setting =
+export type TypedSetting =
   | TextSetting
   | NumberSetting
   | DropdownSetting
@@ -55,6 +55,10 @@ export type Setting =
   | SliderSetting
   | ColourSetting;
 
-export interface SettingValues {
-  [name: string]: any;
-}
+export type Settings = {
+  [key: string]: TypedSetting;
+};
+
+export type SettingValues<S extends Settings> = {
+  [K in keyof S]: S[K] extends Setting<any, infer V, any> ? V : never;
+};

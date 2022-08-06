@@ -1,8 +1,8 @@
-import { Setting, SettingType } from '../../types/SettingTypes';
+import { TypedSetting, SettingType } from '../../types/SettingTypes';
 import { TextField } from '../TextField/TextField';
 
 interface SettingRendererProps {
-  setting: Setting;
+  setting: TypedSetting;
   value: any;
   id: string;
   onChange: (newValue: any) => void;

@@ -2,30 +2,28 @@ import { useCallback, useReducer, useRef } from 'react';
 
 import { Configurator } from '../../components';
 import { Generator } from '../../types/GeneratorTypes';
-import { Setting } from '../../types/SettingTypes';
+import { Settings, SettingValues } from '../../types/SettingTypes';
 
 import styles from './GeneratorPage.module.css';
 
 interface GeneratorPageProps {
-  generator: Generator;
+  generator: Generator<Settings>;
 }
 
 interface GeneratorState {
-  values: {
-    [name: string]: any;
-  };
+  values: SettingValues<Settings>;
   loading: boolean;
 }
 
 type GeneratorAction =
-  | { type: 'set'; name: string; value: any }
-  | { type: 'reset'; settings: Setting[] };
+  | { type: 'set'; key: string; value: any }
+  | { type: 'reset'; settings: Settings };
 
-const init = (settings: Setting[]): GeneratorState => {
-  const values = settings.reduce(
-    (state, setting) => ({
+const init = (settings: Settings): GeneratorState => {
+  const values = Object.entries(settings).reduce(
+    (state, [key, setting]) => ({
       ...state,
-      [setting.name]: setting.defaultValue || undefined,
+      [key]: setting.defaultValue || undefined,
     }),
     {}
   );
@@ -43,7 +41,7 @@ const reducer = (state: GeneratorState, action: GeneratorAction) => {
         ...state,
         values: {
           ...state.values,
-          [action.name]: action.value,
+          [action.key]: action.value,
         },
       };
     case 'reset':
@@ -60,7 +58,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const resultImage = useRef<HTMLImageElement>(null);
 
   const onChange = useCallback(
-    (name: string, value: any) => dispatch({ type: 'set', name, value }),
+    (key: string, value: any) => dispatch({ type: 'set', key, value }),
     [dispatch]
   );
 

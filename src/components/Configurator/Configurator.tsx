@@ -1,12 +1,12 @@
 import { Generator } from '../../types/GeneratorTypes';
-import { SettingValues } from '../../types/SettingTypes';
+import { Settings, SettingValues } from '../../types/SettingTypes';
 import { SettingRenderer } from '../SettingRenderer/SettingRenderer';
 
 import styles from './Configurator.module.css';
 
 interface ConfiguratorProps {
-  generator: Generator;
-  values: SettingValues;
+  generator: Generator<Settings>;
+  values: SettingValues<Settings>;
   onChange: (name: string, value: any) => void;
 }
 
@@ -21,19 +21,16 @@ export const Configurator: React.FC<ConfiguratorProps> = ({
 
     <h3 className={styles.heading}>Settings</h3>
 
-    {generator.settings.map((setting) => {
-      const id = setting.name.toLowerCase().replaceAll(' ', '-');
-      return (
-        <div>
-          <label htmlFor={id}>{setting.name}</label>
-          <SettingRenderer
-            setting={setting}
-            value={values[setting.name]}
-            id={id}
-            onChange={(newValue) => onChange(setting.name, newValue)}
-          />
-        </div>
-      );
-    })}
+    {Object.entries(generator.settings).map(([key, setting]) => (
+      <div>
+        <label htmlFor={key}>{setting.name}</label>
+        <SettingRenderer
+          setting={setting}
+          value={values[key]}
+          id={key}
+          onChange={(newValue) => onChange(key, newValue)}
+        />
+      </div>
+    ))}
   </div>
 );
