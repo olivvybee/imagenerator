@@ -11,12 +11,9 @@ export const Homepage = () => (
   <div>
     <p className={styles.bigText}>hi, im a generator.</p>
 
-    <p>I'll help you make memes and apply fancy styles to your images.</p>
-
     <p>
-      What can I do? Well here are all my generators! Click one to try it out.
-      Some of them use a preset image, and some of them let you choose your own
-      image to edit.
+      I'll help you make memes and apply fancy styles to your images. What can I
+      do? Well here's a list of all my generators:
     </p>
 
     <ul className={styles.generatorList}>
@@ -47,13 +44,12 @@ export const Homepage = () => (
 
     <h2>FAQs</h2>
 
-    <h3>Where do images go when I upload them?</h3>
+    <h3>What happens to uploaded images?</h3>
 
     <p>
-      Simple answer: absolutely nowhere. When you choose an image, it isn't
-      being uploaded anywhere, because I work entirely in your browser. There is
-      no server involved. You can verify this by disconnecting from the internet
-      after loading the page, because everything will still work.
+      Your images never actually get uploaded anywhere, because I work entirely
+      within your browser. Once you've loaded a generator, it will even work
+      offline, because there's no server involved.
     </p>
 
     <h3>What's alt text?</h3>
@@ -68,8 +64,7 @@ export const Homepage = () => (
     <p>
       If you're sharing images on places like twitter, please consider adding
       alt text so that they're accessible to everyone. Some of my generators
-      offer suggested alt text that you can copy and paste instead of having to
-      describe the image yourself.
+      offer suggested alt text that you can copy and paste to make it easier.
     </p>
 
     <h3>Who made you?</h3>
