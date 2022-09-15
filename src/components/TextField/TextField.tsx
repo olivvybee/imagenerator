@@ -20,9 +20,8 @@ export const TextField: React.FC<TextFieldProps> = ({
   onChange,
   onBlur,
   onKeyPress,
-  disabled,
   type = 'text',
-  defaultValue,
+  ...rest
 }) => (
   <input
     className={classNames(styles.textField, className)}
@@ -31,7 +30,6 @@ export const TextField: React.FC<TextFieldProps> = ({
     onChange={(e) => onChange?.(e.target.value)}
     onBlur={onBlur}
     onKeyPress={(e) => onKeyPress?.(e.key)}
-    disabled={disabled}
-    defaultValue={defaultValue}
+    {...rest}
   />
 );

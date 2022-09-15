@@ -39,7 +39,7 @@ export const Navbar = () => {
               height={40}
               width={40}
             />
-            <h1 className={styles.siteName}>imagenerator</h1>
+            <span className={styles.siteName}>imagenerator</span>
           </Link>
 
           <button

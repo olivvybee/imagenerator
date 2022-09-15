@@ -16,14 +16,16 @@ export const Configurator: React.FC<ConfiguratorProps> = ({
   onChange,
 }) => (
   <div className={styles.wrapper}>
-    <h2 className={styles.heading}>{generator.name}</h2>
+    <h1 className={styles.generatorName}>{generator.name}</h1>
     <p className={styles.helpText}>{generator.helpText}</p>
 
     <h3 className={styles.heading}>Settings</h3>
 
     {Object.entries(generator.settings).map(([key, setting]) => (
-      <div>
-        <label htmlFor={key}>{setting.name}</label>
+      <div className={styles.settingWrapper}>
+        <label className={styles.settingName} htmlFor={key}>
+          {setting.name}
+        </label>
         <SettingRenderer
           setting={setting}
           value={values[key]}
