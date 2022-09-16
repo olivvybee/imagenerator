@@ -1,8 +1,10 @@
+import classNames from 'classnames';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
 import { getAllGenerators } from '../utils/getAllGenerators';
 
+import buttonStyles from '../components/Button/Button.module.css';
 import styles from './index.module.css';
 
 const Homepage = ({
@@ -20,18 +22,24 @@ const Homepage = ({
       {generators.map((generator) => (
         <li className={styles.generatorLinkWrapper} key={generator.name}>
           <Link href={generator.route}>
-            <a className={styles.generatorLink}>
-              <span className={styles.generatorName}>{generator.name}</span>
-              <span className={styles.generatorDescription}>
-                {generator.description}
-              </span>
+            <a
+              className={classNames(buttonStyles.button, styles.generatorLink)}>
+              {generator.name}
             </a>
           </Link>
         </li>
       ))}
     </ul>
 
-    <h2>FAQs</h2>
+    <p>
+      Visit the{' '}
+      <Link href="/generators">
+        <a>generators page</a>
+      </Link>{' '}
+      for a more detailed list.
+    </p>
+
+    <h2 className={styles.subheading}>FAQs</h2>
 
     <h3>What happens to uploaded images?</h3>
 
