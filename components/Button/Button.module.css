@@ -1,0 +1,64 @@
+.button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  font-size: unset;
+  margin: 0;
+
+  background-color: var(--primary);
+  cursor: pointer;
+  color: #000000;
+  padding: 8px 12px;
+  border-radius: 8px;
+  line-height: 1.5;
+  min-width: 40px;
+}
+
+.button:hover {
+  background-color: var(--primary-hover);
+  color: #000000;
+}
+
+.button:active {
+  background-color: var(--primary-active);
+  color: #000000;
+}
+
+.button:disabled,
+.button:hover:disabled,
+.button:active:disabled {
+  opacity: 0.5;
+  cursor: default;
+  background-color: var(--primary);
+}
+
+.contentWithIcon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.iconWrapper {
+  margin-right: 16px;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.smallIconWrapper {
+  margin-right: 4px;
+  height: 16px;
+  width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.smallButton {
+  font-size: 0.9em;
+  padding: 4px 6px;
+}

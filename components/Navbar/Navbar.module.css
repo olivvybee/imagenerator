@@ -1,0 +1,53 @@
+.navbar {
+  background-color: #221627;
+  margin-bottom: 16px;
+  padding: 8px 0;
+}
+
+.navbarContent {
+  padding: 0 16px;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.staticContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.homeLink {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  font-family: 'Fredoka One', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+}
+
+.siteName {
+  padding: 0;
+  margin: 0;
+  margin-left: 12px;
+  font-size: 2em;
+}
+
+.link {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 500px) {
+  .homeLink {
+    margin-bottom: 8px;
+  }
+
+  .staticContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
