@@ -68,8 +68,8 @@ const Homepage = ({
 
     <p>
       I was made by{' '}
-      <a className={styles.twitterLink} href="https://twitter.com/olivvybee">
-        @olivvybee
+      <a href="https://twitter.com/olivvybee">
+        <strong>@olivvybee</strong>
       </a>{' '}
       because she kept coming up with ideas for image generators and needed
       somewhere to put them. If you like them, maybe{' '}
