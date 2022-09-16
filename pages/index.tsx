@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
 import { getAllGenerators } from '../utils/getAllGenerators';
 
 import buttonStyles from '../components/Button/Button.module.css';
-import styles from './index.module.css';
+import styles from './homepage.module.css';
 
 const Homepage = ({
   generators,
@@ -80,12 +80,7 @@ const Homepage = ({
 
 export const getStaticProps = async () => {
   const generators = await getAllGenerators();
-
-  return {
-    props: {
-      generators,
-    },
-  };
+  return { props: { generators } };
 };
 
 export default Homepage;
