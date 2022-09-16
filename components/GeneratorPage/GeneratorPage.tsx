@@ -5,6 +5,7 @@ import { Generator } from '../../types/GeneratorTypes';
 import { Configurator } from '../Configurator';
 
 import styles from './GeneratorPage.module.css';
+import { MetaTags } from '../MetaTags/MetaTags';
 
 interface GeneratorPageProps {
   generator: Generator<Settings>;
@@ -69,18 +70,22 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   );
 
   return (
-    <div className={styles.pageWrapper}>
-      <div className={styles.outputWrapper}>
-        <img className={styles.output} ref={resultImage} src="" alt="" />
+    <>
+      <MetaTags title={generator.name} description={generator.description} />
+
+      <div className={styles.pageWrapper}>
+        <div className={styles.outputWrapper}>
+          <img className={styles.output} ref={resultImage} src="" alt="" />
+        </div>
+
+        <Configurator
+          generator={generator}
+          values={state.values}
+          onChange={onChange}
+        />
+
+        <canvas className={styles.canvas} ref={canvas} />
       </div>
-
-      <Configurator
-        generator={generator}
-        values={state.values}
-        onChange={onChange}
-      />
-
-      <canvas className={styles.canvas} ref={canvas} />
-    </div>
+    </>
   );
 };
