@@ -15,6 +15,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^4.23.1",
     "@types/node": "18.7.18",
     "@types/react": "18.0.20",
     "@types/webpack-env": "^1.18.0",
