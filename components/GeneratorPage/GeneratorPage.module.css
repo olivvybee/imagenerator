@@ -1,8 +1,45 @@
-.pageWrapper {
+.generatorWrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-start;
+  max-width: 100%;
 }
 
-.canvas {
-  display: none;
+.generatorWrapper.vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.output {
+  min-width: 0;
+  width: 100%;
+  height: auto;
+}
+
+.spacer {
+  width: 32px;
+}
+
+.altTextSection {
+  border: 1px solid var(--primary-muted);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.altTextTitle {
+  display: block;
+  font-size: 1.25rem;
+  margin-right: 16px;
+}
+
+.altTextTitleWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.altText {
+  margin: 0;
 }

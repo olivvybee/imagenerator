@@ -1,12 +1,14 @@
-import { useCallback, useEffect, useReducer, useRef } from 'react';
-import { useQuery, QueryFunction, QueryKey } from '@tanstack/react-query';
+import { useCallback, useReducer, useRef } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import { Settings, SettingValues } from '../../types/SettingTypes';
-import { Generator, Output } from '../../types/GeneratorTypes';
+import { Generator } from '../../types/GeneratorTypes';
 import { Configurator } from '../Configurator';
+import { MetaTags } from '../MetaTags/MetaTags';
+import { Button } from '../Button';
+import useCopyToClipboard from '../../utils/useCopyToClipboard';
 
 import styles from './GeneratorPage.module.css';
-import { MetaTags } from '../MetaTags/MetaTags';
 
 interface GeneratorPageProps {
   generator: Generator<Settings>;
@@ -77,31 +79,45 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     [dispatch]
   );
 
+  const [copiedText, copyToClipboard] = useCopyToClipboard();
+
   return (
     <>
       <MetaTags title={generator.name} description={generator.description} />
 
       <div className={styles.pageWrapper}>
-        <div className={styles.outputWrapper}>
+        <div className={styles.generatorWrapper}>
           {isFetched && (
             <img
               className={styles.output}
-              width={data.size.width}
-              height={data.size.height}
               ref={resultImage}
               src={data.imageData}
               alt=""
             />
           )}
+
+          <div className={styles.spacer} />
+
+          <Configurator
+            generator={generator}
+            values={settingValues}
+            onChange={onChange}
+          />
         </div>
 
-        <Configurator
-          generator={generator}
-          values={settingValues}
-          onChange={onChange}
-        />
-
-        {isFetched && <p>Suggested alt text: "{data.suggestedAltText}"</p>}
+        {isFetched && data.suggestedAltText && (
+          <div className={styles.altTextSection}>
+            <div className={styles.altTextTitleWrapper}>
+              <div className={styles.altTextTitle}>Suggested alt text</div>
+              <Button
+                onClick={() => copyToClipboard(data.suggestedAltText)}
+                small={true}>
+                {!!copiedText ? 'Copied' : 'Copy'}
+              </Button>
+            </div>
+            <p className={styles.altText}>{data.suggestedAltText}</p>
+          </div>
+        )}
       </div>
     </>
   );
