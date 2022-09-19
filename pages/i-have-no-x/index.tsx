@@ -7,11 +7,25 @@ type IHaveNoXSettings = {
   y: TextSetting;
 };
 
-const generate: GeneratorFunction<IHaveNoXSettings> = async (settings, ctx) => {
+const generate: GeneratorFunction<IHaveNoXSettings> = async (
+  canvas,
+  settings
+) => {
   const { x, y } = settings;
 
+  canvas.width = 100;
+  canvas.height = 100;
+
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#123456';
+  ctx.fillRect(0, 0, 100, 100);
+
+  ctx.fillStyle = 'white';
+  ctx.fillText(x, 5, 20);
+  ctx.fillText(y, 5, 50);
+
   return {
-    size: { width: 0, height: 0 },
+    size: { width: 100, height: 100 },
     suggestedAltText: `Harlan Ellison's I Have No ${x} and I Must ${y}`,
   };
 };

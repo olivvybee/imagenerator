@@ -1,7 +1,8 @@
-import { useCallback, useReducer, useRef } from 'react';
+import { useCallback, useEffect, useReducer, useRef } from 'react';
+import { useQuery, QueryFunction, QueryKey } from '@tanstack/react-query';
 
 import { Settings, SettingValues } from '../../types/SettingTypes';
-import { Generator } from '../../types/GeneratorTypes';
+import { Generator, Output } from '../../types/GeneratorTypes';
 import { Configurator } from '../Configurator';
 
 import styles from './GeneratorPage.module.css';
@@ -11,45 +12,26 @@ interface GeneratorPageProps {
   generator: Generator<Settings>;
 }
 
-interface GeneratorState {
-  values: SettingValues<Settings>;
-  loading: boolean;
-}
-
 type GeneratorAction =
   | { type: 'set'; key: string; value: any }
-  | { type: 'reset'; settings: Settings }
-  | { type: 'setLoading'; isLoading: boolean };
+  | { type: 'reset'; settings: Settings };
 
-const init = (settings: Settings): GeneratorState => {
-  const values = Object.entries(settings).reduce(
+const init = (settings: Settings): SettingValues<Settings> => {
+  return Object.entries(settings).reduce(
     (state, [key, setting]) => ({
       ...state,
       [key]: setting.defaultValue || undefined,
     }),
     {}
   );
-
-  return {
-    values,
-    loading: false,
-  };
 };
 
-const reducer = (state: GeneratorState, action: GeneratorAction) => {
+const reducer = (state: SettingValues<Settings>, action: GeneratorAction) => {
   switch (action.type) {
     case 'set':
       return {
         ...state,
-        values: {
-          ...state.values,
-          [action.key]: action.value,
-        },
-      };
-    case 'setLoading':
-      return {
-        ...state,
-        loading: action.isLoading,
+        [action.key]: action.value,
       };
     case 'reset':
       return init(action.settings);
@@ -59,13 +41,39 @@ const reducer = (state: GeneratorState, action: GeneratorAction) => {
 };
 
 export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
-  const [state, dispatch] = useReducer(reducer, generator.settings, init);
-
-  const canvas = useRef<HTMLCanvasElement>(null);
   const resultImage = useRef<HTMLImageElement>(null);
 
+  const [settingValues, dispatch] = useReducer(
+    reducer,
+    generator.settings,
+    init
+  );
+
+  const { data, isLoading, isFetching, isFetched } = useQuery(
+    ['generate', settingValues],
+    async ({ queryKey }) => {
+      const canvas = document.createElement('canvas');
+
+      const { size, suggestedAltText } = await generator.generate(
+        canvas,
+        queryKey[1] as SettingValues<Settings>
+      );
+
+      const imageData = canvas.toDataURL('image/png');
+
+      return { size, suggestedAltText, imageData };
+    },
+    {
+      networkMode: 'always',
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
+
   const onChange = useCallback(
-    (key: string, value: any) => dispatch({ type: 'set', key, value }),
+    (key: string, value: any) => {
+      dispatch({ type: 'set', key, value });
+    },
     [dispatch]
   );
 
@@ -75,16 +83,25 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
       <div className={styles.pageWrapper}>
         <div className={styles.outputWrapper}>
-          <img className={styles.output} ref={resultImage} src="" alt="" />
+          {isFetched && (
+            <img
+              className={styles.output}
+              width={data.size.width}
+              height={data.size.height}
+              ref={resultImage}
+              src={data.imageData}
+              alt=""
+            />
+          )}
         </div>
 
         <Configurator
           generator={generator}
-          values={state.values}
+          values={settingValues}
           onChange={onChange}
         />
 
-        <canvas className={styles.canvas} ref={canvas} />
+        {isFetched && <p>Suggested alt text: "{data.suggestedAltText}"</p>}
       </div>
     </>
   );

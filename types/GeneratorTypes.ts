@@ -7,8 +7,8 @@ export interface Output {
 }
 
 export type GeneratorFunction<S extends Settings> = (
-  settings: SettingValues<S>,
-  ctx: CanvasRenderingContext2D
+  canvas: HTMLCanvasElement,
+  settings: SettingValues<S>
 ) => Promise<Output>;
 
 export type PreloadFunction = () => Promise<void>;
