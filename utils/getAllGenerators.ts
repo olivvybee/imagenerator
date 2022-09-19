@@ -8,8 +8,10 @@ export const getAllGenerators = async () => {
     /^(?!.*\.(?:css)$)pages\/.*\/index.tsx/
   );
 
-  const generators = context.keys().map((key) => {
-    const generator = context(key).generator as Generator<Settings>;
+  const promises = context.keys().map(async (key) => {
+    const exports = await context(key);
+
+    const generator = exports.generator as Generator<Settings>;
     if (!generator) {
       return undefined;
     }
@@ -20,6 +22,8 @@ export const getAllGenerators = async () => {
       description: generator.description,
     };
   });
+
+  const generators = await Promise.all(promises);
 
   return generators.filter(Boolean);
 };
