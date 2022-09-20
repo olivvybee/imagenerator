@@ -59,6 +59,6 @@ export type Settings = {
   [key: string]: TypedSetting;
 };
 
-export type SettingValues<S extends Settings> = {
+export type SettingValues<S extends Settings = Settings> = {
   [K in keyof S]: S[K] extends Setting<any, infer V, any> ? V : never;
 };

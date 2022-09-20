@@ -2,31 +2,42 @@ import { Generator, GeneratorFunction } from '../../types/GeneratorTypes';
 import { SettingType, TextSetting } from '../../types/SettingTypes';
 import { GeneratorPage } from '../../components/GeneratorPage';
 
+import { loadImage } from '../../utils/loadImage';
+
 type IHaveNoXSettings = {
   x: TextSetting;
   y: TextSetting;
 };
 
-const generate: GeneratorFunction<IHaveNoXSettings> = async (
+type IHaveNoXCache = {
+  background: HTMLImageElement;
+};
+
+const generate: GeneratorFunction<IHaveNoXSettings, IHaveNoXCache> = async (
   canvas,
-  settings
+  settings,
+  cache
 ) => {
+  const background =
+    cache?.background || (await loadImage('/assets/i-have-no-mouth.jpg'));
+
   const { x, y } = settings;
 
-  canvas.width = 100;
-  canvas.height = 100;
+  canvas.width = 900;
+  canvas.height = 450;
 
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#123456';
-  ctx.fillRect(0, 0, 100, 100);
 
-  ctx.fillStyle = 'white';
-  ctx.fillText(x, 5, 20);
-  ctx.fillText(y, 5, 50);
+  ctx.drawImage(background, 0, 0);
+
+  const suggestedAltText =
+    !!x && !!y && `Harlan Ellison's I Have No ${x} and I Must ${y}`;
 
   return {
-    size: { width: 100, height: 100 },
-    suggestedAltText: `Harlan Ellison's I Have No ${x} and I Must ${y}`,
+    suggestedAltText,
+    cache: {
+      background,
+    },
   };
 };
 

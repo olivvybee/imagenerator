@@ -11,14 +11,14 @@ import useCopyToClipboard from '../../utils/useCopyToClipboard';
 import styles from './GeneratorPage.module.css';
 
 interface GeneratorPageProps {
-  generator: Generator<Settings>;
+  generator: Generator;
 }
 
 type GeneratorAction =
   | { type: 'set'; key: string; value: any }
   | { type: 'reset'; settings: Settings };
 
-const init = (settings: Settings): SettingValues<Settings> => {
+const init = (settings: Settings): SettingValues => {
   return Object.entries(settings).reduce(
     (state, [key, setting]) => ({
       ...state,
@@ -28,7 +28,7 @@ const init = (settings: Settings): SettingValues<Settings> => {
   );
 };
 
-const reducer = (state: SettingValues<Settings>, action: GeneratorAction) => {
+const reducer = (state: SettingValues, action: GeneratorAction) => {
   switch (action.type) {
     case 'set':
       return {
@@ -51,19 +51,24 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     init
   );
 
-  const { data, isLoading, isFetching, isFetched } = useQuery(
+  const {
+    data: output,
+    isFetching: isGenerating,
+    isFetched: hasGenerated,
+  } = useQuery(
     ['generate', settingValues],
     async ({ queryKey }) => {
       const canvas = document.createElement('canvas');
 
-      const { size, suggestedAltText } = await generator.generate(
+      const { cache, suggestedAltText } = await generator.generate(
         canvas,
-        queryKey[1] as SettingValues<Settings>
+        queryKey[1] as SettingValues,
+        output?.cache || {}
       );
 
       const imageData = canvas.toDataURL('image/png');
 
-      return { size, suggestedAltText, imageData };
+      return { cache, suggestedAltText, imageData };
     },
     {
       networkMode: 'always',
@@ -87,11 +92,11 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
       <div className={styles.pageWrapper}>
         <div className={styles.generatorWrapper}>
-          {isFetched && (
+          {hasGenerated && (
             <img
               className={styles.output}
               ref={resultImage}
-              src={data.imageData}
+              src={output.imageData}
               alt=""
             />
           )}
@@ -105,17 +110,17 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
           />
         </div>
 
-        {isFetched && data.suggestedAltText && (
+        {hasGenerated && output.suggestedAltText && (
           <div className={styles.altTextSection}>
             <div className={styles.altTextTitleWrapper}>
               <div className={styles.altTextTitle}>Suggested alt text</div>
               <Button
-                onClick={() => copyToClipboard(data.suggestedAltText)}
+                onClick={() => copyToClipboard(output.suggestedAltText)}
                 small={true}>
                 {!!copiedText ? 'Copied' : 'Copy'}
               </Button>
             </div>
-            <p className={styles.altText}>{data.suggestedAltText}</p>
+            <p className={styles.altText}>{output.suggestedAltText}</p>
           </div>
         )}
       </div>
