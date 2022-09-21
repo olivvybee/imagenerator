@@ -16,6 +16,10 @@
   height: auto;
 }
 
+.placeholder {
+  width: 100%;
+}
+
 .spacer {
   width: 32px;
 }

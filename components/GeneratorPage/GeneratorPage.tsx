@@ -53,8 +53,8 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
   const {
     data: output,
+    isSuccess: hasGenerated,
     isFetching: isGenerating,
-    isFetched: hasGenerated,
   } = useQuery(
     ['generate', settingValues],
     async ({ queryKey }) => {
@@ -92,13 +92,15 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
       <div className={styles.pageWrapper}>
         <div className={styles.generatorWrapper}>
-          {hasGenerated && (
+          {hasGenerated ? (
             <img
               className={styles.output}
               ref={resultImage}
               src={output.imageData}
               alt=""
             />
+          ) : (
+            <div className={styles.placeholder} />
           )}
 
           <div className={styles.spacer} />
