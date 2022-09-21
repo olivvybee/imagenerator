@@ -16,7 +16,7 @@ interface TextFieldProps
 
 export const TextField: React.FC<TextFieldProps> = ({
   className,
-  value,
+  value = '',
   onChange,
   onBlur,
   onKeyPress,
