@@ -22,6 +22,7 @@
 
 .spacer {
   width: 32px;
+  height: 16px;
 }
 
 .altTextSection {
@@ -46,4 +47,11 @@
 
 .altText {
   margin: 0;
+}
+
+@media screen and (max-width: 500px) {
+  .generatorWrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
