@@ -25,6 +25,20 @@
   height: 16px;
 }
 
+.shareSection {
+  border: 1px solid var(--primary-muted);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.shareSection > button {
+  flex: 1;
+}
+
 .altTextSection {
   border: 1px solid var(--primary-muted);
   border-radius: 8px;
@@ -53,5 +67,9 @@
   .generatorWrapper {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .shareSection {
+    flex-direction: column;
   }
 }

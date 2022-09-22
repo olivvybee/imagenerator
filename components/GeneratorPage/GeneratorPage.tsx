@@ -1,5 +1,6 @@
 import { useCallback, useReducer, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { saveAs } from 'file-saver';
 
 import { Settings, SettingValues } from '../../types/SettingTypes';
 import { Generator } from '../../types/GeneratorTypes';
@@ -9,6 +10,8 @@ import { Button } from '../Button';
 import useCopyToClipboard from '../../utils/useCopyToClipboard';
 
 import styles from './GeneratorPage.module.css';
+import { useWebShare } from '../../utils/useNativeShare';
+import { createFileFromDataURL } from '../../utils/createFileFromDataUrl';
 
 interface GeneratorPageProps {
   generator: Generator;
@@ -86,6 +89,15 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
   const [copiedText, copyToClipboard] = useCopyToClipboard();
 
+  const { isSharingSupported, share } = useWebShare('image/png');
+  const shareImage = () => {
+    const shareData = {
+      title: generator.name,
+      file: createFileFromDataURL(output?.imageData, generator.name),
+    };
+    share({ data: shareData });
+  };
+
   return (
     <>
       <MetaTags title={generator.name} description={generator.description} />
@@ -110,6 +122,23 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
             values={settingValues}
             onChange={onChange}
           />
+        </div>
+
+        <div className={styles.shareSection}>
+          {isSharingSupported && (
+            <>
+              <Button onClick={shareImage} disabled={!hasGenerated}>
+                Share image
+              </Button>
+              <div className={styles.spacer} />
+            </>
+          )}
+
+          <Button
+            onClick={() => saveAs(output?.imageData, `${generator.name}.png`)}
+            disabled={!hasGenerated}>
+            Download image
+          </Button>
         </div>
 
         {hasGenerated && output.suggestedAltText && (
