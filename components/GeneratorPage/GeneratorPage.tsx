@@ -121,24 +121,11 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
             generator={generator}
             values={settingValues}
             onChange={onChange}
+            shareImage={isSharingSupported && shareImage}
+            downloadImage={() =>
+              saveAs(output?.imageData, `${generator.name}.png`)
+            }
           />
-        </div>
-
-        <div className={styles.shareSection}>
-          {isSharingSupported && (
-            <>
-              <Button onClick={shareImage} disabled={!hasGenerated}>
-                Share image
-              </Button>
-              <div className={styles.spacer} />
-            </>
-          )}
-
-          <Button
-            onClick={() => saveAs(output?.imageData, `${generator.name}.png`)}
-            disabled={!hasGenerated}>
-            Download image
-          </Button>
         </div>
 
         {hasGenerated && output.suggestedAltText && (

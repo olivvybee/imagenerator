@@ -25,20 +25,6 @@
   height: 16px;
 }
 
-.shareSection {
-  border: 1px solid var(--primary-muted);
-  border-radius: 8px;
-  padding: 16px;
-  margin-top: 16px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.shareSection > button {
-  flex: 1;
-}
-
 .altTextSection {
   border: 1px solid var(--primary-muted);
   border-radius: 8px;
@@ -71,5 +57,10 @@
 
   .shareSection {
     flex-direction: column;
+  }
+
+  .shareSection > button {
+    flex: 1;
+    max-width: 100%;
   }
 }

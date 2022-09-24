@@ -24,6 +24,17 @@
   margin-bottom: 16px;
 }
 
+.shareSection {
+  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.shareSection > button {
+  margin-top: 16px;
+}
+
 .settingName {
   display: block;
   margin-bottom: 8px;
