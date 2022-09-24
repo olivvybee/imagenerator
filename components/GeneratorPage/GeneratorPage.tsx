@@ -92,7 +92,6 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const { isSharingSupported, share } = useWebShare('image/png');
   const shareImage = () => {
     const shareData = {
-      title: generator.name,
       file: createFileFromDataURL(output?.imageData, generator.name),
     };
     share({ data: shareData });
