@@ -9,6 +9,7 @@ interface ConfiguratorProps {
   generator: Generator<Settings>;
   values: SettingValues<Settings>;
   onChange: (name: string, value: any) => void;
+  reset: () => void;
   shareImage?: () => void;
   downloadImage: () => void;
 }
@@ -17,6 +18,7 @@ export const Configurator: React.FC<ConfiguratorProps> = ({
   generator,
   values,
   onChange,
+  reset,
   shareImage,
   downloadImage,
 }) => (
@@ -35,7 +37,12 @@ export const Configurator: React.FC<ConfiguratorProps> = ({
       </Button>
     </div>
 
-    <h3 className={styles.heading}>Settings</h3>
+    <div className={styles.headingWrapper}>
+      <h3 className={styles.heading}>Settings</h3>
+      <Button onClick={reset} small={true}>
+        Reset
+      </Button>
+    </div>
 
     {Object.entries(generator.settings).map(([key, setting]) => (
       <div className={styles.settingWrapper} key={key}>

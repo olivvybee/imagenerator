@@ -129,6 +129,9 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
             generator={generator}
             values={settingValues}
             onChange={onChange}
+            reset={() =>
+              dispatch({ type: 'reset', settings: generator.settings })
+            }
             shareImage={isSharingSupported && shareImage}
             downloadImage={() =>
               saveAs(output?.imageData, `${generator.name}.png`)
