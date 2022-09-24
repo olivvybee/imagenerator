@@ -97,6 +97,15 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     share({ data: shareData });
   };
 
+  const imageAltText = output?.suggestedAltText?.replace(
+    '{{userImage}}',
+    'the image you chose'
+  );
+  const suggestedAltText = output?.suggestedAltText?.replace(
+    '{{userImage}}',
+    '[describe your image]'
+  );
+
   return (
     <>
       <MetaTags title={generator.name} description={generator.description} />
@@ -108,7 +117,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
               className={styles.output}
               ref={resultImage}
               src={output.imageData}
-              alt=""
+              alt={imageAltText || ''}
             />
           ) : (
             <div className={styles.placeholder} />
@@ -132,12 +141,12 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
             <div className={styles.altTextTitleWrapper}>
               <div className={styles.altTextTitle}>Suggested alt text</div>
               <Button
-                onClick={() => copyToClipboard(output.suggestedAltText)}
+                onClick={() => copyToClipboard(suggestedAltText)}
                 small={true}>
                 {!!copiedText ? 'Copied' : 'Copy'}
               </Button>
             </div>
-            <p className={styles.altText}>{output.suggestedAltText}</p>
+            <p className={styles.altText}>{suggestedAltText}</p>
           </div>
         )}
       </div>
