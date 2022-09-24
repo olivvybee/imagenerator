@@ -75,7 +75,7 @@ const generate: GeneratorFunction<IHaveNoXSettings, IHaveNoXCache> = async (
   const capitalisedY = y ? y.charAt(0).toUpperCase() + y.slice(1) : '';
 
   const suggestedAltText =
-    "A square with a drawing of a man's face with lines covering the mouth and a glitched effect on the right side of the face. " +
+    "A square containing a drawing of a man's face with lines covering the mouth and a glitched effect on the right side of the face. " +
     'There are silver tracks extending from all around the square making it look like a computer chip. ' +
     `On the right of the square is the text "Harlan Ellison's I Have No ${capitalisedX} and I Must ${capitalisedY}".`;
 
