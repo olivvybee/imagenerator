@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import useMediaQuery from './useMediaQuery';
 
 // This is a subset of file types that the Web Share API supports
 // Reference Web Share API docs before extending this list
@@ -88,10 +89,16 @@ const share = ({ data, onSuccess, onError }: ShareFunctionParameters) => {
 export const useWebShare = (mimeType?: MimeType): ReturnType => {
   const [isSharingSupported, setSharingSupported] = useState(false);
 
+  const isTouchDevice = useMediaQuery('(pointer: coarse)');
+
   useEffect(() => {
-    setSharingSupported(
-      mimeType ? isFileSharingSupported(mimeType) : isTextSharingSupported()
-    );
+    if (!isTouchDevice) {
+      setSharingSupported(false);
+    } else {
+      setSharingSupported(
+        mimeType ? isFileSharingSupported(mimeType) : isTextSharingSupported()
+      );
+    }
   }, [mimeType]);
 
   return {
