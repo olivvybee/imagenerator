@@ -20,6 +20,11 @@ export const MetaTags = (props: MetaTagsProps) => {
 
   return (
     <Head>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+
       <title key="title">{title}</title>
       <meta property="og:title" content={title} key="og:title" />
       <meta name="twitter:title" content={title} key="twitter:title" />
