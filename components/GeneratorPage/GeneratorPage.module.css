@@ -37,10 +37,16 @@
   flex-direction: column;
 }
 
+.sidebar .spacer {
+  height: 0;
+  margin: 32px 0;
+  width: 100%;
+  border-bottom: 1px solid var(--primary-muted);
+}
+
 .generatorName {
   display: block;
   margin-top: 0;
-  margin-bottom: 16px;
   font-size: 1.5em;
 }
 
@@ -49,13 +55,13 @@
 }
 
 .shareSection {
-  margin-top: 16px;
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 
-.shareSection > button {
+.shareSection > button:not(:first-of-type) {
   margin-top: 16px;
 }
 

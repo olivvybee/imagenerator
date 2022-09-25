@@ -6,7 +6,7 @@
 .heading {
   display: block;
   font-size: 1.1rem;
-  margin-right: 16px;
+  margin: 0;
 }
 
 .headingWrapper {
@@ -14,7 +14,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .settingName {

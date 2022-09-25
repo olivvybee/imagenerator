@@ -153,6 +153,8 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
               </Button>
             </div>
 
+            <div className={styles.spacer} />
+
             <Configurator
               generator={generator}
               values={settingValues}
