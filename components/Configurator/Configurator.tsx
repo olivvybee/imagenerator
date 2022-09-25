@@ -1,3 +1,5 @@
+import { IoRefreshOutline } from 'react-icons/io5';
+
 import { Generator } from '../../types/GeneratorTypes';
 import { Settings, SettingValues } from '../../types/SettingTypes';
 import { Button } from '../Button';
@@ -21,7 +23,7 @@ export const Configurator: React.FC<ConfiguratorProps> = ({
   <div className={styles.wrapper}>
     <div className={styles.headingWrapper}>
       <h3 className={styles.heading}>Settings</h3>
-      <Button onClick={reset} small={true}>
+      <Button icon={IoRefreshOutline} onClick={reset} small={true}>
         Reset
       </Button>
     </div>

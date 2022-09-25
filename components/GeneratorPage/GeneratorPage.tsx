@@ -1,6 +1,7 @@
 import { useCallback, useReducer, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { saveAs } from 'file-saver';
+import { IoCopyOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5';
 
 import { Settings, SettingValues } from '../../types/SettingTypes';
 import { Generator } from '../../types/GeneratorTypes';
@@ -140,6 +141,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
               {isSharingSupported && (
                 <Button
                   className={styles.button}
+                  icon={IoShareOutline}
                   onClick={shareImage}
                   disabled={!output?.success}>
                   Share image
@@ -147,9 +149,10 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
               )}
               <Button
                 className={styles.button}
+                icon={IoSaveOutline}
                 onClick={downloadImage}
                 disabled={!output?.success}>
-                Download image
+                Save image
               </Button>
             </div>
 
@@ -171,6 +174,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
             <div className={styles.altTextTitleWrapper}>
               <div className={styles.altTextTitle}>Suggested alt text</div>
               <Button
+                icon={IoCopyOutline}
                 onClick={() => copyToClipboard(suggestedAltText)}
                 small={true}>
                 {!!copiedText ? 'Copied' : 'Copy'}

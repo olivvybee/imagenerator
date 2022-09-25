@@ -1,7 +1,4 @@
-// import {
-//   FontAwesomeIcon,
-//   FontAwesomeIconProps,
-// } from '@fortawesome/react-fontawesome';
+import { IconType } from 'react-icons';
 import classNames from 'classnames';
 import { ButtonHTMLAttributes } from 'react';
 
@@ -13,7 +10,7 @@ interface ButtonProps {
   className?: string;
   disabled?: boolean;
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
-  // icon?: FontAwesomeIconProps['icon'];
+  icon?: IconType;
   small?: boolean;
 }
 
@@ -23,20 +20,18 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   disabled,
   type = 'button',
-  // icon,
+  icon: Icon,
   small,
 }) => {
-  // const content = icon ? (
-  //   <div className={styles.contentWithIcon}>
-  //     <div className={small ? styles.smallIconWrapper : styles.iconWrapper}>
-  //       <FontAwesomeIcon icon={icon} size={small ? '1x' : '2x'} />
-  //     </div>
-  //     {children}
-  //   </div>
-  // ) : (
-  //   children
-  // );
-  const content = children;
+  const content = Icon ? (
+    <div className={styles.contentWithIcon}>
+      <Icon size={small ? 16 : 20} />
+      <div className={styles.iconSpacer} />
+      {children}
+    </div>
+  ) : (
+    children
+  );
 
   return (
     <button

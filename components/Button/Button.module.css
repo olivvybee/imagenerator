@@ -40,25 +40,15 @@
   width: 100%;
 }
 
-.iconWrapper {
-  margin-right: 16px;
-  height: 48px;
-  width: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.smallIconWrapper {
-  margin-right: 4px;
-  height: 16px;
-  width: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.iconSpacer {
+  width: 6px;
 }
 
 .smallButton {
   font-size: 0.9em;
   padding: 4px 6px;
+}
+
+.smallButton .iconSpacer {
+  width: 4px;
 }
