@@ -19,7 +19,7 @@
 
 .settingName {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
 }
 
 .settingName:not(:first-of-type) {
