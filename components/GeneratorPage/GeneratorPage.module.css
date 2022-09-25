@@ -103,4 +103,8 @@
     flex: 1;
     max-width: 100%;
   }
+
+  .sidebar {
+    max-width: 100%;
+  }
 }
