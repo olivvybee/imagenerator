@@ -1,20 +1,6 @@
 .wrapper {
-  border: 1px solid var(--primary-muted);
-  border-radius: 8px;
-  padding: 16px;
   display: flex;
   flex-direction: column;
-}
-
-.generatorName {
-  display: block;
-  margin-top: 0;
-  margin-bottom: 16px;
-  font-size: 1.5em;
-}
-
-.helpText {
-  margin: 0;
 }
 
 .heading {
@@ -28,17 +14,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 16px;
-}
-
-.shareSection {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-
-.shareSection > button {
   margin-top: 16px;
 }
 

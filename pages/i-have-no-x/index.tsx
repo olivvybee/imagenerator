@@ -106,7 +106,6 @@ export const generator: Generator<IHaveNoXSettings> = {
       params: {},
     },
   },
-  showImageSelector: false,
 };
 
 const IHaveNoXGenerator = () => <GeneratorPage generator={generator} />;

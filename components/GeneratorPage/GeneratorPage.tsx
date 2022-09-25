@@ -63,7 +63,11 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     async ({ queryKey }) => {
       const canvas = document.createElement('canvas');
 
-      const { cache, suggestedAltText } = await generator.generate(
+      const {
+        success = true,
+        cache,
+        suggestedAltText,
+      } = await generator.generate(
         canvas,
         queryKey[1] as SettingValues,
         output?.cache || {}
@@ -71,7 +75,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
       const imageData = canvas.toDataURL('image/png');
 
-      return { cache, suggestedAltText, imageData };
+      return { success, cache, suggestedAltText, imageData };
     },
     {
       networkMode: 'always',
@@ -97,6 +101,9 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     share({ data: shareData });
   };
 
+  const downloadImage = () =>
+    saveAs(output?.imageData, `${generator.name}.png`);
+
   const imageAltText = output?.suggestedAltText?.replace(
     '{{userImage}}',
     'the image you chose'
@@ -112,7 +119,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
       <div className={styles.pageWrapper}>
         <div className={styles.generatorWrapper}>
-          {hasGenerated ? (
+          {hasGenerated && output.success ? (
             <img
               className={styles.output}
               ref={resultImage}
@@ -125,18 +132,36 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
           <div className={styles.spacer} />
 
-          <Configurator
-            generator={generator}
-            values={settingValues}
-            onChange={onChange}
-            reset={() =>
-              dispatch({ type: 'reset', settings: generator.settings })
-            }
-            shareImage={isSharingSupported && shareImage}
-            downloadImage={() =>
-              saveAs(output?.imageData, `${generator.name}.png`)
-            }
-          />
+          <div className={styles.sidebar}>
+            <h1 className={styles.generatorName}>{generator.name}</h1>
+            <p className={styles.helpText}>{generator.helpText}</p>
+
+            <div className={styles.shareSection}>
+              {isSharingSupported && (
+                <Button
+                  className={styles.button}
+                  onClick={shareImage}
+                  disabled={!output?.success}>
+                  Share image
+                </Button>
+              )}
+              <Button
+                className={styles.button}
+                onClick={downloadImage}
+                disabled={!output?.success}>
+                Download image
+              </Button>
+            </div>
+
+            <Configurator
+              generator={generator}
+              values={settingValues}
+              onChange={onChange}
+              reset={() =>
+                dispatch({ type: 'reset', settings: generator.settings })
+              }
+            />
+          </div>
         </div>
 
         {hasGenerated && output.suggestedAltText && (

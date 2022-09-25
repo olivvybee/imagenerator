@@ -10,8 +10,6 @@ interface ConfiguratorProps {
   values: SettingValues<Settings>;
   onChange: (name: string, value: any) => void;
   reset: () => void;
-  shareImage?: () => void;
-  downloadImage: () => void;
 }
 
 export const Configurator: React.FC<ConfiguratorProps> = ({
@@ -19,24 +17,8 @@ export const Configurator: React.FC<ConfiguratorProps> = ({
   values,
   onChange,
   reset,
-  shareImage,
-  downloadImage,
 }) => (
   <div className={styles.wrapper}>
-    <h1 className={styles.generatorName}>{generator.name}</h1>
-    <p className={styles.helpText}>{generator.helpText}</p>
-
-    <div className={styles.shareSection}>
-      {!!shareImage && (
-        <Button className={styles.button} onClick={shareImage}>
-          Share image
-        </Button>
-      )}
-      <Button className={styles.button} onClick={downloadImage}>
-        Download image
-      </Button>
-    </div>
-
     <div className={styles.headingWrapper}>
       <h3 className={styles.heading}>Settings</h3>
       <Button onClick={reset} small={true}>

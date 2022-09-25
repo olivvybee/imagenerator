@@ -1,6 +1,7 @@
 import { Settings, SettingValues } from './SettingTypes';
 
 export interface Output<C extends any = any> {
+  success?: boolean;
   suggestedAltText?: string;
   cache?: C;
 }
@@ -17,5 +18,4 @@ export type Generator<S extends Settings = Settings, C extends any = any> = {
   description: string;
   helpText: string;
   settings: S;
-  showImageSelector: boolean;
 };

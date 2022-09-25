@@ -12,17 +12,51 @@
 
 .output {
   min-width: 0;
+  flex: 1;
   width: 100%;
   height: auto;
 }
 
 .placeholder {
+  flex: 1;
   width: 100%;
 }
 
 .spacer {
   width: 32px;
   height: 16px;
+}
+
+.sidebar {
+  flex: 1;
+  max-width: 300px;
+  border: 1px solid var(--primary-muted);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.generatorName {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.5em;
+}
+
+.helpText {
+  margin: 0;
+}
+
+.shareSection {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.shareSection > button {
+  margin-top: 16px;
 }
 
 .altTextSection {
