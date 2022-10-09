@@ -1,3 +1,5 @@
+import { Colour } from './Colour';
+
 export enum SettingType {
   Image,
   Text,
@@ -43,11 +45,12 @@ export type SliderSetting = Setting<
 >;
 export type ColourSetting = Setting<
   SettingType.Colour,
-  string,
-  { presets?: string[] }
+  Colour,
+  { presets?: Colour[]; allowCustom?: boolean }
 >;
 
 export type TypedSetting =
+  | ImageSetting
   | TextSetting
   | NumberSetting
   | DropdownSetting

@@ -1,4 +1,5 @@
 import { TypedSetting, SettingType } from '../../types/SettingTypes';
+import { ColourField } from '../ColourField';
 import { TextField } from '../TextField/TextField';
 
 interface SettingRendererProps {
@@ -24,6 +25,16 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
           autoCapitalize="off"
           value={value}
           placeholder={setting.params.placeholder}
+        />
+      );
+
+    case SettingType.Colour:
+      return (
+        <ColourField
+          onChange={onChange}
+          value={value}
+          presets={setting.params.presets}
+          allowCustom={setting.params.allowCustom}
         />
       );
   }

@@ -1,0 +1,3 @@
+.expander :global(.ReactCollapse--collapse) {
+  transition: height 300ms;
+}
