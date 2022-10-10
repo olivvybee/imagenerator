@@ -36,6 +36,11 @@ const generate: GeneratorFunction<IHaveNoXSettings, IHaveNoXCache> = async (
   canvas.height = 450;
 
   const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    return {
+      success: false,
+    };
+  }
 
   ctx.drawImage(background, 0, 0);
 

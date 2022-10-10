@@ -15,7 +15,7 @@ import { useWebShare } from '../../utils/useNativeShare';
 import { createFileFromDataURL } from '../../utils/createFileFromDataUrl';
 
 interface GeneratorPageProps {
-  generator: Generator;
+  generator: Generator<any, any>;
 }
 
 type GeneratorAction =

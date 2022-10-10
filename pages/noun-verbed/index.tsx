@@ -36,6 +36,11 @@ const generate: GeneratorFunction<NounVerbedSettings, NounVerbedCache> = async (
   const { text, colour } = settings;
 
   const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    return {
+      success: false,
+    };
+  }
 
   let image = cache?.image;
   if (image) {
