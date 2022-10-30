@@ -43,8 +43,8 @@ const generate: GeneratorFunction<NounVerbedSettings> = async (
 
   return {
     suggestedAltText:
-      `{{userImage}} with the text ${text} on top in a ` +
-      `${colour.name} serif font to look like a dark souls screenshot.`,
+      `{{userImage}} with the text "${text || ''}" on top in a ` +
+      `${colour.name.toLowerCase()} serif font to look like a dark souls screenshot.`,
   };
 };
 
