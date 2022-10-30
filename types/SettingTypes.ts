@@ -17,7 +17,7 @@ export interface Setting<T extends SettingType, V, P extends {}> {
   defaultValue?: V;
 }
 
-export type ImageSetting = Setting<SettingType.Image, HTMLImageElement, {}>;
+export type ImageSetting = Setting<SettingType.Image, string, {}>;
 export type TextSetting = Setting<
   SettingType.Text,
   string,

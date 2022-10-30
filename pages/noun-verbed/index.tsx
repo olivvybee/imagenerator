@@ -16,23 +16,12 @@ type NounVerbedSettings = {
   textPosition: SliderSetting;
 };
 
-type NounVerbedCache = {
-  image: HTMLImageElement;
-};
-
 const TARGET_SIZE = 900;
 
-const generate: GeneratorFunction<NounVerbedSettings, NounVerbedCache> = async (
+const generate: GeneratorFunction<NounVerbedSettings> = async (
   canvas,
-  settings,
-  cache
+  settings
 ) => {
-  if (!cache?.image && !settings.image) {
-    return {
-      success: false,
-    };
-  }
-
   const { text, colour } = settings;
 
   const ctx = canvas.getContext('2d');
@@ -42,33 +31,20 @@ const generate: GeneratorFunction<NounVerbedSettings, NounVerbedCache> = async (
     };
   }
 
-  let image = cache?.image;
-  if (image) {
-    canvas.width = image.width;
-    canvas.height = image.height;
-    ctx.drawImage(image, 0, 0);
-  } else {
-    const { width, height } = settings.image;
-    const ratio = width / height;
+  // const { width, height } = settings.image;
+  // const ratio = width / height;
 
-    const newWidth = width > height ? TARGET_SIZE : TARGET_SIZE * ratio;
-    const newHeight = height > width ? TARGET_SIZE : TARGET_SIZE * ratio;
+  // const newWidth = width > height ? TARGET_SIZE : TARGET_SIZE * ratio;
+  // const newHeight = height > width ? TARGET_SIZE : TARGET_SIZE * ratio;
 
-    canvas.width = newWidth;
-    canvas.height = newHeight;
-    ctx.drawImage(settings.image, 0, 0, newWidth, newHeight);
-    const resizedImage = canvas.toDataURL();
-
-    image = await loadImage(resizedImage);
-  }
+  // canvas.width = newWidth;
+  // canvas.height = newHeight;
+  // ctx.drawImage(settings.image, 0, 0, newWidth, newHeight);
 
   return {
     suggestedAltText:
       `{{userImage}} with the text ${text} on top in a ` +
       `${colour.name} serif font to look like a dark souls screenshot.`,
-    cache: {
-      image,
-    },
   };
 };
 

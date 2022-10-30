@@ -1,0 +1,35 @@
+.dropzone {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.preview {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  border: 1px solid var(--primary-muted);
+  border-radius: 8px;
+}
+
+.previewImage {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.button {
+  flex: 1;
+}
+
+.clearButton {
+  margin-left: 8px;
+  height: 40px;
+}

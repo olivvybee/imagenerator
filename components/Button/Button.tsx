@@ -5,7 +5,7 @@ import { ButtonHTMLAttributes } from 'react';
 import styles from './Button.module.css';
 
 interface ButtonProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onClick?: () => void;
   className?: string;
   disabled?: boolean;
@@ -14,7 +14,7 @@ interface ButtonProps {
   small?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = ({
   children,
   onClick,
   className,
@@ -22,11 +22,11 @@ export const Button: React.FC<ButtonProps> = ({
   type = 'button',
   icon: Icon,
   small,
-}) => {
+}: ButtonProps) => {
   const content = Icon ? (
     <div className={styles.contentWithIcon}>
       <Icon size={small ? 16 : 20} />
-      <div className={styles.iconSpacer} />
+      {!!children && <div className={styles.iconSpacer} />}
       {children}
     </div>
   ) : (

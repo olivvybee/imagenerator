@@ -1,5 +1,6 @@
 import { TypedSetting, SettingType } from '../../types/SettingTypes';
 import { ColourField } from '../ColourField';
+import { ImageField } from '../ImageField';
 import { TextField } from '../TextField/TextField';
 
 interface SettingRendererProps {
@@ -37,6 +38,9 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
           allowCustom={setting.params.allowCustom}
         />
       );
+
+    case SettingType.Image:
+      return <ImageField onChange={onChange} value={value} />;
   }
 
   return <div>Unimplemented setting: {SettingType[setting.type]}</div>;
