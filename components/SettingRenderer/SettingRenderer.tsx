@@ -1,7 +1,8 @@
-import { TypedSetting, SettingType } from '../../types/SettingTypes';
-import { ColourField } from '../ColourField';
-import { ImageField } from '../ImageField';
-import { TextField } from '../TextField/TextField';
+import { TypedSetting, SettingType } from "../../types/SettingTypes";
+import { ColourField } from "../ColourField";
+import { ImageField } from "../ImageField";
+import { SliderField } from "../SliderField";
+import { TextField } from "../TextField/TextField";
 
 interface SettingRendererProps {
   setting: TypedSetting;
@@ -41,6 +42,17 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
 
     case SettingType.Image:
       return <ImageField onChange={onChange} value={value} />;
+
+    case SettingType.Slider:
+      return (
+        <SliderField
+          onChange={onChange}
+          value={value}
+          min={setting.params.min}
+          max={setting.params.max}
+          step={setting.params.step}
+        />
+      );
   }
 
   return <div>Unimplemented setting: {SettingType[setting.type]}</div>;
