@@ -8,7 +8,6 @@ import {
   TextSetting,
 } from '../../types/SettingTypes';
 import { loadImage } from '../../utils/loadImage';
-import { calculateFontSize } from './calculateFontSize';
 
 type NounVerbedSettings = {
   text: TextSetting;
@@ -18,6 +17,7 @@ type NounVerbedSettings = {
 };
 
 const TARGET_SIZE = 900;
+const MAX_FONT_SIZE = 72;
 
 const generate: GeneratorFunction<NounVerbedSettings> = async (
   canvas,
@@ -55,7 +55,11 @@ const generate: GeneratorFunction<NounVerbedSettings> = async (
   const y = (newHeight / 100) * textPosition;
   const maxWidth = newWidth - 64;
 
-  const fontSize = calculateFontSize(uppercaseText, maxWidth, ctx);
+  let fontSize = MAX_FONT_SIZE + 1;
+  do {
+    fontSize -= 1;
+    ctx.font = `${fontSize}px 'Optimus Princeps'`;
+  } while (ctx.measureText(text).width > maxWidth);
 
   const bannerHeight = fontSize * 2;
   const bannerTop = y - bannerHeight / 2;
