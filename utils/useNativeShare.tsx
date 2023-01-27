@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useMediaQuery from './useMediaQuery';
 
 // This is a subset of file types that the Web Share API supports
@@ -70,11 +70,11 @@ const isFileSharingSupported = (mimeType: MimeType) =>
 
 const share = ({ data, onSuccess, onError }: ShareFunctionParameters) => {
   if (!isTextSharingSupported()) {
-    return onError(new Error('Text sharing is not supported'));
+    return onError?.(new Error('Text sharing is not supported'));
   }
 
   if (data.file && !isFileSharingSupported(data.file.type as MimeType)) {
-    return onError(new Error('File sharing is not supported'));
+    return onError?.(new Error('File sharing is not supported'));
   }
 
   navigator
@@ -86,7 +86,7 @@ const share = ({ data, onSuccess, onError }: ShareFunctionParameters) => {
     });
 };
 
-export const useWebShare = (mimeType?: MimeType): ReturnType => {
+export const useNativeShare = (mimeType?: MimeType): ReturnType => {
   const [isSharingSupported, setSharingSupported] = useState(false);
 
   const isTouchDevice = useMediaQuery('(pointer: coarse)');

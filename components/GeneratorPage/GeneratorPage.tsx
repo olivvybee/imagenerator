@@ -11,7 +11,7 @@ import { Button } from '../Button';
 import useCopyToClipboard from '../../utils/useCopyToClipboard';
 
 import styles from './GeneratorPage.module.css';
-import { useWebShare } from '../../utils/useNativeShare';
+import { useNativeShare } from '../../utils/useNativeShare';
 import { createFileFromDataURL } from '../../utils/createFileFromDataUrl';
 
 interface GeneratorPageProps {
@@ -94,7 +94,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
   const [copiedText, copyToClipboard] = useCopyToClipboard();
 
-  const { isSharingSupported, share } = useWebShare('image/png');
+  const { isSharingSupported, share } = useNativeShare('image/png');
   const shareImage = () => {
     const shareData = {
       file: createFileFromDataURL(output?.imageData, generator.name),
