@@ -128,7 +128,11 @@ export const generator: Generator<NounVerbedSettings> = {
     textPosition: {
       name: 'Text position',
       type: SettingType.Slider,
-      params: { min: 0, max: 100 },
+      params: {
+        min: 0,
+        max: 100,
+        presets: [{ name: 'Centre', value: 50 }],
+      },
       defaultValue: 50,
     },
   },

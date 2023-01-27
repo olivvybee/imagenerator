@@ -1,4 +1,5 @@
 import { Colour } from './Colour';
+import { SliderPreset } from './Slider';
 
 export enum SettingType {
   Image,
@@ -41,7 +42,7 @@ export type StepperSetting<V> = Setting<
 export type SliderSetting = Setting<
   SettingType.Slider,
   number,
-  { min: number; max: number; step?: number }
+  { min: number; max: number; step?: number; presets?: SliderPreset[] }
 >;
 export type ColourSetting = Setting<
   SettingType.Colour,

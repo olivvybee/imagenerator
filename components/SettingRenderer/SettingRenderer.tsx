@@ -1,8 +1,8 @@
-import { TypedSetting, SettingType } from "../../types/SettingTypes";
-import { ColourField } from "../ColourField";
-import { ImageField } from "../ImageField";
-import { SliderField } from "../SliderField";
-import { TextField } from "../TextField/TextField";
+import { TypedSetting, SettingType } from '../../types/SettingTypes';
+import { ColourField } from '../ColourField';
+import { ImageField } from '../ImageField';
+import { SliderField } from '../SliderField';
+import { TextField } from '../TextField/TextField';
 
 interface SettingRendererProps {
   setting: TypedSetting;
@@ -51,6 +51,7 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
           min={setting.params.min}
           max={setting.params.max}
           step={setting.params.step}
+          presets={setting.params.presets}
         />
       );
   }
