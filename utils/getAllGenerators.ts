@@ -1,5 +1,6 @@
 import { Generator } from '../types/GeneratorTypes';
 import { Settings } from '../types/SettingTypes';
+import { notUndefined } from './notUndefined';
 
 export const getAllGenerators = async () => {
   const context = require.context(
@@ -25,5 +26,5 @@ export const getAllGenerators = async () => {
 
   const generators = await Promise.all(promises);
 
-  return generators.filter(Boolean);
+  return generators.filter(notUndefined);
 };
