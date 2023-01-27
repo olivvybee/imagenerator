@@ -144,7 +144,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
                   icon={IoShareOutline}
                   onClick={shareImage}
                   disabled={!output?.success}>
-                  Share image
+                  Share result
                 </Button>
               )}
               <Button
@@ -152,7 +152,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
                 icon={IoSaveOutline}
                 onClick={downloadImage}
                 disabled={!output?.success}>
-                Save image
+                Save result
               </Button>
             </div>
 

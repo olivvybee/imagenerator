@@ -24,7 +24,7 @@ export const Configurator: React.FC<ConfiguratorProps> = ({
     <div className={styles.headingWrapper}>
       <h3 className={styles.heading}>Settings</h3>
       <Button icon={IoRefreshOutline} onClick={reset} small={true}>
-        Reset
+        Reset all
       </Button>
     </div>
 
