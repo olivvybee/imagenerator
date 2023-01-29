@@ -28,18 +28,24 @@ export const Configurator: React.FC<ConfiguratorProps> = ({
       </Button>
     </div>
 
-    {Object.entries(generator.settings).map(([key, setting]) => (
-      <div className={styles.settingWrapper} key={key}>
-        <label className={styles.settingName} htmlFor={key}>
-          {setting.name}
-        </label>
-        <SettingRenderer
-          setting={setting}
-          value={values[key]}
-          id={key}
-          onChange={(newValue) => onChange(key, newValue)}
-        />
-      </div>
-    ))}
+    {Object.entries(generator.settings).map(([key, setting]) => {
+      if (setting.when && !setting.when(values)) {
+        return null;
+      }
+
+      return (
+        <div className={styles.settingWrapper} key={key}>
+          <label className={styles.settingName} htmlFor={key}>
+            {setting.name}
+          </label>
+          <SettingRenderer
+            setting={setting}
+            value={values[key]}
+            id={key}
+            onChange={(newValue) => onChange(key, newValue)}
+          />
+        </div>
+      );
+    })}
   </div>
 );

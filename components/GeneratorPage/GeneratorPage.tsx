@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { saveAs } from 'file-saver';
 import { IoCopyOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5';
 
-import { Settings, SettingValues } from '../../types/SettingTypes';
+import { Settings, SettingType, SettingValues } from '../../types/SettingTypes';
 import { Generator } from '../../types/GeneratorTypes';
 import { Configurator } from '../Configurator';
 import { MetaTags } from '../MetaTags/MetaTags';
@@ -25,13 +25,17 @@ type GeneratorAction =
   | { type: 'reset'; settings: Settings };
 
 const init = (settings: Settings): SettingValues => {
-  return Object.entries(settings).reduce(
-    (state, [key, setting]) => ({
+  return Object.entries(settings).reduce((state, [key, setting]) => {
+    const implicitDefault =
+      setting.type === SettingType.Dropdown
+        ? setting.params.options[0]
+        : undefined;
+
+    return {
       ...state,
-      [key]: setting.defaultValue || undefined,
-    }),
-    {}
-  );
+      [key]: setting.defaultValue || implicitDefault,
+    };
+  }, {});
 };
 
 const reducer = (state: SettingValues, action: GeneratorAction) => {

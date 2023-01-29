@@ -1,5 +1,6 @@
 import { TypedSetting, SettingType } from '../../types/SettingTypes';
 import { ColourField } from '../ColourField';
+import { DropdownField } from '../DropdownField';
 import { ImageField } from '../ImageField';
 import { SliderField } from '../SliderField';
 import { TextField } from '../TextField/TextField';
@@ -9,6 +10,7 @@ interface SettingRendererProps {
   value: any;
   id: string;
   onChange: (newValue: any) => void;
+  disabled?: boolean;
 }
 
 export const SettingRenderer: React.FC<SettingRendererProps> = ({
@@ -16,6 +18,7 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
   value,
   id,
   onChange,
+  disabled,
 }) => {
   switch (setting.type) {
     case SettingType.Text:
@@ -27,6 +30,7 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
           autoCapitalize="off"
           value={value}
           placeholder={setting.params.placeholder}
+          disabled={disabled}
         />
       );
 
@@ -52,6 +56,15 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
           max={setting.params.max}
           step={setting.params.step}
           presets={setting.params.presets}
+        />
+      );
+
+    case SettingType.Dropdown:
+      return (
+        <DropdownField
+          onChange={onChange}
+          value={value}
+          options={setting.params.options}
         />
       );
   }

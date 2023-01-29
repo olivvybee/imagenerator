@@ -11,11 +11,16 @@ export enum SettingType {
   Colour,
 }
 
+export type SettingCondition = <S extends Settings = Settings>(
+  settings: SettingValues<S>
+) => boolean;
+
 export interface Setting<T extends SettingType, V, P extends {}> {
   type: T;
   name: string;
   params: P;
   defaultValue?: V;
+  when?: SettingCondition;
 }
 
 export type ImageSetting = Setting<SettingType.Image, string, {}>;
