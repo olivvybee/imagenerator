@@ -65,16 +65,10 @@
   margin-top: 16px;
 }
 
-.altTextSection {
-  border: 1px solid var(--primary-muted);
-  border-radius: 8px;
-  padding: 16px;
-  margin-top: 16px;
-}
-
 .altTextTitle {
   display: block;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
+  font-weight: bold;
   margin-right: 16px;
 }
 
@@ -85,12 +79,13 @@
   margin-bottom: 16px;
 }
 
-.altText {
-  margin: 0;
-}
-
 .altTextExpander {
   margin-top: 16px;
+}
+
+.altText {
+  padding-top: 8px;
+  margin: 0;
 }
 
 @media screen and (max-width: 500px) {

@@ -113,8 +113,10 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   );
   const suggestedAltText = output?.suggestedAltText?.replace(
     '{{userImage}}',
-    '[describe your image]'
+    '[describe your image here]'
   );
+
+  const hasAltText = hasGenerated && !!suggestedAltText;
 
   return (
     <>
@@ -160,29 +162,37 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
             <div className={styles.spacer} />
 
-            <Configurator
-              generator={generator}
-              values={settingValues}
-              onChange={onChange}
-              reset={() =>
-                dispatch({ type: 'reset', settings: generator.settings })
-              }
-            />
-          </div>
-        </div>
-
-        {hasGenerated && output.suggestedAltText && (
-          <div className={styles.altTextSection}>
             <div className={styles.altTextTitleWrapper}>
               <div className={styles.altTextTitle}>Suggested alt text</div>
               <Button
+                disabled={!hasAltText}
                 icon={IoCopyOutline}
                 onClick={() => copyToClipboard(suggestedAltText)}
                 small={true}>
                 {!!copiedText ? 'Copied' : 'Copy'}
               </Button>
             </div>
-            <p className={styles.altText}>{suggestedAltText}</p>
+
+            {hasAltText ? (
+              <Expander
+                renderTrigger={(toggle, isExpanded) => (
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toggle();
+                    }}>
+                    {isExpanded ? 'Hide' : 'Show'} suggested alt text
+                  </a>
+                )}>
+                <p className={styles.altText}>{suggestedAltText}</p>
+              </Expander>
+            ) : (
+              <p className={styles.altText}>
+                Alt text will be suggested here once an image has been
+                generated.
+              </p>
+            )}
 
             <Expander
               className={styles.altTextExpander}
@@ -198,8 +208,19 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
               )}>
               <AltTextExplanation />
             </Expander>
+
+            <div className={styles.spacer} />
+
+            <Configurator
+              generator={generator}
+              values={settingValues}
+              onChange={onChange}
+              reset={() =>
+                dispatch({ type: 'reset', settings: generator.settings })
+              }
+            />
           </div>
-        )}
+        </div>
       </div>
     </>
   );

@@ -4,7 +4,10 @@ import classNames from 'classnames';
 
 import styles from './Expander.module.css';
 
-export type TriggerRenderFunction = (toggle: () => void) => React.ReactNode;
+export type TriggerRenderFunction = (
+  toggle: () => void,
+  isExpanded: boolean
+) => React.ReactNode;
 
 interface ExpanderProps {
   renderTrigger: TriggerRenderFunction;
@@ -22,7 +25,7 @@ export const Expander = ({
   return (
     <div className={classNames(styles.expander, className)}>
       <div className={styles.triggerWrapper}>
-        {renderTrigger(() => setIsExpanded(!isExpanded))}
+        {renderTrigger(() => setIsExpanded(!isExpanded), isExpanded)}
       </div>
       <Collapse className={styles.contentWrapper} isOpened={isExpanded}>
         {children}
