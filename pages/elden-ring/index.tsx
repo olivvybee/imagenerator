@@ -195,8 +195,9 @@ const drawText = (ctx: CanvasRenderingContext2D, text: string) => {
 
 export const generator: Generator<EldenRingSettings> = {
   generate,
-  name: 'Try Fingers, But Hole',
-  helpText: 'Create a message using one or two lines of text.',
+  name: 'Try fingers, but hole',
+  helpText:
+    'Create a message using one or two lines of text. The second line will appear after choosing a joining phrase.',
   description: 'Create your own Elden Ring messages.',
   settings: {
     firstLineFormat: {

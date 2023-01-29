@@ -26,5 +26,7 @@ export const getAllGenerators = async () => {
 
   const generators = await Promise.all(promises);
 
-  return generators.filter(notUndefined);
+  return generators
+    .filter(notUndefined)
+    .sort((a, b) => a.name.localeCompare(b.name));
 };
