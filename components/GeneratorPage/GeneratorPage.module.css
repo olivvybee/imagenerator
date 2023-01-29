@@ -89,6 +89,10 @@
   margin: 0;
 }
 
+.altTextExpander {
+  margin-top: 16px;
+}
+
 @media screen and (max-width: 500px) {
   .generatorWrapper {
     flex-direction: column;

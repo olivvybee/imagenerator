@@ -6,6 +6,7 @@ import { getAllGenerators } from '../utils/getAllGenerators';
 
 import buttonStyles from '../components/Button/Button.module.css';
 import styles from './homepage.module.css';
+import { AltTextExplanation } from '../components/AltTextExplanation';
 
 const Homepage = ({
   generators,
@@ -51,17 +52,20 @@ const Homepage = ({
 
     <h3>What's alt text?</h3>
 
+    <AltTextExplanation />
+
+    <h3>What font do you use?</h3>
+
     <p>
-      Alt text is used to describe images for people who can't view them
-      normally. For example, someone who is partially sighted might use software
-      called a screen reader, where the computer reads out what's on the screen.
-      Alt text is used by that software since AI isn't good enough to accurately
-      describe an image without help.
+      Most of the generators use{' '}
+      <a href="https://brailleinstitute.org/freefont">Atkinson Hyperlegible</a>,
+      a font designed for maximum legitbility and developed by the Braille
+      Institute of America.
     </p>
+
     <p>
-      If you're sharing images on places like twitter, please consider adding
-      alt text so that they're accessible to everyone. Some of my generators
-      offer suggested alt text that you can copy and paste to make it easier.
+      Some generators use fonts specific to the image, like the Noun Verbed
+      generator which uses the Dark Souls font.
     </p>
 
     <h3>Who made you?</h3>

@@ -13,6 +13,8 @@ import useCopyToClipboard from '../../utils/useCopyToClipboard';
 import styles from './GeneratorPage.module.css';
 import { useNativeShare } from '../../utils/useNativeShare';
 import { createFileFromDataURL } from '../../utils/createFileFromDataUrl';
+import { Expander } from '../Expander';
+import { AltTextExplanation } from '../AltTextExplanation';
 
 interface GeneratorPageProps {
   generator: Generator<any, any>;
@@ -181,6 +183,21 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
               </Button>
             </div>
             <p className={styles.altText}>{suggestedAltText}</p>
+
+            <Expander
+              className={styles.altTextExpander}
+              renderTrigger={(toggle) => (
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggle();
+                  }}>
+                  What is alt text?
+                </a>
+              )}>
+              <AltTextExplanation />
+            </Expander>
           </div>
         )}
       </div>

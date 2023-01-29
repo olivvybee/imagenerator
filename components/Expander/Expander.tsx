@@ -9,13 +9,18 @@ export type TriggerRenderFunction = (toggle: () => void) => React.ReactNode;
 interface ExpanderProps {
   renderTrigger: TriggerRenderFunction;
   children?: React.ReactNode;
+  className?: string;
 }
 
-export const Expander = ({ children, renderTrigger }: ExpanderProps) => {
+export const Expander = ({
+  children,
+  renderTrigger,
+  className,
+}: ExpanderProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className={styles.expander}>
+    <div className={classNames(styles.expander, className)}>
       <div className={styles.triggerWrapper}>
         {renderTrigger(() => setIsExpanded(!isExpanded))}
       </div>
