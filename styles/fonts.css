@@ -26,3 +26,13 @@
   src: local(''), url('/fonts/OptimusPrincepsSemiBold.woff2') format('woff2'),
     url('/fonts/OptimusPrincepsSemiBold.woff') format('woff');
 }
+
+/* Atkinson Hyperlegible */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+    url('/fonts/Atkinson-HyperLegible-Regular.woff2') format('woff2'),
+    url('/fonts/Atkinson-HyperLegible-Regular.woff') format('woff');
+}
