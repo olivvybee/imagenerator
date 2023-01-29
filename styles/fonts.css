@@ -13,9 +13,8 @@
   font-family: 'Garamond';
   font-style: normal;
   font-weight: 400;
-  src: local(''),
-    url('/fonts/eb-garamond-v24-latin-regular.woff2') format('woff2'),
-    url('/fonts/eb-garamond-v24-latin-regular.woff') format('woff');
+  src: local(''), url('/fonts/EB-Garamond.woff2') format('woff2'),
+    url('/fonts/EB-Garamond.woff') format('woff');
 }
 
 /* Optimus Princeps */
