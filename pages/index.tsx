@@ -72,7 +72,7 @@ const Homepage = ({
 
     <p>
       I was made by{' '}
-      <a href="https://twitter.com/olivvybee">
+      <a href="https://tech.lgbt/@olivvybee" rel="me">
         <strong>@olivvybee</strong>
       </a>{' '}
       because she kept coming up with ideas for image generators and needed
