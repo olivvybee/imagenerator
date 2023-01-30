@@ -57,9 +57,9 @@ const Homepage = ({
     <h3>What font do you use?</h3>
 
     <p>
-      Most of the generators use{' '}
+      Text on the page and most of the generators use{' '}
       <a href="https://brailleinstitute.org/freefont">Atkinson Hyperlegible</a>,
-      a font designed for maximum legitbility and developed by the Braille
+      a font designed for maximum legibility and developed by the Braille
       Institute of America.
     </p>
 
