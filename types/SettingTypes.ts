@@ -1,3 +1,4 @@
+import React from 'react';
 import { Colour } from './Colour';
 import { SliderPreset } from './Slider';
 
@@ -42,7 +43,11 @@ export type DropdownSetting = Setting<
 export type StepperSetting<V> = Setting<
   SettingType.Stepper,
   V,
-  { options: V[]; allowWrapping: boolean }
+  {
+    options: V[];
+    allowWrapping: boolean;
+    renderLabel?: (value: V, index: number) => React.ReactElement;
+  }
 >;
 export type SliderSetting = Setting<
   SettingType.Slider,

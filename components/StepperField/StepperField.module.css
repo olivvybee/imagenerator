@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.label {
+  min-width: 40px;
+  text-align: center;
+}

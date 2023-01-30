@@ -3,6 +3,7 @@ import { ColourField } from '../ColourField';
 import { DropdownField } from '../DropdownField';
 import { ImageField } from '../ImageField';
 import { SliderField } from '../SliderField';
+import { StepperField } from '../StepperField';
 import { TextField } from '../TextField/TextField';
 
 interface SettingRendererProps {
@@ -65,6 +66,17 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
           onChange={onChange}
           value={value}
           options={setting.params.options}
+        />
+      );
+
+    case SettingType.Stepper:
+      return (
+        <StepperField
+          onChange={onChange}
+          value={value}
+          options={setting.params.options}
+          allowWrapping={setting.params.allowWrapping}
+          renderLabel={setting.params.renderLabel}
         />
       );
   }

@@ -1,0 +1,1 @@
+export { PalettePreview } from './PalettePreview';
