@@ -253,7 +253,8 @@ const buildAltText = (settings: SettingValues<HierarchyOfNeedsSettings>) => {
 export const generator: Generator<HierarchyOfNeedsSettings> = {
   generate,
   name: 'Hierarchy of needs',
-  description: '',
+  description:
+    "All you need is love, and a Maslow's hierarchy of needs generator.",
   helpText:
     'Choose the number of segments you would like, then fill in each segment.',
   settings: {
