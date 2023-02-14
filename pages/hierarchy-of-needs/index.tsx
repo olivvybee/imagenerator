@@ -1,3 +1,5 @@
+import multilineText from '../../utils/drawMultilineText';
+
 import { GeneratorPage } from '../../components/GeneratorPage';
 import { Generator, GeneratorFunction } from '../../types/GeneratorTypes';
 import {
@@ -30,10 +32,44 @@ const SEGMENT_COLOURS = ['#ceb4fd', '#fdb489', '#9cc5f1', '#fed687', '#a8d5ae'];
 const SEGMENT_MAP = [
   [],
   [0, 0, 0, 0],
-  [0, 1, 1, 1],
+  [0, 0, 1, 1],
   [1, 1, 2, 2],
   [1, 1, 2, 3],
   [1, 2, 3, 4],
+];
+
+interface Rect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+const TEXT_BOXES: Rect[][] = [
+  [],
+  [{ x: 205, y: 300, width: 700, height: 500 }],
+  [
+    { x: 205, y: 150, width: 700, height: 400 },
+    { x: 105, y: 600, width: 900, height: 250 },
+  ],
+  [
+    { x: 205, y: 50, width: 700, height: 250 },
+    { x: 155, y: 325, width: 800, height: 250 },
+    { x: 105, y: 600, width: 900, height: 250 },
+  ],
+  [
+    { x: 205, y: 50, width: 700, height: 250 },
+    { x: 155, y: 325, width: 800, height: 250 },
+    { x: 105, y: 600, width: 900, height: 125 },
+    { x: 55, y: 735, width: 1000, height: 125 },
+  ],
+  [
+    { x: 230, y: 50, width: 650, height: 250 },
+    { x: 180, y: 315, width: 750, height: 125 },
+    { x: 155, y: 450, width: 800, height: 125 },
+    { x: 105, y: 600, width: 900, height: 125 },
+    { x: 55, y: 735, width: 1000, height: 125 },
+  ],
 ];
 
 const generate: GeneratorFunction<
@@ -42,8 +78,14 @@ const generate: GeneratorFunction<
 > = async (canvas, settings, cache) => {
   const font = cache?.font || (await loadFont());
 
-  const { numberOfSegments, segment1, segment2, segment3, segment4, segment5 } =
-    settings;
+  const {
+    numberOfSegments,
+    segment1 = '',
+    segment2 = '',
+    segment3 = '',
+    segment4 = '',
+    segment5 = '',
+  } = settings;
 
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
@@ -152,6 +194,22 @@ const generate: GeneratorFunction<
   ctx.lineTo(1032, 30 + (5 * triangleHeight) / 6);
   ctx.stroke();
 
+  const segments = [segment1, segment2, segment3, segment4, segment5].slice(
+    0,
+    numberOfSegments
+  );
+
+  const textBoxes = TEXT_BOXES[numberOfSegments];
+  textBoxes.forEach((textBox, index) => {
+    const { x, y, width, height } = textBox;
+    const text = segments[index];
+
+    ctx.textBaseline = 'bottom';
+
+    multilineText.fontSize = 48;
+    multilineText.drawText(ctx, text, x, y, width, height);
+  });
+
   const suggestedAltText = buildAltText(settings);
 
   return {
@@ -177,13 +235,16 @@ const buildAltText = (settings: SettingValues<HierarchyOfNeedsSettings>) => {
 
   let list = '';
   if (segments.length === 1) {
-    list = segments[0];
+    list = `"${segments[0]}"`;
   } else if (segments.length === 2) {
-    list = `${segments[0]} and ${segments[1]}`;
+    list = `"${segments[0]}" and "${segments[1]}"`;
   } else {
-    const head = segments.slice(0, -2).join(', ');
+    const head = segments
+      .slice(0, -2)
+      .map((text) => `"${text}"`)
+      .join(', ');
     const tail = segments[segments.length - 1];
-    list = `${head}, and ${tail}`;
+    list = `${head}, and "${tail}"`;
   }
 
   return `The triangle diagram showing Maslow's Hierarchy of Needs, except the usual segments have been replaced with ${list}.`;
