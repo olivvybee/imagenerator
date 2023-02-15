@@ -44,7 +44,7 @@ const generate: GeneratorFunction<NounVerbedSettings> = async (
   const ratio = width / height;
 
   const newWidth = width > height ? TARGET_SIZE : TARGET_SIZE * ratio;
-  const newHeight = height > width ? TARGET_SIZE : TARGET_SIZE * ratio;
+  const newHeight = height > width ? TARGET_SIZE : TARGET_SIZE / ratio;
 
   canvas.width = newWidth;
   canvas.height = newHeight;
