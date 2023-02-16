@@ -1,4 +1,4 @@
-import multilineText from '../../utils/drawMultilineText';
+import multilineText from '../../utils/multilineText';
 
 import { GeneratorPage } from '../../components/GeneratorPage';
 import { Generator, GeneratorFunction } from '../../types/GeneratorTypes';

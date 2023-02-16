@@ -19,6 +19,7 @@ const canvasTxt = {
   lineHeight: null,
   justify: false,
   opaque: false,
+  background: true,
   /**
    *
    * @param {CanvasRenderingContext2D} ctx
@@ -121,7 +122,7 @@ const canvasTxt = {
     });
     const charHeight = this.lineHeight
       ? this.lineHeight
-      : this.getTextHeight(ctx, mytext, style) + 35; //close approximation of height with width
+      : this.getTextHeight(ctx, mytext, style) + (this.background ? 35 : 0); //close approximation of height with width
     const vheight = charHeight * (textarray.length - 1);
     const negoffset = vheight / 2;
 
@@ -141,11 +142,15 @@ const canvasTxt = {
     textarray.forEach((txtline) => {
       txtline = txtline.trim();
       if (txtline) {
-        drawTextWithBackground(ctx, txtline, {
-          x: textanchor,
-          y: txtY,
-          opaque: this.opaque,
-        });
+        if (this.background) {
+          drawTextWithBackground(ctx, txtline, {
+            x: textanchor,
+            y: txtY,
+            opaque: this.opaque,
+          });
+        } else {
+          ctx.fillText(txtline, textanchor, txtY);
+        }
       }
       txtY += charHeight;
     });
