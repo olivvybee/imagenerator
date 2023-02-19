@@ -3,6 +3,7 @@ import { IconContext } from 'react-icons';
 import { AppProps } from 'next/app';
 
 import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
 
 import '../styles/variables.css';
 import '../styles/globals.css';
@@ -23,6 +24,7 @@ const App = ({ Component, pageProps }: AppProps) => (
         <div className={styles.content}>
           <Component {...pageProps} />
         </div>
+        <Footer />
       </div>
     </IconContext.Provider>
   </QueryClientProvider>

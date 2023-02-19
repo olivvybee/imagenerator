@@ -68,6 +68,14 @@ const Homepage = ({
       generator which uses the Dark Souls font.
     </p>
 
+    <h3>How can I report a bug or suggest a new feature?</h3>
+
+    <p>
+      If something's not working right, or you have an idea for an improvement
+      or a new generator, please create an issue on{' '}
+      <a href="https://github.com/olivvybee/imagenerator">github</a>.
+    </p>
+
     <h3>Who made you?</h3>
 
     <p>
