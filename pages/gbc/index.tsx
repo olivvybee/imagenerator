@@ -13,6 +13,7 @@ import {
   SettingType,
   StepperSetting,
 } from '../../types/SettingTypes';
+import { applyCrop } from '../../utils/applyCrop';
 import { chunkString } from '../../utils/chunkString';
 import { clamp } from '../../utils/clamp';
 import { loadImage } from '../../utils/loadImage';
@@ -24,25 +25,18 @@ type GameBoyCameraSettings = {
   palette: StepperSetting<Palette>;
 };
 
-type GameBoyCameraCache = {
-  // image: HTMLImageElement;
-};
-
+const INPUT_SIZE = 128;
 const OUTPUT_SIZE = 512;
 
-const generate: GeneratorFunction<
-  GameBoyCameraSettings,
-  GameBoyCameraCache
-> = async (canvas, settings, cache) => {
-  const image = /*cache?.image ||*/ await loadImage(settings.image);
-
-  if (!image) {
+const generate: GeneratorFunction<GameBoyCameraSettings> = async (
+  canvas,
+  settings
+) => {
+  if (!settings.image.src || !settings.image.crop) {
     return {
       success: false,
     };
   }
-
-  const { brightness, contrast, palette } = settings;
 
   canvas.width = OUTPUT_SIZE;
   canvas.height = OUTPUT_SIZE;
@@ -54,18 +48,39 @@ const generate: GeneratorFunction<
     };
   }
 
-  const pixels = cropToSquare(image, ctx);
+  const croppedImageSrc = await applyCrop(
+    settings.image.src,
+    settings.image.crop
+  );
+
+  if (!croppedImageSrc) {
+    return {
+      success: false,
+    };
+  }
+
+  const croppedImage = await loadImage(croppedImageSrc);
+
+  if (!croppedImage) {
+    return {
+      success: false,
+    };
+  }
+
+  ctx.drawImage(croppedImage, 0, 0, INPUT_SIZE, INPUT_SIZE);
+
+  const pixels = ctx.getImageData(0, 0, INPUT_SIZE, INPUT_SIZE);
+  const { brightness, contrast, palette } = settings;
+
   retroify(pixels, BRIGHTNESS_MAP[brightness], CONTRAST_MAP[contrast]);
   recolour(pixels, palette);
+
   ctx.putImageData(upscale(pixels), 0, 0);
 
   return {
     success: true,
     suggestedAltText:
       '{{userImage}}. The picture has been edited to look like it was taken with a game boy camera, so it uses a palette of four colours and has a low resolution pixellated effect.',
-    cache: {
-      image,
-    },
   };
 };
 
@@ -191,7 +206,12 @@ export const generator: Generator<GameBoyCameraSettings> = {
     image: {
       type: SettingType.Image,
       name: 'Image',
-      params: {},
+      params: {
+        allowCrop: true,
+        cropAspectRatio: 1,
+        cropMinWidth: 128,
+        cropMinHeight: 128,
+      },
     },
     brightness: {
       type: SettingType.Stepper,

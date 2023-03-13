@@ -25,7 +25,7 @@ const generate: GeneratorFunction<NounVerbedSettings> = async (
 ) => {
   const { text = '', colour, image, textPosition } = settings;
 
-  if (!image) {
+  if (!image.src) {
     return {
       success: false,
     };
@@ -38,7 +38,7 @@ const generate: GeneratorFunction<NounVerbedSettings> = async (
     };
   }
 
-  const loadedImage = await loadImage(image);
+  const loadedImage = await loadImage(image.src);
   const { width, height } = loadedImage;
 
   const ratio = width / height;

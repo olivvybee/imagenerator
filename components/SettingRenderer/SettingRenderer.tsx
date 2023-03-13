@@ -46,7 +46,16 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
       );
 
     case SettingType.Image:
-      return <ImageField onChange={onChange} value={value} />;
+      return (
+        <ImageField
+          onChange={onChange}
+          value={value}
+          allowCrop={setting.params.allowCrop}
+          cropAspectRatio={setting.params.cropAspectRatio}
+          cropMinWidth={setting.params.cropMinWidth}
+          cropMinHeight={setting.params.cropMinHeight}
+        />
+      );
 
     case SettingType.Slider:
       return (

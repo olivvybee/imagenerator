@@ -1,5 +1,6 @@
 import React from 'react';
 import { Colour } from './Colour';
+import { Image } from './Image';
 import { SliderPreset } from './Slider';
 
 export enum SettingType {
@@ -24,7 +25,16 @@ export interface Setting<T extends SettingType, V, P extends {}> {
   when?: SettingCondition;
 }
 
-export type ImageSetting = Setting<SettingType.Image, string, {}>;
+export type ImageSetting = Setting<
+  SettingType.Image,
+  Image,
+  {
+    allowCrop?: boolean;
+    cropAspectRatio?: number;
+    cropMinWidth?: number;
+    cropMinHeight?: number;
+  }
+>;
 export type TextSetting = Setting<
   SettingType.Text,
   string,

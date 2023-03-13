@@ -26,10 +26,16 @@ type GeneratorAction =
 
 const init = (settings: Settings): SettingValues => {
   return Object.entries(settings).reduce((state, [key, setting]) => {
-    const implicitDefault =
-      setting.type === SettingType.Dropdown
-        ? setting.params.options[0]
-        : undefined;
+    let implicitDefault: any = undefined;
+
+    switch (setting.type) {
+      case SettingType.Dropdown:
+        implicitDefault = setting.params.options[0];
+        break;
+      case SettingType.Image:
+        implicitDefault = {};
+        break;
+    }
 
     return {
       ...state,
