@@ -1,4 +1,4 @@
-import { Palette } from '../../constants/GameBoyCamera';
+import { Palette } from '../types';
 
 import styles from './PalettePreview.module.css';
 

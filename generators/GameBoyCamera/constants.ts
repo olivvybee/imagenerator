@@ -1,3 +1,8 @@
+import { Palette } from './types';
+
+export const TARGET_SIZE = 128;
+export const OUTPUT_SIZE = 512;
+
 export const BRIGHTNESS_MAP = [2.5, 2, 1.5, 1, 0.8, 0.6, 0.4];
 export const CONTRAST_MAP = [0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4];
 
@@ -12,12 +17,6 @@ export const bayer8 = [
   [10, 58, 6, 54, 9, 57, 5, 53],
   [42, 26, 38, 22, 41, 25, 37, 21],
 ];
-
-export interface Palette {
-  name: string;
-  colours: string[];
-  source?: string;
-}
 
 export const PALETTES: Palette[] = [
   {
