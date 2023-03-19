@@ -117,11 +117,11 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const downloadImage = () =>
     saveAs(output?.imageData, `${generator.name}.png`);
 
-  const imageAltText = output?.suggestedAltText?.replace(
+  const imageAltText = output?.suggestedAltText?.replaceAll(
     '{{userImage}}',
     'the image you chose'
   );
-  const suggestedAltText = output?.suggestedAltText?.replace(
+  const suggestedAltText = output?.suggestedAltText?.replaceAll(
     '{{userImage}}',
     '[describe your image here]'
   );
