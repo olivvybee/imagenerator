@@ -1,9 +1,16 @@
 .pageWrapper {
+  display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .content {
+  width: 100%;
   max-width: 900px;
   margin: 0 auto;
   padding: 16px;
+}
+
+.spacer {
+  flex: 1;
 }

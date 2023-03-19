@@ -24,6 +24,7 @@ const App = ({ Component, pageProps }: AppProps) => (
         <div className={styles.content}>
           <Component {...pageProps} />
         </div>
+        <div className={styles.spacer} />
         <Footer />
       </div>
     </IconContext.Provider>
