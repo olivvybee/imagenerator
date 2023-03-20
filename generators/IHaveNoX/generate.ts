@@ -43,24 +43,24 @@ export const generate: GeneratorFunction<
 
   if (x) {
     const line2 = x.toUpperCase();
-    constrainFontSize(ctx, line2, {
-      x: TEXT_CENTER,
-      y: 210,
+    const line2Size = constrainFontSize(ctx, line2, {
       font: 'Harlan',
       targetSize: 94,
       maxWidth: 480,
     });
+    ctx.font = `${line2Size}px Harlan`;
+    ctx.fillText(line2, TEXT_CENTER, 210);
   }
 
   if (y) {
     const line4 = y.toUpperCase();
-    constrainFontSize(ctx, line4, {
-      x: TEXT_CENTER,
-      y: 390,
+    const line4Size = constrainFontSize(ctx, line4, {
       font: 'Harlan',
       targetSize: 94,
       maxWidth: 480,
     });
+    ctx.font = `${line4Size}px Harlan`;
+    ctx.fillText(line4, TEXT_CENTER, 390);
   }
 
   const capitalisedX = x ? x.charAt(0).toUpperCase() + x.slice(1) : '';

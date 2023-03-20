@@ -35,3 +35,11 @@
     url('/fonts/Atkinson-HyperLegible-Regular.woff2') format('woff2'),
     url('/fonts/Atkinson-HyperLegible-Regular.woff') format('woff');
 }
+
+@font-face {
+  font-family: 'Yakuza';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('/fonts/yakuza.woff2') format('woff2'),
+    url('/fonts/yakuza.woff') format('woff');
+}

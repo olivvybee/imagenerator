@@ -1,6 +1,4 @@
 interface Options {
-  x: number;
-  y: number;
   font: string;
   targetSize: number;
   maxWidth?: number;
@@ -11,7 +9,7 @@ export const constrainFontSize = (
   text: string,
   options: Options
 ) => {
-  const { x, y, font, targetSize, maxWidth = ctx.canvas.width } = options;
+  const { font, targetSize, maxWidth = ctx.canvas.width } = options;
 
   let size: number;
   for (size = targetSize; size > 0; size--) {
@@ -21,10 +19,5 @@ export const constrainFontSize = (
     }
   }
 
-  const prevBaseline = ctx.textBaseline;
-
-  ctx.textBaseline = 'middle';
-  ctx.fillText(text, x, y);
-
-  ctx.textBaseline = prevBaseline;
+  return size;
 };
