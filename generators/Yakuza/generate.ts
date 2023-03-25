@@ -2,6 +2,7 @@ import { GeneratorFunction } from '../../types/GeneratorTypes';
 import { constrainFontSize } from '../../utils/constrainFontSize';
 import { loadImage } from '../../utils/loadImage';
 import multilineText from '../../utils/multilineText';
+import { calculateImageSize } from '../../utils/resizeImage';
 import { buildAltText } from './buildAltText';
 
 import {
@@ -33,29 +34,25 @@ export const generate: GeneratorFunction<YakuzaSettings> = async (
   }
 
   const loadedImage = await loadImage(image.src);
-  const { width, height } = loadedImage;
 
-  const ratio = width / height;
+  const { width, height } = calculateImageSize(loadedImage, TARGET_SIZE);
+  const maxWidth = width - 64;
 
-  const newWidth = width > height ? TARGET_SIZE : TARGET_SIZE * ratio;
-  const newHeight = height > width ? TARGET_SIZE : TARGET_SIZE / ratio;
-  const maxWidth = newWidth - 64;
-
-  canvas.width = newWidth;
-  canvas.height = newHeight;
-  ctx.drawImage(loadedImage, 0, 0, newWidth, newHeight);
+  canvas.width = width;
+  canvas.height = height;
+  ctx.drawImage(loadedImage, 0, 0, width, height);
 
   const nameFontSize = drawText(ctx, name, {
-    x: newWidth / 2,
-    y: (newHeight / 3) * 2,
+    x: width / 2,
+    y: (height / 3) * 2,
     maxWidth,
     maxFontSize: MAX_NAME_FONT_SIZE,
     strokeWidth: 6,
   });
 
   drawText(ctx, title, {
-    x: newWidth / 2,
-    y: (newHeight / 3) * 2 + nameFontSize,
+    x: width / 2,
+    y: (height / 3) * 2 + nameFontSize,
     maxWidth,
     maxFontSize: (nameFontSize / MAX_NAME_FONT_SIZE) * MAX_TITLE_FONT_SIZE,
     strokeWidth: (nameFontSize / MAX_NAME_FONT_SIZE) * 5,

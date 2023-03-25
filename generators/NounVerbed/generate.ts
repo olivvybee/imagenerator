@@ -1,5 +1,6 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
 import { loadImage } from '../../utils/loadImage';
+import { calculateImageSize } from '../../utils/resizeImage';
 
 import { TARGET_SIZE, MAX_FONT_SIZE } from './constants';
 import { NounVerbedSettings } from './types';
@@ -24,21 +25,17 @@ export const generate: GeneratorFunction<NounVerbedSettings> = async (
   }
 
   const loadedImage = await loadImage(image.src);
-  const { width, height } = loadedImage;
 
-  const ratio = width / height;
+  const { width, height } = calculateImageSize(loadedImage, TARGET_SIZE);
 
-  const newWidth = width > height ? TARGET_SIZE : TARGET_SIZE * ratio;
-  const newHeight = height > width ? TARGET_SIZE : TARGET_SIZE / ratio;
-
-  canvas.width = newWidth;
-  canvas.height = newHeight;
-  ctx.drawImage(loadedImage, 0, 0, newWidth, newHeight);
+  canvas.width = width;
+  canvas.height = height;
+  ctx.drawImage(loadedImage, 0, 0, width, height);
 
   const uppercaseText = text.toUpperCase();
-  const x = newWidth / 2;
-  const y = (newHeight / 100) * textPosition;
-  const maxWidth = newWidth - 64;
+  const x = width / 2;
+  const y = (height / 100) * textPosition;
+  const maxWidth = width - 64;
 
   let fontSize = MAX_FONT_SIZE + 1;
   do {
@@ -57,7 +54,7 @@ export const generate: GeneratorFunction<NounVerbedSettings> = async (
   gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
   ctx.fillStyle = gradient;
-  ctx.fillRect(0, bannerTop, newWidth, bannerHeight);
+  ctx.fillRect(0, bannerTop, width, bannerHeight);
 
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
@@ -71,7 +68,7 @@ export const generate: GeneratorFunction<NounVerbedSettings> = async (
   ctx.globalAlpha = 1;
 
   ctx.font = `${fontSize} 'Optimus Princeps'`;
-  ctx.fillText(uppercaseText, newWidth / 2, (newHeight / 100) * textPosition);
+  ctx.fillText(uppercaseText, width / 2, (height / 100) * textPosition);
 
   return {
     suggestedAltText:
