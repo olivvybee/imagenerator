@@ -7,7 +7,23 @@ import { drawTextWithBackground } from './drawText';
 // Hair space character for precise justification
 const SPACE = '\u200a';
 
-const canvasTxt = {
+interface MultilineTextParams {
+  debug: boolean;
+  align: 'left' | 'center' | 'right';
+  vAlign: 'top' | 'middle' | 'bottom';
+  fontSize: number;
+  fontWeight: string;
+  fontStyle: string;
+  fontVariant: string;
+  font: string;
+  lineHeight: number | null;
+  justify: boolean;
+  opaque: boolean;
+  background: boolean;
+  [key: string]: any;
+}
+
+const canvasTxt: MultilineTextParams = {
   debug: false,
   align: 'center',
   vAlign: 'middle',

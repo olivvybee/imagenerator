@@ -4,6 +4,7 @@ export * from './GameBoyCamera';
 export * from './HierarchyOfNeeds';
 export * from './IHaveNoX';
 export * from './NounVerbed';
+export * from './TomScott';
 export * from './TopBottomText';
 export * from './TuxedoMask';
 export * from './Yakuza';

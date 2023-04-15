@@ -21,7 +21,7 @@ interface ImageCropProps {
 
 export const ImageCrop = ({
   image,
-  aspectRatio = 1,
+  aspectRatio,
   minWidth,
   minHeight,
   onSave,
@@ -41,8 +41,10 @@ export const ImageCrop = ({
   const onImageLoad: ReactEventHandler<HTMLImageElement> = (e) => {
     const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
 
+    const aspect = aspectRatio || width / height;
+
     const defaultCrop = centerCrop(
-      makeAspectCrop({ unit: '%', width: 100 }, aspectRatio, width, height),
+      makeAspectCrop({ unit: '%', width: 100 }, aspect, width, height),
       width,
       height
     );
