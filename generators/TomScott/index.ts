@@ -45,5 +45,19 @@ export const tomScottGenerator: Generator<TomScottSettings, TomScottCache> = {
       },
       defaultValue: 50,
     },
+    arrowHorizontalPosition: {
+      type: SettingType.Slider,
+      name: 'Arrow position',
+      params: {
+        min: 0,
+        max: 100,
+        step: 1,
+        presets: [
+          { name: 'left', value: 0 },
+          { name: 'right', value: 100 },
+        ],
+      },
+      defaultValue: 100,
+    },
   },
 };

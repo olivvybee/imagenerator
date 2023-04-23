@@ -10,6 +10,7 @@ export type TomScottSettings = {
   text: TextSetting;
   horizontalPosition: DropdownSetting;
   verticalPosition: SliderSetting;
+  arrowHorizontalPosition: SliderSetting;
 };
 
 export type TomScottCache = {

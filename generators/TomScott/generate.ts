@@ -18,7 +18,13 @@ export const generate: GeneratorFunction<TomScottSettings> = async (
   canvas,
   settings
 ) => {
-  const { text = '', image, verticalPosition, horizontalPosition } = settings;
+  const {
+    text = '',
+    image,
+    verticalPosition,
+    horizontalPosition,
+    arrowHorizontalPosition,
+  } = settings;
 
   if (!image.src || !image.crop) {
     return {
@@ -53,17 +59,17 @@ export const generate: GeneratorFunction<TomScottSettings> = async (
 
   const lowercaseText = text.toLowerCase();
 
-  const arrowX =
-    horizontalPosition === 'left'
-      ? width / 2 - ARROW_SIZE - 2 * ARROW_PADDING
-      : width / 2;
+  // const arrowX =
+  //   horizontalPosition === 'left'
+  //     ? width / 2 - ARROW_SIZE - 2 * ARROW_PADDING
+  //     : width / 2;
 
   const textX =
     horizontalPosition === 'left' ? TEXT_PADDING : width / 2 + TEXT_PADDING;
 
   const textY = (verticalPosition / 100) * height;
 
-  const textWidth = width / 2 - 2 * TEXT_PADDING;
+  const textMaxWidth = width / 2 - 2 * TEXT_PADDING;
 
   multilineText.align = 'left';
   multilineText.vAlign = 'top';
@@ -76,7 +82,7 @@ export const generate: GeneratorFunction<TomScottSettings> = async (
     lowercaseText,
     textX,
     textY,
-    textWidth,
+    textMaxWidth,
     height
   );
 
@@ -84,23 +90,25 @@ export const generate: GeneratorFunction<TomScottSettings> = async (
   ctx.fillRect(
     textX - TEXT_PADDING,
     textY,
-    textWidth + 2 * TEXT_PADDING,
+    width / 2,
     textHeight + 2 * TEXT_PADDING
   );
 
+  const arrowWidth = ARROW_SIZE + ARROW_PADDING * 2;
+
   const useBottomArrow = verticalPosition < 50;
+
+  const arrowX =
+    (horizontalPosition === 'left' ? width / 2 : width) -
+    arrowWidth -
+    ((100 - arrowHorizontalPosition) / 100) * (width / 2 - arrowWidth);
 
   const arrowY = useBottomArrow
     ? textY + textHeight + 2 * TEXT_PADDING
     : textY - ARROW_SIZE - 2 * ARROW_PADDING;
 
   ctx.fillStyle = BACKGROUND_COLOUR;
-  ctx.fillRect(
-    arrowX,
-    arrowY,
-    ARROW_SIZE + ARROW_PADDING * 2,
-    ARROW_SIZE + ARROW_PADDING * 2
-  );
+  ctx.fillRect(arrowX, arrowY, arrowWidth, arrowWidth);
 
   const arrowDirectionX = horizontalPosition === 'left' ? 'right' : 'left';
   const arrowDirectionY = useBottomArrow ? 'down' : 'up';
@@ -119,12 +127,19 @@ export const generate: GeneratorFunction<TomScottSettings> = async (
     lowercaseText,
     textX,
     textY + 3,
-    textWidth,
+    textMaxWidth,
     height
   );
 
   ctx.fillStyle = 'white';
-  multilineText.drawText(ctx, lowercaseText, textX, textY, textWidth, height);
+  multilineText.drawText(
+    ctx,
+    lowercaseText,
+    textX,
+    textY,
+    textMaxWidth,
+    height
+  );
 
   const suggestedAltText = `{{userImage}} with text on top with a red background that says "${lowercaseText}". There's an arrow pointing at [describe what the arrow is pointing at].`;
 
