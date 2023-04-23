@@ -59,13 +59,11 @@ export const generate: GeneratorFunction<TomScottSettings> = async (
       : width / 2;
 
   const textX =
-    horizontalPosition === 'left'
-      ? TEXT_PADDING
-      : TEXT_PADDING + arrowX + ARROW_SIZE + 2 * ARROW_PADDING;
+    horizontalPosition === 'left' ? TEXT_PADDING : width / 2 + TEXT_PADDING;
+
   const textY = (verticalPosition / 100) * height;
 
-  const textWidth =
-    width / 2 - ARROW_SIZE - 2 * ARROW_PADDING - 2 * TEXT_PADDING;
+  const textWidth = width / 2 - 2 * TEXT_PADDING;
 
   multilineText.align = 'left';
   multilineText.vAlign = 'top';
@@ -90,10 +88,11 @@ export const generate: GeneratorFunction<TomScottSettings> = async (
     textHeight + 2 * TEXT_PADDING
   );
 
-  const arrowY =
-    textY + textHeight < height / 2
-      ? textY + textHeight + 2 * TEXT_PADDING - ARROW_SIZE - 2 * ARROW_PADDING
-      : textY;
+  const useBottomArrow = verticalPosition < 50;
+
+  const arrowY = useBottomArrow
+    ? textY + textHeight + 2 * TEXT_PADDING
+    : textY - ARROW_SIZE - 2 * ARROW_PADDING;
 
   ctx.fillStyle = BACKGROUND_COLOUR;
   ctx.fillRect(
@@ -104,7 +103,7 @@ export const generate: GeneratorFunction<TomScottSettings> = async (
   );
 
   const arrowDirectionX = horizontalPosition === 'left' ? 'right' : 'left';
-  const arrowDirectionY = textY + textHeight < height / 2 ? 'down' : 'up';
+  const arrowDirectionY = useBottomArrow ? 'down' : 'up';
 
   const arrowImage = await loadImage(
     `/assets/tom-scott-arrow-${arrowDirectionY}-${arrowDirectionX}.jpg`
