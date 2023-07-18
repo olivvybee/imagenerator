@@ -147,6 +147,7 @@ export const generate: GeneratorFunction<
 
     ctx.textBaseline = 'bottom';
 
+    multilineText.font = 'Atkinson Hyperlegible';
     multilineText.fontSize = 48;
     multilineText.drawText(ctx, text, x, y, width, height);
   });
