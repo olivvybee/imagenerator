@@ -40,16 +40,16 @@ export const generate: GeneratorFunction<NowThatsWhatICallSettings> = async (
 
   ctx.fillStyle = fillColour.hex;
   ctx.strokeStyle = strokeColour.hex;
-  ctx.lineWidth = 10;
+  ctx.lineWidth = 15;
 
   ctx.font = `${LARGE_FONT_SIZE}px Arial Black`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'bottom';
-  ctx.fillText('NOW', 390, 320);
   ctx.strokeText('NOW', 390, 320);
+  ctx.fillText('NOW', 390, 320);
 
-  ctx.fillRect(25, 260, 750, 120);
   ctx.strokeRect(25, 260, 750, 120);
+  ctx.fillRect(25, 260, 750, 120);
 
   ctx.fillStyle = strokeColour.hex;
   ctx.font = `${SMALL_FONT_SIZE}px Arial Bold`;
@@ -83,10 +83,10 @@ export const generate: GeneratorFunction<NowThatsWhatICallSettings> = async (
     y += previousFontSize / 2 + fontSize / 2;
 
     ctx.font = `${fontSize}px Arial Black`;
-    ctx.lineWidth = 10 * (fontSize / LARGE_FONT_SIZE);
+    ctx.lineWidth = 15 * (fontSize / LARGE_FONT_SIZE);
 
-    ctx.fillText(s, 400, y);
     ctx.strokeText(s, 400, y);
+    ctx.fillText(s, 400, y);
   });
 
   const suggestedAltText = buildAltText(settings);
