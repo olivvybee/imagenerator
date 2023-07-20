@@ -43,3 +43,10 @@
   src: local(''), url('/fonts/yakuza.woff2') format('woff2'),
     url('/fonts/yakuza.woff') format('woff');
 }
+
+@font-face {
+  font-family: 'Arial Black';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('/fonts/Arial-Black.woff2') format('woff2');
+}

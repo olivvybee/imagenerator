@@ -1,4 +1,5 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
+import { loadFont } from '../../utils/loadFont';
 import multilineText from '../../utils/multilineText';
 
 import { buildAltText } from './buildAltText';
@@ -26,6 +27,8 @@ export const generate: GeneratorFunction<NowThatsWhatICallSettings> = async (
       success: false,
     };
   }
+
+  await loadFont('Arial Black');
 
   const text = [text1, text2, text3].map((s) => s.toUpperCase());
 
