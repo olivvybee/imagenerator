@@ -51,17 +51,20 @@ export const generate: GeneratorFunction<NowThatsWhatICallSettings> = async (
   ctx.strokeText('NOW', 390, 320);
   ctx.fillText('NOW', 390, 320);
 
-  ctx.strokeRect(25, 260, 750, 120);
-  ctx.fillRect(25, 260, 750, 120);
+  ctx.strokeRect(25, 280, 750, 120);
+  ctx.fillRect(25, 280, 750, 120);
 
   ctx.fillStyle = strokeColour.hex;
   ctx.font = `${SMALL_FONT_SIZE}px Arial Bold`;
   ctx.textBaseline = 'middle';
-  ctx.fillText("THAT'S WHAT I CALL", 400, 320);
+  ctx.fillText("THAT'S WHAT I CALL", 400, 340);
+
+  const numberOfLines = text.filter((s) => !!s).length;
+  const maxFontSize = 400 / numberOfLines;
 
   const fontSizes = text.map((s) => {
     if (s) {
-      let fontSize = LARGE_FONT_SIZE;
+      let fontSize = maxFontSize;
       let width = 999;
       while (width > 760) {
         fontSize -= 1;
@@ -70,7 +73,7 @@ export const generate: GeneratorFunction<NowThatsWhatICallSettings> = async (
       }
       return fontSize;
     } else {
-      return LARGE_FONT_SIZE;
+      return maxFontSize;
     }
   });
 
@@ -78,7 +81,7 @@ export const generate: GeneratorFunction<NowThatsWhatICallSettings> = async (
   ctx.fillStyle = fillColour.hex;
   ctx.strokeStyle = strokeColour.hex;
 
-  let y = 400;
+  let y = 410;
   text.forEach((s, index) => {
     const fontSize = fontSizes[index];
     const previousFontSize = index > 0 ? fontSizes[index - 1] : 0;
