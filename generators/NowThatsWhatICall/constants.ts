@@ -10,5 +10,10 @@ export const DEFAULT_STROKE: Colour = {
   hex: '#ff96ee',
 };
 
+export const BACKGROUND_PRESETS: Colour[] = [
+  { name: 'White', hex: '#ffffff' },
+  { name: 'Black', hex: '#000000' },
+];
+
 export const LARGE_FONT_SIZE = 290;
 export const SMALL_FONT_SIZE = 70;

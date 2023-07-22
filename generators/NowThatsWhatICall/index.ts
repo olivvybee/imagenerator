@@ -1,6 +1,6 @@
 import { Generator } from '../../types/GeneratorTypes';
 import { SettingType } from '../../types/SettingTypes';
-import { DEFAULT_FILL, DEFAULT_STROKE } from './constants';
+import { BACKGROUND_PRESETS, DEFAULT_FILL, DEFAULT_STROKE } from './constants';
 import { generate } from './generate';
 import { NowThatsWhatICallSettings } from './types';
 
@@ -39,6 +39,15 @@ export const nowThatsWhatICallGenerator: Generator<NowThatsWhatICallSettings> =
         type: SettingType.Colour,
         defaultValue: DEFAULT_STROKE,
         params: {
+          allowCustom: true,
+        },
+      },
+      backgroundColour: {
+        name: 'Background colour',
+        type: SettingType.Colour,
+        defaultValue: BACKGROUND_PRESETS[0],
+        params: {
+          presets: BACKGROUND_PRESETS,
           allowCustom: true,
         },
       },

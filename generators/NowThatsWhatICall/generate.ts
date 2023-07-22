@@ -16,6 +16,7 @@ export const generate: GeneratorFunction<NowThatsWhatICallSettings> = async (
     text3 = '',
     fillColour,
     strokeColour,
+    backgroundColour,
   } = settings;
 
   canvas.width = 800;
@@ -32,7 +33,7 @@ export const generate: GeneratorFunction<NowThatsWhatICallSettings> = async (
 
   const text = [text1, text2, text3].map((s) => s.toUpperCase());
 
-  ctx.fillStyle = 'white';
+  ctx.fillStyle = backgroundColour.hex;
   ctx.fillRect(0, 0, 800, 800);
 
   multilineText.fontSize = 190;

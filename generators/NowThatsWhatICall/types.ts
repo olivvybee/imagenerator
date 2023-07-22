@@ -6,4 +6,5 @@ export type NowThatsWhatICallSettings = {
   text3: TextSetting;
   fillColour: ColourSetting;
   strokeColour: ColourSetting;
+  backgroundColour: ColourSetting;
 };
