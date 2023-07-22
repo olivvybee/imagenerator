@@ -41,6 +41,7 @@ export const ColourField = ({
                 className={styles.presetButton}
                 style={{ backgroundColor: preset.hex }}
                 onClick={() => onChange(preset)}
+                title={preset.name}
               />
             </li>
           ))}
