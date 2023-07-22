@@ -1,6 +1,5 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
 import { loadFont } from '../../utils/loadFont';
-import multilineText from '../../utils/multilineText';
 
 import { buildAltText } from './buildAltText';
 import { LARGE_FONT_SIZE, SMALL_FONT_SIZE } from './constants';
@@ -36,27 +35,21 @@ export const generate: GeneratorFunction<NowThatsWhatICallSettings> = async (
   ctx.fillStyle = backgroundColour.hex;
   ctx.fillRect(0, 0, 800, 800);
 
-  multilineText.fontSize = 190;
-  multilineText.font = 'Arial Black';
-  multilineText.align = 'center';
-  multilineText.vAlign = 'middle';
-  multilineText.background = false;
-
   ctx.fillStyle = fillColour.hex;
   ctx.strokeStyle = strokeColour.hex;
   ctx.lineWidth = 15;
 
-  ctx.font = `${LARGE_FONT_SIZE}px Arial Black`;
+  ctx.font = `${LARGE_FONT_SIZE}px "Arial Black"`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'bottom';
   ctx.strokeText('NOW', 390, 320);
   ctx.fillText('NOW', 390, 320);
 
-  ctx.strokeRect(25, 280, 750, 120);
-  ctx.fillRect(25, 280, 750, 120);
+  ctx.strokeRect(25, 280, 750, 110);
+  ctx.fillRect(25, 280, 750, 110);
 
   ctx.fillStyle = strokeColour.hex;
-  ctx.font = `${SMALL_FONT_SIZE}px Arial Bold`;
+  ctx.font = `${SMALL_FONT_SIZE}px "Arial Black"`;
   ctx.textBaseline = 'middle';
   ctx.fillText("THAT'S WHAT I CALL", 400, 340);
 
@@ -69,7 +62,7 @@ export const generate: GeneratorFunction<NowThatsWhatICallSettings> = async (
       let width = 999;
       while (width > 760) {
         fontSize -= 1;
-        ctx.font = `${fontSize}px Arial Black`;
+        ctx.font = `${fontSize}px "Arial Black"`;
         width = ctx.measureText(s).width;
       }
       return fontSize;
