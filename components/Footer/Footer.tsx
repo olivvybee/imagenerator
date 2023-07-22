@@ -5,7 +5,7 @@ export const Footer = () => (
     <div className={styles.footerContent}>
       <span>
         imagenerator by{' '}
-        <a rel="me" href="https://tech.lgbt/@olivvybee">
+        <a rel="me" href="https://fedi.beehive.gay/@olivvybee">
           olivvybee
         </a>
         . Support her and the site on{' '}
