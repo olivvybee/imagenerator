@@ -1,4 +1,5 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
+import { constrainFontSize } from '../../utils/constrainFontSize';
 import { loadFont } from '../../utils/loadFont';
 
 import { buildAltText } from './buildAltText';
@@ -58,14 +59,11 @@ export const generate: GeneratorFunction<NowThatsWhatICallSettings> = async (
 
   const fontSizes = text.map((s) => {
     if (s) {
-      let fontSize = maxFontSize;
-      let width = 999;
-      while (width > 760) {
-        fontSize -= 1;
-        ctx.font = `${fontSize}px "Arial Black"`;
-        width = ctx.measureText(s).width;
-      }
-      return fontSize;
+      return constrainFontSize(ctx, s, {
+        font: '"Arial Black"',
+        maxWidth: 760,
+        targetSize: maxFontSize,
+      });
     } else {
       return maxFontSize;
     }
