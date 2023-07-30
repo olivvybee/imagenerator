@@ -8,21 +8,27 @@ import { EndlessCycleSettings } from './types';
 const TEXT_WIDTH = 350;
 const TEXT_HEIGHT = 250;
 
-const TEXT_POSITIONS = [
+interface Text {
+  x: number;
+  y: number;
+  align?: 'top' | 'middle' | 'bottom';
+}
+
+const TEXT_POSITIONS: Text[][] = [
   [
-    [275, 25],
-    [275, 625],
+    { x: 275, y: 25, align: 'bottom' },
+    { x: 275, y: 625, align: 'top' },
   ],
   [
-    [275, 75],
-    [525, 525],
-    [25, 525],
+    { x: 275, y: 75 },
+    { x: 525, y: 525 },
+    { x: 25, y: 525 },
   ],
   [
-    [275, 25],
-    [525, 325],
-    [275, 625],
-    [25, 325],
+    { x: 275, y: 25 },
+    { x: 525, y: 325 },
+    { x: 275, y: 625 },
+    { x: 25, y: 325 },
   ],
 ];
 
@@ -217,7 +223,8 @@ export const generate: GeneratorFunction<EndlessCycleSettings> = async (
 
   for (let i = 0; i < numberOfSteps; i++) {
     const text = steps[i];
-    const [x, y] = textPositions[i];
+    const { x, y, align = 'middle' } = textPositions[i];
+    multilineText.vAlign = align;
     multilineText.drawText(ctx, text, x, y, TEXT_WIDTH, TEXT_HEIGHT);
 
     drawArrow(ctx, arrowPosition[i]);
