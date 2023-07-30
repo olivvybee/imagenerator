@@ -20,9 +20,9 @@ const TEXT_POSITIONS: Text[][] = [
     { x: 275, y: 625, align: 'top' },
   ],
   [
-    { x: 275, y: 75 },
-    { x: 525, y: 525 },
-    { x: 25, y: 525 },
+    { x: 275, y: 25 },
+    { x: 525, y: 475 },
+    { x: 25, y: 475 },
   ],
   [
     { x: 275, y: 25 },
@@ -67,21 +67,21 @@ const ARROW_POSITIONS: Arrow[][] = [
   ],
   [
     {
-      start: { x: 675, y: 200 },
-      end: { x: 775, y: 500 },
-      controlPoint: { x: 800, y: 200 },
+      start: { x: 675, y: 150 },
+      end: { x: 775, y: 450 },
+      controlPoint: { x: 800, y: 150 },
       direction: ArrowDirection.Down,
     },
     {
-      start: { x: 675, y: 800 },
-      end: { x: 250, y: 800 },
-      controlPoint: { x: 450, y: 950 },
+      start: { x: 675, y: 750 },
+      end: { x: 250, y: 750 },
+      controlPoint: { x: 450, y: 900 },
       direction: ArrowDirection.UpLeft,
     },
     {
-      start: { x: 125, y: 500 },
-      end: { x: 225, y: 200 },
-      controlPoint: { x: 100, y: 200 },
+      start: { x: 125, y: 450 },
+      end: { x: 225, y: 150 },
+      controlPoint: { x: 100, y: 150 },
       direction: ArrowDirection.Right,
     },
   ],
