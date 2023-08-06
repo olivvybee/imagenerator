@@ -108,14 +108,19 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
   const { isSharingSupported, share } = useNativeShare('image/png');
   const shareImage = () => {
-    const shareData = {
-      file: createFileFromDataURL(output?.imageData, generator.name),
-    };
-    share({ data: shareData });
+    if (output?.imageData) {
+      const shareData = {
+        file: createFileFromDataURL(output?.imageData, generator.name),
+      };
+      share({ data: shareData });
+    }
   };
 
-  const downloadImage = () =>
-    saveAs(output?.imageData, `${generator.name}.png`);
+  const downloadImage = () => {
+    if (output?.imageData) {
+      saveAs(output?.imageData, `${generator.name}.png`);
+    }
+  };
 
   const imageAltText = output?.suggestedAltText?.replaceAll(
     '{{userImage}}',
@@ -177,7 +182,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
               <Button
                 disabled={!hasAltText}
                 icon={IoCopyOutline}
-                onClick={() => copyToClipboard(suggestedAltText)}
+                onClick={() => copyToClipboard(suggestedAltText || '')}
                 small={true}>
                 {!!copiedText ? 'Copied' : 'Copy'}
               </Button>

@@ -13,9 +13,7 @@ export enum SettingType {
   Colour,
 }
 
-export type SettingCondition = <S extends Settings = Settings>(
-  settings: SettingValues<S>
-) => boolean;
+export type SettingCondition = (settings: SettingValues<any>) => boolean;
 
 export interface Setting<T extends SettingType, V, P extends {}> {
   type: T;

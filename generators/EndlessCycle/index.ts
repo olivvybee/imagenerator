@@ -1,7 +1,13 @@
 import { Generator } from '../../types/GeneratorTypes';
-import { SettingType } from '../../types/SettingTypes';
+import {
+  SettingType,
+  SettingValues,
+  SettingCondition,
+} from '../../types/SettingTypes';
 import { generate } from './generate';
 import { EndlessCycleSettings } from './types';
+
+type T = SettingValues<EndlessCycleSettings>['numberOfSteps'];
 
 export const endlessCycleGenerator: Generator<EndlessCycleSettings> = {
   name: 'Endless cycle',
@@ -33,13 +39,13 @@ export const endlessCycleGenerator: Generator<EndlessCycleSettings> = {
       name: 'Step 3',
       type: SettingType.Text,
       params: {},
-      when: (settings) => settings.numberOfSteps >= 3,
+      when: (settings) => (settings.numberOfSteps as number) >= 3,
     },
     step4: {
       name: 'Step 4',
       type: SettingType.Text,
       params: {},
-      when: (settings) => settings.numberOfSteps >= 4,
+      when: (settings) => (settings.numberOfSteps as number) >= 4,
     },
   },
 };
