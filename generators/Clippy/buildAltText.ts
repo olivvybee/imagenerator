@@ -6,7 +6,7 @@ export const buildAltText = (settings: SettingValues<ClippySettings>) => {
   const { text, button1, button2, button3 } = settings;
 
   const textDescription = text
-    ? `saying "${text}"`
+    ? `saying "${text.replaceAll('\n', ' ')}"`
     : 'that has a blank space where text should go';
 
   const visibleButtons = [button1, button2, button3].filter(
