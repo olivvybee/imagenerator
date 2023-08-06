@@ -32,6 +32,7 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
           value={value}
           placeholder={setting.params.placeholder}
           disabled={disabled}
+          multiline={setting.params.multiline}
         />
       );
 

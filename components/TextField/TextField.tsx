@@ -12,6 +12,7 @@ interface TextFieldProps
   onChange?: (newValue: string) => void;
   onBlur?: () => void;
   onKeyPress?: (key: string) => void;
+  multiline?: boolean;
 }
 
 export const TextField: React.FC<TextFieldProps> = ({
@@ -21,15 +22,25 @@ export const TextField: React.FC<TextFieldProps> = ({
   onBlur,
   onKeyPress,
   type = 'text',
+  multiline = false,
   ...rest
-}) => (
-  <input
-    className={classNames(styles.textField, className)}
-    type={type}
-    value={value}
-    onChange={(e) => onChange?.(e.target.value)}
-    onBlur={onBlur}
-    onKeyPress={(e) => onKeyPress?.(e.key)}
-    {...rest}
-  />
-);
+}) =>
+  multiline ? (
+    <textarea
+      className={classNames(styles.textField, styles.textArea, className)}
+      value={value}
+      onChange={(e) => onChange?.(e.target.value)}
+      onBlur={onBlur}
+      onKeyUp={(e) => onKeyPress?.(e.key)}
+    />
+  ) : (
+    <input
+      className={classNames(styles.textField, className)}
+      type={type}
+      value={value}
+      onChange={(e) => onChange?.(e.target.value)}
+      onBlur={onBlur}
+      onKeyUp={(e) => onKeyPress?.(e.key)}
+      {...rest}
+    />
+  );

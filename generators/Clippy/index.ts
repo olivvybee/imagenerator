@@ -14,7 +14,9 @@ export const clippyGenerator: Generator<ClippySettings> = {
     text: {
       name: 'Text',
       type: SettingType.Text,
-      params: {},
+      params: {
+        multiline: true,
+      },
     },
     button1: {
       name: 'Button 1',
