@@ -50,3 +50,10 @@
   font-weight: 400;
   src: local(''), url('/fonts/Arial-Black.woff2') format('woff2');
 }
+
+@font-face {
+  font-family: 'Tahoma';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('/fonts/Tahoma.woff2') format('woff2');
+}
