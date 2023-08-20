@@ -41,7 +41,7 @@ export const generate: GeneratorFunction<IsThisAPigeonSettings> = async (
   ctx.font = `${BOTTOM_FONT_SIZE}px "Atkinson Hyperlegible"`;
 
   if (bottomText) {
-    drawTextWithBackground(ctx, bottomText, { y: 750 });
+    drawTextWithBackground(ctx, bottomText, { y: 740 });
   }
 
   const suggestedAltText = buildAltText(settings);
