@@ -16,6 +16,8 @@ import { createFileFromDataURL } from '../../utils/createFileFromDataUrl';
 import { Expander } from '../Expander';
 import { AltTextExplanation } from '../AltTextExplanation';
 
+import { writeMetadata } from 'png-metadata';
+
 interface GeneratorPageProps {
   generator: Generator<any, any>;
 }
@@ -87,8 +89,17 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
       );
 
       const imageData = canvas.toDataURL('image/png');
+      const [header, data] = imageData.split(',');
+      const buffer = Buffer.from(data, 'base64');
+      const newBuffer = writeMetadata(buffer, {
+        'tEXt': {
+          'Description': suggestedAltText,
+          'Software': 'imagenerator.net',
+        },
+      });
+      const newImageData = `${header},${newBuffer.toString('base64')}`;
 
-      return { success, cache, suggestedAltText, imageData };
+      return { success, cache, suggestedAltText, imageData: newImageData };
     },
     {
       networkMode: 'always',
