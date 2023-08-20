@@ -91,9 +91,9 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
       const [header, data] = imageData.split(',');
       const buffer = Buffer.from(data, 'base64');
       const newBuffer = writeMetadata(buffer, {
-        'tEXt': {
-          'Description': suggestedAltText,
-          'Software': 'imagenerator.net',
+        tEXt: {
+          Description: suggestedAltText || '',
+          Software: 'imagenerator.net',
         },
       });
       const newImageData = `${header},${newBuffer.toString('base64')}`;
