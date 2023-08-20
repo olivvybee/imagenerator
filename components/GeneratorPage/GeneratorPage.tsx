@@ -2,6 +2,7 @@ import { useCallback, useReducer, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { saveAs } from 'file-saver';
 import { IoCopyOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5';
+import { writeMetadata } from 'png-metadata';
 
 import { Settings, SettingType, SettingValues } from '../../types/SettingTypes';
 import { Generator } from '../../types/GeneratorTypes';
@@ -15,8 +16,6 @@ import { useNativeShare } from '../../utils/useNativeShare';
 import { createFileFromDataURL } from '../../utils/createFileFromDataUrl';
 import { Expander } from '../Expander';
 import { AltTextExplanation } from '../AltTextExplanation';
-
-import { writeMetadata } from 'png-metadata';
 
 interface GeneratorPageProps {
   generator: Generator<any, any>;
