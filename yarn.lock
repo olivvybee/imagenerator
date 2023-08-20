@@ -2170,8 +2170,8 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.3.1:
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
 "png-metadata@https://github.com/theresnotime/png-metadata":
-  version "2.0.0"
-  resolved "https://github.com/theresnotime/png-metadata#4f493fbd6db1c8c74362521d67ee0608cfb7ad7e"
+  version "2.1.0"
+  resolved "https://github.com/theresnotime/png-metadata#ee2e76c3c5995e66203f25a81e2b76380d065f4f"
 
 postcss@8.4.14:
   version "8.4.14"
