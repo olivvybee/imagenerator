@@ -2181,7 +2181,8 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.3.1:
 
 "png-metadata@https://github.com/theresnotime/png-metadata":
   version "2.1.0"
-  resolved "https://github.com/theresnotime/png-metadata#ee2e76c3c5995e66203f25a81e2b76380d065f4f"
+  uid ae230ab786948314606da130aa42e2ee208b3670
+  resolved "https://github.com/theresnotime/png-metadata#ae230ab786948314606da130aa42e2ee208b3670"
 
 postcss@8.4.14:
   version "8.4.14"
