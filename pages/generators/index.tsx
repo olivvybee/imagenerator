@@ -3,11 +3,17 @@ import Link from 'next/link';
 import { getAllGenerators } from '../../utils/getAllGenerators';
 
 import styles from './generators.module.css';
+import { MetaTags } from '../../components/MetaTags/MetaTags';
 
 const GeneratorsPage = ({
   generators,
 }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <>
+    <MetaTags
+      title="All generators"
+      description="A handy list of all the generators available on imagenerator."
+    />
+
     <h2 className={styles.heading}>All generators</h2>
 
     <ul className={styles.generatorList}>
