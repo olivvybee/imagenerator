@@ -57,3 +57,10 @@
   font-weight: 400;
   src: local(''), url('/fonts/Tahoma.woff2') format('woff2');
 }
+
+@font-face {
+  font-family: 'NYT';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('/fonts/nyt.woff2') format('woff2');
+}
