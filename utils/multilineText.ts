@@ -20,6 +20,7 @@ interface MultilineTextParams {
   justify: boolean;
   opaque: boolean;
   background: boolean;
+  padding: number;
   [key: string]: any;
 }
 
@@ -36,6 +37,7 @@ const canvasTxt: MultilineTextParams = {
   justify: false,
   opaque: false,
   background: true,
+  padding: 8,
   /**
    *
    * @param {CanvasRenderingContext2D} ctx
@@ -138,7 +140,8 @@ const canvasTxt: MultilineTextParams = {
     });
     const charHeight = this.lineHeight
       ? this.lineHeight
-      : this.getTextHeight(ctx, mytext, style) + (this.background ? 35 : 0); //close approximation of height with width
+      : this.getTextHeight(ctx, mytext, style) +
+        (this.background ? 2 * this.padding : 0); //close approximation of height with width
     const vheight = charHeight * (textarray.length - 1);
     const negoffset = vheight / 2;
 
@@ -163,6 +166,7 @@ const canvasTxt: MultilineTextParams = {
             x: textanchor,
             y: txtY,
             opaque: this.opaque,
+            padding: this.padding,
           });
         } else {
           ctx.fillText(txtline, textanchor, txtY);
