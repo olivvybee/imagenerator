@@ -10,7 +10,7 @@ export const generate: GeneratorFunction<SorryImLateSettings> = async (
   canvas,
   settings
 ) => {
-  const { panel1Text, panel2Text } = settings;
+  const { panel1Text = '', panel2Text } = settings;
 
   const image = await loadImage('/assets/sorry-im-late.jpg');
   const { width, height } = image;
@@ -27,21 +27,16 @@ export const generate: GeneratorFunction<SorryImLateSettings> = async (
 
   ctx.drawImage(image, 0, 0);
 
-  multilineText.fontSize = FONT_SIZE;
-  multilineText.font = 'Atkinson Hyperlegible';
-  multilineText.background = false;
-  ctx.fillStyle = '#000000';
-  ctx.textBaseline = 'bottom';
-  multilineText.vAlign = 'middle';
+  if (panel1Text) {
+    multilineText.fontSize = FONT_SIZE;
+    multilineText.font = 'Atkinson Hyperlegible';
+    multilineText.background = false;
+    ctx.fillStyle = '#000000';
+    ctx.textBaseline = 'bottom';
+    multilineText.vAlign = 'middle';
 
-  multilineText.drawText(
-    ctx,
-    `Sorry I'm late ${panel1Text || ''}`,
-    530,
-    220,
-    350,
-    130
-  );
+    multilineText.drawText(ctx, panel1Text, 530, 220, 350, 130);
+  }
 
   if (panel2Text) {
     multilineText.drawText(ctx, panel2Text, 155, 650, 200, 90);

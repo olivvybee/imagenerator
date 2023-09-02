@@ -6,8 +6,7 @@ import { SorryImLateSettings } from './types';
 export const sorryImLateGenerator: Generator<SorryImLateSettings> = {
   name: "Sorry I'm late",
   description: "Sorry I'm late, I was generating images.",
-  helpText:
-    'Enter some text for each panel. "Sorry I\'m late" will be added automatically.',
+  helpText: 'Enter some text for each panel.',
   generate,
   settings: {
     panel1Text: {
