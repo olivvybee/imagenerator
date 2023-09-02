@@ -14,7 +14,7 @@
     "color": "^4.2.3",
     "file-saver": "^2.0.5",
     "next": "12.3.0",
-    "png-metadata": "https://github.com/theresnotime/png-metadata",
+    "png-metadata": "https://github.com/olivvybee/png-metadata",
     "react": "18.2.0",
     "react-collapse": "^5.1.1",
     "react-colorful": "^5.6.1",
@@ -24,11 +24,11 @@
     "react-image-crop": "^10.0.9"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^4.40.1",
+    "@netlify/plugin-nextjs": "^4.23.1",
     "@types/color": "^3.0.3",
     "@types/file-saver": "^2.0.5",
     "@types/node": "18.7.18",
-    "@types/react": "18.2.21",
+    "@types/react": "18.0.20",
     "@types/react-collapse": "^5.0.1",
     "@types/webpack-env": "^1.18.0",
     "eslint": "8.47.0",
