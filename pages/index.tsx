@@ -83,9 +83,9 @@ const Homepage = ({
       <a href="https://fedi.beehive.gay/@olivvybee" rel="me">
         <strong>@olivvybee</strong>
       </a>{' '}
-      because she kept coming up with ideas for image generators and needed
-      somewhere to put them. If you like them, maybe{' '}
-      <a href="https://ko-fi.com/olivvybee">buy her a coffee</a>.
+      because they kept coming up with ideas for image generators and needed
+      somewhere to put them. If you like the site, maybe{' '}
+      <a href="https://ko-fi.com/olivvybee">buy them a coffee</a>.
     </p>
   </div>
 );
