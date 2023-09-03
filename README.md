@@ -57,6 +57,10 @@ I try to limit the number of third party dependencies wherever possible, but if
 there's something useful that allows a feature which would otherwise be
 extremely useful to implement, it can be added.
 
+### Testing
+
+There are no unit tests set up. Browser compatibility for this project is tested with [BrowserStack](https://www.browserstack.com).
+
 ### Linting
 
 ESLint is set up on the project but doesn't currently run automatically on PRs.
