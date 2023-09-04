@@ -2,7 +2,7 @@ name: PR Checks
 on: [pull_request]
 
 jobs:
-  build:
+  pr-checks:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,5 +14,5 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: yarn install
-      - name: Run unit tests
+      - name: Unit tests
         run: yarn test
