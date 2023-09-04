@@ -34,7 +34,7 @@
     "@types/color": "^3.0.3",
     "@types/file-saver": "^2.0.5",
     "@types/jest": "^29.5.4",
-    "@types/node": "18.7.18",
+    "@types/node": "20.5.9",
     "@types/react": "18.0.20",
     "@types/react-collapse": "^5.0.1",
     "@types/webpack-env": "^1.18.0",
