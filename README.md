@@ -45,24 +45,29 @@ by running `yarn install`.
 To run imagenerator locally, run `yarn dev`. The server will start at
 `http://localhost:3000`, which you can now open in your browser.
 
-### PR checks
-
-When you open a PR, your branch will be deployed to a netlify preview branch so
-your changes can be verified. There are no automated checks on these previews,
-other than ensuring the code still builds.
-
-### Dependencies
-
-I try to limit the number of third party dependencies wherever possible, but if
-there's something useful that allows a feature which would otherwise be
-extremely useful to implement, it can be added.
-
 ### Testing
 
-There are no unit tests set up. Browser compatibility for this project is tested with [BrowserStack](https://www.browserstack.com).
+Unit testing is done using jest. To run the tests, run `yarn test`. All
+generators automatically have tests to ensure they have a unique name, a
+description, and suggest alt text when generating.
+
+Browser compatibility for this project is tested with
+[BrowserStack](https://www.browserstack.com).
 
 ### Linting
 
 ESLint is set up on the project but doesn't currently run automatically on PRs.
 The ruleset is also not particularly strict. If you'd like to run linting just
 to double check, run `yarn lint`.
+
+### PR checks
+
+When you open a PR, your branch will be deployed to a netlify preview branch so
+your changes can be verified. A github action will also run unit tests against
+the PR.
+
+### Dependencies
+
+I try to limit the number of third party dependencies wherever possible, but if
+there's something useful that allows a feature which would otherwise be
+extremely useful to implement, it can be added.

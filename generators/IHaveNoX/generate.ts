@@ -1,5 +1,6 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
 import { constrainFontSize } from '../../utils/constrainFontSize';
+import { loadFont } from '../../utils/loadFont';
 import { loadImage } from '../../utils/loadImage';
 import { TEXT_CENTER } from './constants';
 
@@ -11,11 +12,7 @@ export const generate: GeneratorFunction<
 > = async (canvas, settings, cache) => {
   const background =
     cache?.background || (await loadImage('/assets/i-have-no-mouth.jpg'));
-  const font =
-    cache?.font || new FontFace('Harlan', 'url("/fonts/harlan.woff2")');
-
-  await font.load();
-  document.fonts.add(font);
+  const font = cache?.font || (await loadFont('Harlan', '/fonts/harlan.woff2'));
 
   const { x, y } = settings;
 
