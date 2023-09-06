@@ -22,22 +22,18 @@ const Homepage = ({
     <ul className={styles.generatorList}>
       {generators.map((generator) => (
         <li className={styles.generatorLinkWrapper} key={generator.name}>
-          <Link href={generator.route}>
-            <a
-              className={classNames(buttonStyles.button, styles.generatorLink)}>
-              {generator.name}
-            </a>
+          <Link
+            href={generator.route}
+            className={classNames(buttonStyles.button, styles.generatorLink)}>
+            {generator.name}
           </Link>
         </li>
       ))}
     </ul>
 
     <p>
-      Visit the{' '}
-      <Link href="/generators">
-        <a>generators page</a>
-      </Link>{' '}
-      for a more detailed list.
+      Visit the <Link href="/generators">generators page</Link> for a more
+      detailed list.
     </p>
 
     <h2 className={styles.subheading}>FAQs</h2>

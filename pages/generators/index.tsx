@@ -19,13 +19,11 @@ const GeneratorsPage = ({
     <ul className={styles.generatorList}>
       {generators.map((generator) => (
         <li className={styles.generatorLinkWrapper} key={generator.name}>
-          <Link href={generator.route}>
-            <a className={styles.generatorLink}>
-              <span className={styles.generatorName}>{generator.name}</span>
-              <span className={styles.generatorDescription}>
-                {generator.description}
-              </span>
-            </a>
+          <Link href={generator.route} className={styles.generatorLink}>
+            <span className={styles.generatorName}>{generator.name}</span>
+            <span className={styles.generatorDescription}>
+              {generator.description}
+            </span>
           </Link>
         </li>
       ))}
