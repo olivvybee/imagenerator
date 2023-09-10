@@ -3,6 +3,7 @@ import { applyCrop } from '../../utils/applyCrop';
 import { loadImage } from '../../utils/loadImage';
 
 import { applyDithering } from './applyDithering';
+import { buildAltText } from './buildAltText';
 import {
   BRIGHTNESS_MAP,
   CONTRAST_MAP,
@@ -62,9 +63,10 @@ export const generate: GeneratorFunction<GameBoyCameraSettings> = async (
 
   ctx.putImageData(upscale(pixels), 0, 0);
 
+  const suggestedAltText = buildAltText(settings);
+
   return {
     success: true,
-    suggestedAltText:
-      '{{userImage}}. The picture has been edited to look like it was taken with a game boy camera, so it uses a palette of four colours and has a low resolution pixellated effect.',
+    suggestedAltText,
   };
 };

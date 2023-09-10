@@ -2,14 +2,15 @@ import { SettingValues } from '../../types/SettingTypes';
 import { YakuzaSettings } from './types';
 
 export const buildAltText = (settings: SettingValues<YakuzaSettings>) => {
-  const { name, title } = settings;
+  const { name, title, image } = settings;
 
   if (!name && !title) {
     return undefined;
   }
 
-  const firstLine =
-    '{{userImage}} with text on top in a red handwriting style font styled like a character intro screen from a Yakuza game. ';
+  const imageDesc = image.altText || '{{userImage}}';
+
+  const firstLine = `${imageDesc} with text on top in a red handwriting style font styled like a character intro screen from a Yakuza game. `;
 
   if (name && title) {
     return (

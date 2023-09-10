@@ -49,6 +49,8 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
     case SettingType.Image:
       return (
         <ImageField
+          id={id}
+          name={setting.name}
           onChange={onChange}
           value={value}
           allowCrop={setting.params.allowCrop}

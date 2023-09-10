@@ -1,6 +1,7 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
 import { applyCrop } from '../../utils/applyCrop';
 import { loadImage } from '../../utils/loadImage';
+import { buildAltText } from './buildAltText';
 import { BORDER_WIDTH, IMAGE_SIZE, OUTPUT_SIZE } from './constants';
 import { convertToGreyscale } from './convertToGreyscale';
 import { TheyLiveCache, TheyLiveSettings } from './types';
@@ -86,12 +87,7 @@ export const generate: GeneratorFunction<
     }
   }
 
-  const suggestedAltText =
-    'A four panel meme with shots from the movie They Live. ' +
-    "In the first panel, the main character (played by Roddy Piper) is holding a pair of sunglasses partially off his face, so that he's looking over them. " +
-    'The next panel is {{userImage}}. ' +
-    "In the third panel, he has put the sunglasses on so he's looking through them. " +
-    'The final panel is {{userImage}}, in black and white.';
+  const suggestedAltText = buildAltText(settings);
 
   return {
     success: true,

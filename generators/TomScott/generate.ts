@@ -13,6 +13,7 @@ import {
   TEXT_PADDING,
 } from './constants';
 import { TomScottSettings } from './types';
+import { buildAltText } from './buildAltText';
 
 export const generate: GeneratorFunction<TomScottSettings> = async (
   canvas,
@@ -141,7 +142,7 @@ export const generate: GeneratorFunction<TomScottSettings> = async (
     height
   );
 
-  const suggestedAltText = `{{userImage}} with text on top with a red background that says "${lowercaseText}". There's an arrow pointing at [describe what the arrow is pointing at].`;
+  const suggestedAltText = buildAltText(settings);
 
   return {
     success: true,

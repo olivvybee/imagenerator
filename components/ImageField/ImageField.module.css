@@ -1,3 +1,9 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .dropzone {
   display: flex;
   flex-direction: row;
@@ -36,4 +42,14 @@
 
 .cropWrapper {
   padding-top: 12px;
+}
+
+.altTextWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.altTextField {
+  width: 100%;
 }
