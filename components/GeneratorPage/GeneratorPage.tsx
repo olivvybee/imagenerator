@@ -92,7 +92,8 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
       const buffer = Buffer.from(data, 'base64');
       const newBuffer = writeMetadata(buffer, {
         iTXt: {
-          Description: suggestedAltText || '',
+          Description:
+            suggestedAltText?.replaceAll('{{userImage}}', 'an image') || '',
           Software: 'imagenerator.net',
         },
       });

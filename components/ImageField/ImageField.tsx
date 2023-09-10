@@ -12,12 +12,15 @@ import { Image } from '../../types/Image';
 import { Button } from '../Button';
 import { Expander } from '../Expander';
 import { ImageCrop } from '../ImageCrop';
+import { TextField } from '../TextField';
 
 import styles from './ImageField.module.css';
 
 interface ImageFieldProps {
   value: Image;
   onChange: (value: Image | undefined) => void;
+  id: string;
+  name: string;
   allowCrop?: boolean;
   cropAspectRatio?: number;
   cropMinWidth?: number;
@@ -27,6 +30,8 @@ interface ImageFieldProps {
 export const ImageField = ({
   value = {},
   onChange,
+  id,
+  name,
   allowCrop,
   cropAspectRatio,
   cropMinWidth,
@@ -60,50 +65,61 @@ export const ImageField = ({
   });
 
   return (
-    <Expander
-      renderTrigger={(toggle) => (
-        <div {...getRootProps()} className={styles.dropzone}>
-          <input {...getInputProps()} />
-          <div className={styles.preview} onClick={open}>
-            {value.src ? (
-              <img className={styles.previewImage} src={value.src} alt="" />
-            ) : (
-              <IoImage width={48} height={48} />
+    <div className={styles.wrapper}>
+      <Expander
+        renderTrigger={(toggle) => (
+          <div {...getRootProps()} className={styles.dropzone}>
+            <input {...getInputProps()} />
+            <div className={styles.preview} onClick={open}>
+              {value.src ? (
+                <img className={styles.previewImage} src={value.src} alt="" />
+              ) : (
+                <IoImage width={48} height={48} />
+              )}
+            </div>
+            <Button
+              className={styles.button}
+              onClick={open}
+              icon={value.src ? IoSwapHorizontalOutline : IoFolderOutline}>
+              <span>{value.src ? 'Replace' : 'Choose an image'}</span>
+            </Button>
+            {!!value.src && (
+              <Button
+                className={styles.clearButton}
+                onClick={clearImage}
+                icon={IoTrashOutline}
+              />
+            )}
+            {allowCrop && !!value.src && (
+              <Button
+                className={styles.clearButton}
+                onClick={toggle}
+                icon={IoCropOutline}
+              />
             )}
           </div>
-          <Button
-            className={styles.button}
-            onClick={open}
-            icon={value.src ? IoSwapHorizontalOutline : IoFolderOutline}>
-            <span>{value.src ? 'Replace' : 'Choose an image'}</span>
-          </Button>
-          {!!value.src && (
-            <Button
-              className={styles.clearButton}
-              onClick={clearImage}
-              icon={IoTrashOutline}
+        )}>
+        {allowCrop && !!value.src && (
+          <div className={styles.cropWrapper}>
+            <ImageCrop
+              image={value.src}
+              aspectRatio={cropAspectRatio}
+              minWidth={cropMinWidth}
+              minHeight={cropMinHeight}
+              onSave={(crop) => onChange({ ...value, crop })}
             />
-          )}
-          {allowCrop && !!value.src && (
-            <Button
-              className={styles.clearButton}
-              onClick={toggle}
-              icon={IoCropOutline}
-            />
-          )}
-        </div>
-      )}>
-      {allowCrop && !!value.src && (
-        <div className={styles.cropWrapper}>
-          <ImageCrop
-            image={value.src}
-            aspectRatio={cropAspectRatio}
-            minWidth={cropMinWidth}
-            minHeight={cropMinHeight}
-            onSave={(crop) => onChange({ ...value, crop })}
-          />
-        </div>
-      )}
-    </Expander>
+          </div>
+        )}
+      </Expander>
+      <div className={styles.altTextWrapper}>
+        <label htmlFor={`${id}-alt-text`}>{name} alt text</label>
+        <TextField
+          id={`${id}-alt-text`}
+          className={styles.altTextField}
+          value={value.altText || ''}
+          onChange={(newValue) => onChange({ ...value, altText: newValue })}
+        />
+      </div>
+    </div>
   );
 };

@@ -1,6 +1,7 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
 import { loadImage } from '../../utils/loadImage';
 import { calculateImageSize } from '../../utils/resizeImage';
+import { buildAltText } from './buildAltText';
 
 import { TARGET_SIZE, MAX_FONT_SIZE } from './constants';
 import { NounVerbedSettings } from './types';
@@ -70,9 +71,9 @@ export const generate: GeneratorFunction<NounVerbedSettings> = async (
   ctx.font = `${fontSize} 'Optimus Princeps'`;
   ctx.fillText(uppercaseText, width / 2, (height / 100) * textPosition);
 
+  const suggestedAltText = buildAltText(settings);
+
   return {
-    suggestedAltText:
-      `{{userImage}} with the text "${uppercaseText}" on top in a ` +
-      `${colour.name.toLowerCase()} serif font, to look like a dark souls "you died" screenshot.`,
+    suggestedAltText,
   };
 };
