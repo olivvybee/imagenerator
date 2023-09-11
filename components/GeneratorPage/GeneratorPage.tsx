@@ -16,6 +16,7 @@ import { useNativeShare } from '../../utils/useNativeShare';
 import { createFileFromDataURL } from '../../utils/createFileFromDataUrl';
 import { Expander } from '../Expander';
 import { AltTextExplanation } from '../AltTextExplanation';
+import { PLACEHOLDER_DESCRIPTION } from '../ImageField/ImageField';
 
 interface GeneratorPageProps {
   generator: Generator<any, any>;
@@ -34,7 +35,7 @@ const init = (settings: Settings): SettingValues => {
         implicitDefault = setting.params.options[0];
         break;
       case SettingType.Image:
-        implicitDefault = {};
+        implicitDefault = { description: PLACEHOLDER_DESCRIPTION };
         break;
     }
 
@@ -93,7 +94,8 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
       const newBuffer = writeMetadata(buffer, {
         iTXt: {
           Description:
-            suggestedAltText?.replaceAll('{{userImage}}', 'an image') || '',
+            suggestedAltText?.replaceAll(PLACEHOLDER_DESCRIPTION, 'an image') ||
+            '',
           Software: 'imagenerator.net',
         },
       });
@@ -134,11 +136,11 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   };
 
   const imageAltText = output?.suggestedAltText?.replaceAll(
-    '{{userImage}}',
+    PLACEHOLDER_DESCRIPTION,
     'the image you chose'
   );
   const suggestedAltText = output?.suggestedAltText?.replaceAll(
-    '{{userImage}}',
+    PLACEHOLDER_DESCRIPTION,
     '[describe your image here]'
   );
 

@@ -27,8 +27,10 @@ interface ImageFieldProps {
   cropMinHeight?: number;
 }
 
+export const PLACEHOLDER_DESCRIPTION = '{{userImage}}';
+
 export const ImageField = ({
-  value = {},
+  value = { description: PLACEHOLDER_DESCRIPTION },
   onChange,
   id,
   name,
@@ -45,7 +47,7 @@ export const ImageField = ({
 
       const file = acceptedFiles[0];
       const url = URL.createObjectURL(file);
-      onChange({ src: url });
+      onChange({ src: url, description: PLACEHOLDER_DESCRIPTION });
     },
     [onChange]
   );
@@ -111,14 +113,23 @@ export const ImageField = ({
           </div>
         )}
       </Expander>
-      <div className={styles.altTextWrapper}>
-        <label htmlFor={`${id}-alt-text`}>{name} alt text</label>
+      <div className={styles.descriptionWrapper}>
+        <label htmlFor={`${id}-description`}>{name} description</label>
         <TextField
-          id={`${id}-alt-text`}
-          className={styles.altTextField}
-          value={value.altText || ''}
-          onChange={(newValue) => onChange({ ...value, altText: newValue })}
+          id={`${id}-description`}
+          className={styles.descriptionField}
+          value={value.description?.replace(PLACEHOLDER_DESCRIPTION, '') || ''}
+          onChange={(newValue) =>
+            onChange({
+              ...value,
+              description: newValue || PLACEHOLDER_DESCRIPTION,
+            })
+          }
         />
+        <p className={styles.descriptionHelp}>
+          Describe the image you chose so that it can be added to the alt text
+          for the generated image.
+        </p>
       </div>
     </div>
   );

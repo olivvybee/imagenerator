@@ -8,9 +8,7 @@ export const buildAltText = (settings: SettingValues<YakuzaSettings>) => {
     return undefined;
   }
 
-  const imageDesc = image.altText || '{{userImage}}';
-
-  const firstLine = `${imageDesc} with text on top in a red handwriting style font styled like a character intro screen from a Yakuza game. `;
+  const firstLine = `${image.description} with text on top in a red handwriting style font styled like a character intro screen from a Yakuza game. `;
 
   if (name && title) {
     return (

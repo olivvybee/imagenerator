@@ -44,12 +44,17 @@
   padding-top: 12px;
 }
 
-.altTextWrapper {
+.descriptionWrapper {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.altTextField {
+.descriptionField {
   width: 100%;
+}
+
+.descriptionHelp {
+  margin: 0;
+  font-size: 0.85rem;
 }
