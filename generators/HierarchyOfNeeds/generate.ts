@@ -1,6 +1,6 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
+import { MultilineText } from '../../utils/drawMultilineText';
 import { loadFont } from '../../utils/loadFont';
-import multilineText from '../../utils/multilineText';
 
 import { buildAltText } from './buildAltText';
 import {
@@ -140,6 +140,12 @@ export const generate: GeneratorFunction<
     numberOfSegments
   );
 
+  const multilineText = new MultilineText(ctx, {
+    fontSize: 48,
+    background: true,
+    opaqueBackground: false,
+  });
+
   const textBoxes = TEXT_BOXES[numberOfSegments];
   textBoxes.forEach((textBox, index) => {
     const { x, y, width, height } = textBox;
@@ -147,9 +153,7 @@ export const generate: GeneratorFunction<
 
     ctx.textBaseline = 'bottom';
 
-    multilineText.font = 'Atkinson Hyperlegible';
-    multilineText.fontSize = 48;
-    multilineText.drawText(ctx, text, x, y, width, height);
+    multilineText.drawText(text, { x, y, width, height });
   });
 
   const suggestedAltText = buildAltText(settings);
