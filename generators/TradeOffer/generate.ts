@@ -1,12 +1,11 @@
 import Color from 'color';
 import { GeneratorFunction } from '../../types/GeneratorTypes';
-import { applyCrop } from '../../utils/applyCrop';
 import { loadImage } from '../../utils/loadImage';
-import multilineText from '../../utils/multilineText';
 
 import { buildAltText } from './buildAltText';
 import { TradeOfferSettings } from './types';
 import { drawTextWithBackground } from '../../utils/drawText';
+import { MultilineText } from '../../utils/MultilineText';
 
 export const generate: GeneratorFunction<TradeOfferSettings> = async (
   canvas,
@@ -14,9 +13,6 @@ export const generate: GeneratorFunction<TradeOfferSettings> = async (
 ) => {
   const { iReceive, youReceive, character, characterLabel, backgroundColour } =
     settings;
-
-  const face = await loadImage('/assets/boykisser-face.png');
-  const defaultImage = await loadImage('/assets/boykisser-outline.jpg');
 
   canvas.width = 650;
   canvas.height = 900;
@@ -54,17 +50,23 @@ export const generate: GeneratorFunction<TradeOfferSettings> = async (
   ctx.fillText('I receive:', 155, 150);
   ctx.fillText('You receive:', 495, 150);
 
-  multilineText.font = 'Atkinson Hyperlegible';
-  multilineText.fontSize = 32;
-  multilineText.align = 'center';
-  multilineText.vAlign = 'top';
-  multilineText.background = false;
+  const multilineText = new MultilineText(ctx, { fontSize: 32, vAlign: 'top' });
 
   if (iReceive) {
-    multilineText.drawText(ctx, iReceive, 5, 180, 300, 270);
+    multilineText.drawText(iReceive, {
+      x: 5,
+      y: 180,
+      width: 300,
+      height: 270,
+    });
   }
   if (youReceive) {
-    multilineText.drawText(ctx, youReceive, 345, 180, 300, 270);
+    multilineText.drawText(youReceive, {
+      x: 345,
+      y: 180,
+      width: 300,
+      height: 270,
+    });
   }
 
   ctx.font = '40px "Atkinson Hyperlegible"';

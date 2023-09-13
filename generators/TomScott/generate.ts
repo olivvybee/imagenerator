@@ -2,7 +2,6 @@ import { GeneratorFunction } from '../../types/GeneratorTypes';
 import { applyCrop } from '../../utils/applyCrop';
 import { loadImage } from '../../utils/loadImage';
 import { calculateImageSize } from '../../utils/resizeImage';
-import multilineText from '../../utils/multilineText';
 
 import {
   ARROW_PADDING,
@@ -14,6 +13,7 @@ import {
 } from './constants';
 import { TomScottSettings } from './types';
 import { buildAltText } from './buildAltText';
+import { MultilineText } from '../../utils/MultilineText';
 
 export const generate: GeneratorFunction<TomScottSettings> = async (
   canvas,
@@ -60,11 +60,6 @@ export const generate: GeneratorFunction<TomScottSettings> = async (
 
   const lowercaseText = text.toLowerCase();
 
-  // const arrowX =
-  //   horizontalPosition === 'left'
-  //     ? width / 2 - ARROW_SIZE - 2 * ARROW_PADDING
-  //     : width / 2;
-
   const textX =
     horizontalPosition === 'left' ? TEXT_PADDING : width / 2 + TEXT_PADDING;
 
@@ -72,25 +67,24 @@ export const generate: GeneratorFunction<TomScottSettings> = async (
 
   const textMaxWidth = width / 2 - 2 * TEXT_PADDING;
 
-  multilineText.align = 'left';
-  multilineText.vAlign = 'top';
-  multilineText.fontSize = FONT_SIZE;
-  multilineText.font = 'Arial Black';
-  multilineText.background = false;
+  const multilineText = new MultilineText(ctx, {
+    align: 'left',
+    vAlign: 'top',
+    fontSize: FONT_SIZE,
+    fontFace: 'Arial Black',
+  });
 
-  const { height: textHeight } = multilineText.drawText(
-    ctx,
-    lowercaseText,
-    textX,
-    textY,
-    textMaxWidth,
-    height
-  );
+  const { height: textHeight } = multilineText.drawText(lowercaseText, {
+    x: textX,
+    y: textY,
+    width: textMaxWidth,
+    height,
+  });
 
   ctx.fillStyle = BACKGROUND_COLOUR;
   ctx.fillRect(
     textX - TEXT_PADDING,
-    textY,
+    textY - TEXT_PADDING,
     width / 2,
     textHeight + 2 * TEXT_PADDING
   );
@@ -122,25 +116,20 @@ export const generate: GeneratorFunction<TomScottSettings> = async (
 
   ctx.restore();
 
-  ctx.fillStyle = 'black';
-  multilineText.drawText(
-    ctx,
-    lowercaseText,
-    textX,
-    textY + 3,
-    textMaxWidth,
-    height
-  );
+  multilineText.drawText(lowercaseText, {
+    x: textX,
+    y: textY + 3,
+    width: textMaxWidth,
+    height,
+  });
 
-  ctx.fillStyle = 'white';
-  multilineText.drawText(
-    ctx,
-    lowercaseText,
-    textX,
-    textY,
-    textMaxWidth,
-    height
-  );
+  multilineText.drawText(lowercaseText, {
+    x: textX,
+    y: textY,
+    width: textMaxWidth,
+    height,
+    colour: 'white',
+  });
 
   const suggestedAltText = buildAltText(settings);
 

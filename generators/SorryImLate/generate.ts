@@ -1,6 +1,6 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
+import { MultilineText } from '../../utils/MultilineText';
 import { loadImage } from '../../utils/loadImage';
-import multilineText from '../../utils/multilineText';
 
 import { buildAltText } from './buildAltText';
 import { FONT_SIZE } from './constants';
@@ -27,19 +27,24 @@ export const generate: GeneratorFunction<SorryImLateSettings> = async (
 
   ctx.drawImage(image, 0, 0);
 
-  if (panel1Text) {
-    multilineText.fontSize = FONT_SIZE;
-    multilineText.font = 'Atkinson Hyperlegible';
-    multilineText.background = false;
-    ctx.fillStyle = '#000000';
-    ctx.textBaseline = 'bottom';
-    multilineText.vAlign = 'middle';
+  const multilineText = new MultilineText(ctx, { fontSize: FONT_SIZE });
 
-    multilineText.drawText(ctx, panel1Text, 530, 220, 350, 130);
+  if (panel1Text) {
+    multilineText.drawText(panel1Text, {
+      x: 530,
+      y: 220,
+      width: 350,
+      height: 130,
+    });
   }
 
   if (panel2Text) {
-    multilineText.drawText(ctx, panel2Text, 155, 650, 200, 90);
+    multilineText.drawText(panel2Text, {
+      x: 155,
+      y: 650,
+      width: 200,
+      height: 90,
+    });
   }
 
   const suggestedAltText = buildAltText(settings);

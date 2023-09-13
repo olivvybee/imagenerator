@@ -1,6 +1,6 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
+import { MultilineText } from '../../utils/MultilineText';
 import { loadImage } from '../../utils/loadImage';
-import multilineText from '../../utils/multilineText';
 
 import { buildAltText } from './buildAltText';
 import { FONT_SIZE } from './constants';
@@ -27,15 +27,10 @@ export const generate: GeneratorFunction<TapTheSignSettings> = async (
 
   ctx.drawImage(image, 0, 0);
 
-  multilineText.fontSize = FONT_SIZE;
-  multilineText.font = 'Atkinson Hyperlegible';
-  multilineText.background = false;
-  ctx.fillStyle = '#000000';
-  ctx.textBaseline = 'bottom';
-  multilineText.vAlign = 'middle';
+  const multilineText = new MultilineText(ctx, { fontSize: FONT_SIZE });
 
   if (text) {
-    multilineText.drawText(ctx, text, 90, 530, 460, 295);
+    multilineText.drawText(text, { x: 90, y: 530, width: 460, height: 295 });
   }
 
   const suggestedAltText = buildAltText(settings);

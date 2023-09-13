@@ -1,7 +1,6 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
-import { applyCrop } from '../../utils/applyCrop';
 import { loadImage } from '../../utils/loadImage';
-import multilineText from '../../utils/multilineText';
+import { MultilineText } from '../../utils/MultilineText';
 
 import { buildAltText } from './buildAltText';
 import { FONT_SIZE } from './constants';
@@ -30,44 +29,38 @@ export const generate: GeneratorFunction<DramaticCrossroadsSettings> = async (
 
   ctx.drawImage(image, 0, 0);
 
-  multilineText.font = 'Atkinson Hyperlegible';
-  multilineText.fontSize = FONT_SIZE;
-  multilineText.align = 'center';
-  multilineText.vAlign = 'top';
-  multilineText.background = true;
+  const multilineText = new MultilineText(ctx, {
+    fontSize: FONT_SIZE,
+    vAlign: 'top',
+    background: true,
+  });
 
   if (leftPath) {
-    multilineText.drawText(
-      ctx,
-      leftPath,
-      15,
-      15,
-      width / 2 - 30,
-      height / 3 - 30
-    );
+    multilineText.drawText(leftPath, {
+      x: 15,
+      y: 15,
+      width: width / 2 - 30,
+      height: height / 3 - 30,
+    });
   }
 
   if (rightPath) {
-    multilineText.drawText(
-      ctx,
-      rightPath,
-      width / 2 + 15,
-      15,
-      width / 2 - 30,
-      height / 3 - 30
-    );
+    multilineText.drawText(rightPath, {
+      x: width / 2 + 15,
+      y: 15,
+      width: width / 2 - 30,
+      height: height / 3 - 30,
+    });
   }
 
   if (person) {
-    multilineText.vAlign = 'middle';
-    multilineText.drawText(
-      ctx,
-      person,
-      width / 2 - 150,
-      height - 125 - 15,
-      300,
-      125
-    );
+    multilineText.drawText(person, {
+      x: width / 2 - 150,
+      y: height - 125 - 15,
+      width: 300,
+      height: 125,
+      vAlign: 'middle',
+    });
   }
 
   const suggestedAltText = buildAltText(settings);
