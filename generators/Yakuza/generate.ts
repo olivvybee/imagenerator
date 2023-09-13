@@ -1,7 +1,5 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
-import { constrainFontSize } from '../../utils/constrainFontSize';
 import { loadImage } from '../../utils/loadImage';
-import multilineText from '../../utils/multilineText';
 import { calculateImageSize } from '../../utils/resizeImage';
 import { buildAltText } from './buildAltText';
 
