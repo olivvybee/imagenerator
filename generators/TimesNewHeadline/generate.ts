@@ -1,6 +1,6 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
+import { MultilineText } from '../../utils/drawMultilineText';
 import { loadFont } from '../../utils/loadFont';
-import multilineText from '../../utils/multilineText';
 
 import { buildAltText } from './buildAltText';
 import {
@@ -39,21 +39,20 @@ export const generate: GeneratorFunction<TimesNewHeadlineSettings> = async (
 
   ctx.fillStyle = 'black';
 
-  multilineText.font = 'NYT';
-  multilineText.fontSize = HEADLINE_FONT_SIZE;
-  multilineText.fontWeight = 'bold';
-  multilineText.align = 'left';
-  multilineText.background = false;
-  multilineText.vAlign = 'top';
+  const multilineText = new MultilineText(ctx, {
+    fontFace: 'NYT',
+    fontSize: HEADLINE_FONT_SIZE,
+    fontWeight: 'bold',
+    align: 'left',
+    vAlign: 'top',
+  });
 
-  const { height: headlineHeight } = multilineText.drawText(
-    ctx,
-    headline,
-    100,
-    125,
-    600,
-    600
-  );
+  const { height: headlineHeight } = multilineText.drawText(headline, {
+    x: 100,
+    y: 125,
+    width: 600,
+    height: 600,
+  });
 
   if (byline) {
     const offset = headline ? headlineHeight : 0;
