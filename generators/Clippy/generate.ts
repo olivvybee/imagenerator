@@ -1,6 +1,6 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
 import { clamp } from '../../utils/clamp';
-import { MultilineText } from '../../utils/drawMultilineText';
+import { MultilineText } from '../../utils/MultilineText';
 import { loadFont } from '../../utils/loadFont';
 import { loadImage } from '../../utils/loadImage';
 

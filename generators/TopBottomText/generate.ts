@@ -7,7 +7,7 @@ import { calculateImageSize } from '../../utils/resizeImage';
 import { buildAltText } from './buildAltText';
 import { FONT_SIZE, OUTPUT_SIZE, SPACING } from './constants';
 import { TopBottomTextSettings } from './types';
-import { MultilineText } from '../../utils/drawMultilineText';
+import { MultilineText } from '../../utils/MultilineText';
 
 export const generate: GeneratorFunction<TopBottomTextSettings> = async (
   canvas,

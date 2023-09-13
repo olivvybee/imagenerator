@@ -1,5 +1,5 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
-import { MultilineText } from '../../utils/drawMultilineText';
+import { MultilineText } from '../../utils/MultilineText';
 import { loadFont } from '../../utils/loadFont';
 
 import { buildAltText } from './buildAltText';

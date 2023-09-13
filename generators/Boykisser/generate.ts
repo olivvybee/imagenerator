@@ -1,7 +1,7 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
 import { applyCrop } from '../../utils/applyCrop';
 import { loadImage } from '../../utils/loadImage';
-import { MultilineText } from '../../utils/drawMultilineText';
+import { MultilineText } from '../../utils/MultilineText';
 
 import { buildAltText } from './buildAltText';
 import { FONT_SIZE } from './constants';

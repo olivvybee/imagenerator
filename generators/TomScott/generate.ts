@@ -13,7 +13,7 @@ import {
 } from './constants';
 import { TomScottSettings } from './types';
 import { buildAltText } from './buildAltText';
-import { MultilineText } from '../../utils/drawMultilineText';
+import { MultilineText } from '../../utils/MultilineText';
 
 export const generate: GeneratorFunction<TomScottSettings> = async (
   canvas,

@@ -5,7 +5,7 @@ import { loadImage } from '../../utils/loadImage';
 import { buildAltText } from './buildAltText';
 import { TradeOfferSettings } from './types';
 import { drawTextWithBackground } from '../../utils/drawText';
-import { MultilineText } from '../../utils/drawMultilineText';
+import { MultilineText } from '../../utils/MultilineText';
 
 export const generate: GeneratorFunction<TradeOfferSettings> = async (
   canvas,
