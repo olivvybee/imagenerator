@@ -1,5 +1,5 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
-import multilineText from '../../utils/multilineText';
+import { MultilineText } from '../../utils/drawMultilineText';
 
 import { buildAltText } from './buildAltText';
 import { FONT_SIZE } from './constants';
@@ -210,12 +210,9 @@ export const generate: GeneratorFunction<EndlessCycleSettings> = async (
   ctx.fillStyle = 'white';
   ctx.fillRect(0, 0, 900, 900);
 
-  multilineText.fontSize = FONT_SIZE;
-  multilineText.font = 'Atkinson Hyperlegible';
-  multilineText.background = false;
-  ctx.fillStyle = '#000000';
-  ctx.textBaseline = 'bottom';
-  multilineText.vAlign = 'middle';
+  const multilineText = new MultilineText(ctx, {
+    fontSize: FONT_SIZE,
+  });
 
   const textPositions = TEXT_POSITIONS[numberOfSteps - 2];
   const arrowPosition = ARROW_POSITIONS[numberOfSteps - 2];
@@ -224,8 +221,13 @@ export const generate: GeneratorFunction<EndlessCycleSettings> = async (
   for (let i = 0; i < numberOfSteps; i++) {
     const text = steps[i];
     const { x, y, align = 'middle' } = textPositions[i];
-    multilineText.vAlign = align;
-    multilineText.drawText(ctx, text, x, y, TEXT_WIDTH, TEXT_HEIGHT);
+    multilineText.drawText(text, {
+      x,
+      y,
+      width: TEXT_WIDTH,
+      height: TEXT_HEIGHT,
+      vAlign: align,
+    });
 
     drawArrow(ctx, arrowPosition[i]);
   }
