@@ -1,7 +1,8 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
+import { clamp } from '../../utils/clamp';
+import { MultilineText } from '../../utils/drawMultilineText';
 import { loadFont } from '../../utils/loadFont';
 import { loadImage } from '../../utils/loadImage';
-import multilineText from '../../utils/multilineText';
 
 import { buildAltText } from './buildAltText';
 import {
@@ -40,30 +41,27 @@ export const generate: GeneratorFunction<ClippySettings> = async (
     (textWidth <= MAX_WIDTH ? textWidth : MAX_WIDTH) + 2 * BUBBLE_PADDING;
   const bubbleX = MAX_WIDTH - bubbleWidth + BUBBLE_MARGIN + 2 * BUBBLE_PADDING;
 
-  multilineText.fontSize = FONT_SIZE;
-  multilineText.font = 'Tahoma';
-  multilineText.background = false;
-  ctx.fillStyle = 'transparent';
-  ctx.textBaseline = 'bottom';
-  multilineText.align = 'left';
-  multilineText.vAlign = 'top';
-  multilineText.lineHeight = FONT_SIZE * 1.2;
+  const multilineText = new MultilineText(ctx, {
+    fontSize: FONT_SIZE,
+    fontFace: 'Tahoma',
+    align: 'left',
+    vAlign: 'top',
+  });
 
   const textToMeasure = [text, button1, button2, button3]
     .filter((s) => !!s)
     .join('\n\n');
 
-  const { height: textHeight } = multilineText.drawText(
-    ctx,
-    textToMeasure,
-    bubbleX + BUBBLE_PADDING,
-    BUBBLE_MARGIN + BUBBLE_PADDING,
-    bubbleWidth - 2 * BUBBLE_PADDING,
-    MAX_HEIGHT
-  );
+  const { height: textHeight } = multilineText.drawText(textToMeasure, {
+    x: bubbleX + BUBBLE_PADDING,
+    y: BUBBLE_MARGIN + BUBBLE_PADDING,
+    width: bubbleWidth - 2 * BUBBLE_PADDING,
+    height: MAX_HEIGHT,
+  });
 
-  const bubbleHeight =
-    (textHeight <= MAX_HEIGHT ? textHeight : MAX_HEIGHT) + 2 * BUBBLE_PADDING;
+  const measuredHeight = clamp(textHeight, FONT_SIZE, MAX_HEIGHT);
+
+  const bubbleHeight = measuredHeight + 2 * BUBBLE_PADDING;
   const bubbleY =
     MAX_HEIGHT - bubbleHeight + BUBBLE_MARGIN + 2 * BUBBLE_PADDING;
 
@@ -86,27 +84,16 @@ export const generate: GeneratorFunction<ClippySettings> = async (
   ctx.stroke();
   ctx.fill();
 
-  multilineText.fontSize = FONT_SIZE;
-  multilineText.font = 'Tahoma';
-  multilineText.background = false;
-  ctx.fillStyle = '#000000';
-  ctx.textBaseline = 'bottom';
-  multilineText.align = 'left';
-  multilineText.vAlign = 'middle';
-  multilineText.lineHeight = FONT_SIZE * 1.2;
-
   const textToDraw = [text, button1, button2, button3]
     .filter((s) => !!s)
     .join('\n\n🔵 ');
 
-  multilineText.drawText(
-    ctx,
-    textToDraw,
-    bubbleX + BUBBLE_PADDING,
-    bubbleY + BUBBLE_PADDING,
-    bubbleWidth - 2 * BUBBLE_PADDING,
-    bubbleHeight - 2 * BUBBLE_PADDING
-  );
+  multilineText.drawText(textToDraw, {
+    x: bubbleX + BUBBLE_PADDING,
+    y: bubbleY + BUBBLE_PADDING,
+    width: bubbleWidth - 2 * BUBBLE_PADDING,
+    height: bubbleHeight - 2 * BUBBLE_PADDING,
+  });
 
   const suggestedAltText = buildAltText(settings);
 

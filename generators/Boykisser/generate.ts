@@ -1,7 +1,7 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
 import { applyCrop } from '../../utils/applyCrop';
 import { loadImage } from '../../utils/loadImage';
-import multilineText from '../../utils/multilineText';
+import { MultilineText } from '../../utils/drawMultilineText';
 
 import { buildAltText } from './buildAltText';
 import { FONT_SIZE } from './constants';
@@ -52,17 +52,15 @@ export const generate: GeneratorFunction<BoykisserSettings> = async (
 
   ctx.drawImage(face, 190, 455);
 
-  multilineText.fontSize = FONT_SIZE;
-  multilineText.font = 'Atkinson Hyperlegible';
-  multilineText.background = false;
-  ctx.fillStyle = '#000000';
-  ctx.textBaseline = 'bottom';
-  multilineText.vAlign = 'middle';
-  multilineText.lineHeight = FONT_SIZE * 1.3;
-
-  if (text) {
-    multilineText.drawText(ctx, text, 5, 5, 784, 210);
-  }
+  const multilineText = new MultilineText(ctx, {
+    fontSize: FONT_SIZE,
+  });
+  multilineText.drawText(text, {
+    x: 5,
+    y: 5,
+    width: 790,
+    height: 210,
+  });
 
   const suggestedAltText = buildAltText(settings);
 
