@@ -1,6 +1,6 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
+import { MultilineText } from '../../utils/drawMultilineText';
 import { loadImage } from '../../utils/loadImage';
-import multilineText from '../../utils/multilineText';
 
 import { buildAltText } from './buildAltText';
 import { NotKiddingSettings } from './types';
@@ -25,15 +25,15 @@ export const generate: GeneratorFunction<NotKiddingSettings> = async (
 
   ctx.drawImage(image, 0, 0);
 
-  multilineText.fontSize = fontSize;
-  multilineText.font = 'Atkinson Hyperlegible';
-  multilineText.background = false;
-  ctx.fillStyle = '#000000';
-  ctx.textBaseline = 'bottom';
-  multilineText.vAlign = 'middle';
+  const multilineText = new MultilineText(ctx, { fontSize });
 
   if (text) {
-    multilineText.drawText(ctx, `I want ${text}`, 25, 13, 550, 190);
+    multilineText.drawText(`I want ${text}`, {
+      x: 25,
+      y: 13,
+      width: 550,
+      height: 190,
+    });
   }
 
   const suggestedAltText = buildAltText(settings);
