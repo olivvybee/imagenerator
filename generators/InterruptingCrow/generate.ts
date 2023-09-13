@@ -1,6 +1,6 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
+import { MultilineText } from '../../utils/drawMultilineText';
 import { loadImage } from '../../utils/loadImage';
-import multilineText from '../../utils/multilineText';
 import { generateAltText } from './generateAltText';
 
 import { InterruptingCrowSettings } from './types';
@@ -41,36 +41,55 @@ export const generate: GeneratorFunction<InterruptingCrowSettings> = async (
 
   ctx.drawImage(background, 0, 0);
 
-  multilineText.font = 'Atkinson Hyperlegible';
-  multilineText.fontSize = 32;
-  multilineText.background = false;
-  multilineText.align = 'center';
-  multilineText.vAlign = 'middle';
+  const multilineText = new MultilineText(ctx);
 
-  multilineText.drawText(ctx, topLeftText, 35, 20, 250, 80);
-  multilineText.drawText(ctx, topRightText1, 485, 60, 250, 65);
+  multilineText.drawText(topLeftText, {
+    x: 35,
+    y: 20,
+    width: 250,
+    height: 80,
+    fontSize: 32,
+  });
+  multilineText.drawText(topRightText1, {
+    x: 485,
+    y: 60,
+    width: 250,
+    height: 65,
+    fontSize: 32,
+  });
 
   ctx.drawImage(bubble, 0, 0);
 
-  multilineText.fontSize = 36;
-  multilineText.vAlign = 'top';
-  multilineText.drawText(ctx, topRightText2.toUpperCase(), 645, 10, 240, 150);
+  multilineText.drawText(topRightText2.toUpperCase(), {
+    x: 645,
+    y: 10,
+    width: 240,
+    height: 150,
+    vAlign: 'top',
+    fontSize: 36,
+  });
 
   ctx.drawImage(topRightBird, 0, 0);
 
-  multilineText.drawText(ctx, bottomLeftText.toUpperCase(), 145, 450, 300, 180);
+  multilineText.drawText(bottomLeftText.toUpperCase(), {
+    x: 145,
+    y: 450,
+    width: 300,
+    height: 180,
+    vAlign: 'top',
+    fontSize: 36,
+  });
 
   ctx.drawImage(bottomLeftBird, 0, 0);
 
-  multilineText.fontSize = 42;
-  multilineText.drawText(
-    ctx,
-    bottomRightText.toUpperCase(),
-    535,
-    450,
-    350,
-    220
-  );
+  multilineText.drawText(bottomRightText.toUpperCase(), {
+    x: 535,
+    y: 450,
+    width: 350,
+    height: 220,
+    vAlign: 'top',
+    fontSize: 42,
+  });
 
   ctx.drawImage(bottomRightBird, 0, 0);
 
