@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { saveAs } from 'file-saver';
 import { IoCopyOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5';
 import { writeMetadata } from 'png-metadata';
+import { useDebounce } from 'use-debounce';
+import classNames from 'classnames';
 
 import { Settings, SettingType, SettingValues } from '../../types/SettingTypes';
 import { Generator } from '../../types/GeneratorTypes';
@@ -69,12 +71,17 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     init
   );
 
+  const [debouncedSettingValues, { isPending }] = useDebounce(
+    settingValues,
+    300
+  );
+
   const {
     data: output,
     isSuccess: hasGenerated,
     isFetching: isGenerating,
   } = useQuery(
-    ['generate', settingValues],
+    ['generate', debouncedSettingValues],
     async ({ queryKey }) => {
       const canvas = document.createElement('canvas');
 
@@ -154,7 +161,9 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
         <div className={styles.generatorWrapper}>
           {hasGenerated && output.success ? (
             <img
-              className={styles.output}
+              className={classNames(styles.output, {
+                [styles.dimmed]: isPending(),
+              })}
               ref={resultImage}
               src={output.imageData}
               alt={imageAltText || ''}
