@@ -17,6 +17,15 @@
   height: auto;
 }
 
+.dimmer {
+  flex: 1;
+  width: 100%;
+}
+
+.dimmed {
+  opacity: 0.5;
+}
+
 .placeholder {
   flex: 1;
   width: 100%;
