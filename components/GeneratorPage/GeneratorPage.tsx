@@ -73,7 +73,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
   const [debouncedSettingValues, { isPending }] = useDebounce(
     settingValues,
-    250
+    300
   );
 
   const {
@@ -159,21 +159,18 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
       <div className={styles.pageWrapper}>
         <div className={styles.generatorWrapper}>
-          <div
-            className={classNames(styles.dimmer, {
-              [styles.dimmed]: isPending(),
-            })}>
-            {hasGenerated && output.success ? (
-              <img
-                className={styles.output}
-                ref={resultImage}
-                src={output.imageData}
-                alt={imageAltText || ''}
-              />
-            ) : (
-              <div className={styles.placeholder} />
-            )}
-          </div>
+          {hasGenerated && output.success ? (
+            <img
+              className={classNames(styles.output, {
+                [styles.dimmed]: isPending(),
+              })}
+              ref={resultImage}
+              src={output.imageData}
+              alt={imageAltText || ''}
+            />
+          ) : (
+            <div className={styles.placeholder} />
+          )}
 
           <div className={styles.spacer} />
 
