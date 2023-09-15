@@ -23,6 +23,11 @@ to some simple rules:
   there will never be a generator on this site which generates memes usually
   associated with problematic content.
 
+- **Nothing that could be interpreted as "real"**. Generators should not produce
+  images that could be misinterpreted as a screenshot rather than a meme. For
+  example, a generator that creates an image that looks like a tweet would not
+  be allowed.
+
 ## Contributing
 
 The easiest way to contribute is to
