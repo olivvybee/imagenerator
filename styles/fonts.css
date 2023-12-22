@@ -64,3 +64,10 @@
   font-weight: 400;
   src: local(''), url('/fonts/nyt.woff2') format('woff2');
 }
+
+@font-face {
+  font-family: 'Pixellari';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('/fonts/Pixellari.woff2') format('woff2');
+}
