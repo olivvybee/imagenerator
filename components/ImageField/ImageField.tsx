@@ -113,24 +113,29 @@ export const ImageField = ({
           </div>
         )}
       </Expander>
-      <div className={styles.descriptionWrapper}>
-        <label htmlFor={`${id}-description`}>{name} description</label>
-        <TextField
-          id={`${id}-description`}
-          className={styles.descriptionField}
-          value={value.description?.replace(PLACEHOLDER_DESCRIPTION, '') || ''}
-          onChange={(newValue) =>
-            onChange({
-              ...value,
-              description: newValue || PLACEHOLDER_DESCRIPTION,
-            })
-          }
-        />
-        <p className={styles.descriptionHelp}>
-          Describe the image you chose so that it can be added to the alt text
-          for the generated image.
-        </p>
-      </div>
+
+      {!!value.src && (
+        <div className={styles.descriptionWrapper}>
+          <label htmlFor={`${id}-description`}>{name} description</label>
+          <TextField
+            id={`${id}-description`}
+            className={styles.descriptionField}
+            value={
+              value.description?.replace(PLACEHOLDER_DESCRIPTION, '') || ''
+            }
+            onChange={(newValue) =>
+              onChange({
+                ...value,
+                description: newValue || PLACEHOLDER_DESCRIPTION,
+              })
+            }
+          />
+          <p className={styles.descriptionHelp}>
+            Describe the image you chose so that it can be added to the alt text
+            for the generated image.
+          </p>
+        </div>
+      )}
     </div>
   );
 };
