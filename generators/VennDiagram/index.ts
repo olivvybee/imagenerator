@@ -15,19 +15,16 @@ export const vennDiagramGenerator: Generator<VennDiagramSettings> = {
       name: 'Left circle',
       type: SettingType.Text,
       params: {},
-      defaultValue: 'Some text in the left circle',
     },
     rightCircle: {
       name: 'Right circle',
       type: SettingType.Text,
       params: {},
-      defaultValue: 'Some text in the right circle',
     },
     overlap: {
       name: 'Overlap',
       type: SettingType.Text,
       params: {},
-      defaultValue: 'Some text in the overlap',
     },
     leftCircleColour: {
       name: 'Left circle colour',
