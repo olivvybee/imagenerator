@@ -1,4 +1,5 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
+import { constrainFontSize } from '../../utils/constrainFontSize';
 import { loadImage } from '../../utils/loadImage';
 import { calculateImageSize } from '../../utils/resizeImage';
 import { buildAltText } from './buildAltText';
@@ -38,11 +39,11 @@ export const generate: GeneratorFunction<NounVerbedSettings> = async (
   const y = (height / 100) * textPosition;
   const maxWidth = width - 64;
 
-  let fontSize = MAX_FONT_SIZE + 1;
-  do {
-    fontSize -= 1;
-    ctx.font = `${fontSize}px 'Optimus Princeps'`;
-  } while (ctx.measureText(text).width > maxWidth);
+  const fontSize = constrainFontSize(ctx, uppercaseText, {
+    font: 'Optimus Princeps',
+    targetSize: MAX_FONT_SIZE,
+    maxWidth,
+  });
 
   const bannerHeight = fontSize * 2;
   const bannerTop = y - bannerHeight / 2;
