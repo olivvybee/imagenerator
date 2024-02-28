@@ -13,12 +13,6 @@ export const generate: GeneratorFunction<NounVerbedSettings> = async (
 ) => {
   const { text = '', colour, image, textPosition } = settings;
 
-  if (!image.src) {
-    return {
-      success: false,
-    };
-  }
-
   const ctx = canvas.getContext('2d');
   if (!ctx) {
     return {
@@ -26,13 +20,26 @@ export const generate: GeneratorFunction<NounVerbedSettings> = async (
     };
   }
 
-  const loadedImage = await loadImage(image.src);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const { width, height } = calculateImageSize(loadedImage, TARGET_SIZE);
+  if (image?.src) {
+    const loadedImage = await loadImage(image.src);
 
-  canvas.width = width;
-  canvas.height = height;
-  ctx.drawImage(loadedImage, 0, 0, width, height);
+    const { width, height } = calculateImageSize(loadedImage, TARGET_SIZE);
+
+    canvas.width = width;
+    canvas.height = height;
+
+    ctx.clearRect(0, 0, width, height);
+    ctx.drawImage(loadedImage, 0, 0);
+  } else {
+    canvas.width = TARGET_SIZE;
+    canvas.height = (TARGET_SIZE / 16) * 9;
+
+    ctx.clearRect(0, 0, 1280, 720);
+  }
+
+  const { width, height } = canvas;
 
   const uppercaseText = text.toUpperCase();
   const x = width / 2;

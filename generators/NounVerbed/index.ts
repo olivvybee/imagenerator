@@ -10,14 +10,9 @@ export const nounVerbedGenerator: Generator<NounVerbedSettings> = {
   name: 'Noun verbed',
   description: 'MEME GENERATED',
   helpText:
-    'Choose an image and then enter some text to add on top. ' +
+    'Enter some text to display in the banner, and optionally add a background image. ' +
     'Use the position slider to move the text up or down if it covers the image too much.',
   settings: {
-    image: {
-      name: 'Image',
-      type: SettingType.Image,
-      params: {},
-    },
     text: {
       name: 'Text',
       type: SettingType.Text,
@@ -30,6 +25,11 @@ export const nounVerbedGenerator: Generator<NounVerbedSettings> = {
         presets: COLOURS,
       },
       defaultValue: COLOURS[0],
+    },
+    image: {
+      name: 'Background image',
+      type: SettingType.Image,
+      params: {},
     },
     textPosition: {
       name: 'Text position',
