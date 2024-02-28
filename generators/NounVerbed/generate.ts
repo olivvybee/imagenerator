@@ -1,5 +1,6 @@
 import { GeneratorFunction } from '../../types/GeneratorTypes';
 import { constrainFontSize } from '../../utils/constrainFontSize';
+import { loadFont } from '../../utils/loadFont';
 import { loadImage } from '../../utils/loadImage';
 import { calculateImageSize } from '../../utils/resizeImage';
 import { buildAltText } from './buildAltText';
@@ -19,6 +20,8 @@ export const generate: GeneratorFunction<NounVerbedSettings> = async (
       success: false,
     };
   }
+
+  await loadFont('Optimus Princeps', '/fonts/OptimusPrincepsSemiBold.woff2');
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
