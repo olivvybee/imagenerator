@@ -34,7 +34,7 @@ export const generate: GeneratorFunction<NounVerbedSettings> = async (
     canvas.height = height;
 
     ctx.clearRect(0, 0, width, height);
-    ctx.drawImage(loadedImage, 0, 0);
+    ctx.drawImage(loadedImage, 0, 0, width, height);
   } else {
     canvas.width = TARGET_SIZE;
     canvas.height = (TARGET_SIZE / 16) * 9;
