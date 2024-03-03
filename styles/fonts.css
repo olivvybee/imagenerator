@@ -71,3 +71,11 @@
   font-weight: 400;
   src: local(''), url('/fonts/Pixellari.woff2') format('woff2');
 }
+
+@font-face {
+  font-family: 'Komika';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('/fonts/Komika.woff2') format('woff2'),
+    url('/fonts/Komika.woff') format('woff');
+}
