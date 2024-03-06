@@ -185,11 +185,12 @@ export class MultilineText {
         } else {
           wrappedLines.push(currentLine);
           currentLine = word;
-          currentWidth = this.ctx.measureText(currentLine).width;
 
           if (currentWidth > boundingWidth) {
             boundingWidth = currentWidth;
           }
+
+          currentWidth = this.ctx.measureText(currentLine).width;
         }
       }
 
