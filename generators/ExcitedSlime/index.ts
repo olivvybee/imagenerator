@@ -1,5 +1,5 @@
 import { Generator } from '../../types/GeneratorTypes';
-import { SettingType } from '../../types/SettingTypes';
+import { SettingType, SettingValues } from '../../types/SettingTypes';
 
 import { generate } from './generate';
 import { ExcitedSlimeSettings } from './types';
@@ -25,6 +25,21 @@ export const excitedSlimeGenerator: Generator<ExcitedSlimeSettings> = {
       type: SettingType.Text,
       name: 'Third panel',
       params: {},
+    },
+    includeSadPanel: {
+      type: SettingType.Dropdown,
+      name: 'Add sad slime',
+      params: {
+        options: ['No', 'Yes'],
+      },
+      defaultValue: 'No',
+    },
+    fourthPanel: {
+      type: SettingType.Text,
+      name: 'Fourth panel',
+      params: {},
+      when: (settings: SettingValues<ExcitedSlimeSettings>) =>
+        settings.includeSadPanel === 'Yes',
     },
   },
 };
