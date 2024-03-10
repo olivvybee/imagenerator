@@ -1,7 +1,7 @@
 ---
 name: Generator idea
 about: Suggest a idea for a new generator
-title: "[Generator idea]"
+title: ""
 labels: generator idea
 assignees: ''
 
