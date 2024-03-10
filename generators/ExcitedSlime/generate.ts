@@ -10,8 +10,19 @@ export const generate: GeneratorFunction<
   ExcitedSlimeSettings,
   ExcitedSlimeCache
 > = async (canvas, settings, cache) => {
-  const backgroundImage =
-    cache?.backgroundImage || (await loadImage('/assets/excited-slime.jpg'));
+  const {
+    includeSadPanel,
+    firstPanel = '',
+    secondPanel = '',
+    thirdPanel = '',
+    fourthPanel = '',
+  } = settings;
+
+  const useSadPanel = includeSadPanel === 'Yes';
+
+  const backgroundImage = await loadImage(
+    useSadPanel ? '/assets/excited-slime-sad.jpg' : '/assets/excited-slime.jpg'
+  );
 
   const ctx = await setupCanvas(canvas, { backgroundImage });
   if (!ctx) {
@@ -19,8 +30,6 @@ export const generate: GeneratorFunction<
       success: false,
     };
   }
-
-  const { firstPanel = '', secondPanel = '', thirdPanel = '' } = settings;
 
   const multilineText = new MultilineText(ctx, { fontSize: 48 });
 
@@ -42,6 +51,15 @@ export const generate: GeneratorFunction<
     width: 485,
     height: 367,
   });
+
+  if (includeSadPanel) {
+    multilineText.drawText(fourthPanel, {
+      x: 16,
+      y: 1131,
+      width: 485,
+      height: 367,
+    });
+  }
 
   const suggestedAltText = buildAltText(settings);
 
