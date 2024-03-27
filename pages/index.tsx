@@ -76,7 +76,7 @@ const Homepage = ({
 
     <p>
       I was made by{' '}
-      <a href="https://meow.woem.cat/@olivvybee" rel="me">
+      <a href="https://honeycomb.engineer/@olivvybee" rel="me">
         <strong>@olivvybee</strong>
       </a>{' '}
       because she kept coming up with ideas for image generators and needed
