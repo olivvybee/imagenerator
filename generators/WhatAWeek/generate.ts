@@ -15,7 +15,7 @@ export const generate: GeneratorFunction<WhatAWeekSettings> = async (
 
   const useComicFont = font === 'Comic';
 
-  await loadFont('Komika', '/fonts/Komika.woff2');
+  await loadFont('Polsyh', '/fonts/Polsyh.woff2');
 
   const image = await loadImage('/assets/what-a-week.jpg');
   const { width, height } = image;
@@ -34,19 +34,19 @@ export const generate: GeneratorFunction<WhatAWeekSettings> = async (
 
   const multilineText = new MultilineText(ctx, {
     fontSize: useComicFont ? COMIC_FONT_SIZE : REGULAR_FONT_SIZE,
-    fontFace: useComicFont ? 'Komika' : 'Atkinson Hyperlegible',
+    fontFace: useComicFont ? 'Polsyh' : 'Atkinson Hyperlegible',
   });
 
   multilineText.drawText(captainHaddock, {
     x: 88,
-    y: useComicFont ? 72 : 77,
+    y: 77,
     width: 720,
     height: 130,
   });
 
   multilineText.drawText(tintin, {
     x: 85,
-    y: useComicFont ? 222 : 227,
+    y: 224,
     width: 505,
     height: 80,
   });
