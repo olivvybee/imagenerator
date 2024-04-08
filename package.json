@@ -30,7 +30,7 @@
     "use-debounce": "^9.0.4"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^4.23.1",
+    "@netlify/plugin-nextjs": "^5.0.0",
     "@testing-library/jest-dom": "^6.1.2",
     "@testing-library/react": "^14.0.0",
     "@types/color": "^3.0.3",
