@@ -11,7 +11,7 @@
     "new": "tsx ./scripts/new-generator/new-generator.ts"
   },
   "engines": {
-    "node": ">=18"
+    "node": "20.x"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.33.0",
