@@ -13,6 +13,6 @@ jobs:
         with:
           node-version: 18
       - name: Install dependencies
-        run: yarn install
+        run: npm install
       - name: Unit tests
-        run: yarn test
+        run: npm test
