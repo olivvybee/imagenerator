@@ -2,14 +2,28 @@ import { Size } from '../types/UtilTypes';
 
 export const calculateImageSize = (
   image: HTMLImageElement,
-  targetSize: number
+  targetSize: number | Size
 ): Size => {
   const { width, height } = image;
 
   const ratio = width / height;
 
-  const newWidth = width > height ? targetSize : targetSize * ratio;
-  const newHeight = height > width ? targetSize : targetSize / ratio;
+  if (typeof targetSize === 'number') {
+    const newWidth = width > height ? targetSize : targetSize * ratio;
+    const newHeight = height > width ? targetSize : targetSize / ratio;
 
-  return { width: newWidth, height: newHeight };
+    return { width: newWidth, height: newHeight };
+  }
+
+  if (width > height) {
+    return {
+      width: targetSize.width,
+      height: targetSize.width / ratio,
+    };
+  } else {
+    return {
+      width: targetSize.height * ratio,
+      height: targetSize.height,
+    };
+  }
 };
