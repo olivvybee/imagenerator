@@ -2,15 +2,18 @@ import inquirer from 'inquirer';
 import path from 'path';
 import fs from 'fs';
 
-const toTitleCase = (s: string) =>
-  s.charAt(0).toUpperCase() +
-  s.slice(1).replace(/\W+(.)/g, (_, chr) => ` ${chr.toUpperCase()}`);
-
 const toCamelCase = (s: string) =>
   s.charAt(0).toLowerCase() +
-  s.slice(1).replace(/\W+(.)/g, (_, chr) => chr.toUpperCase());
+  s
+    .slice(1)
+    .replace(/[^ a-zA-Z0-9_-]/g, '')
+    .replace(/\W+(.)/g, (_, chr) => chr.toUpperCase());
 
-const toKebabCase = (s: string) => s.toLowerCase().replace(/\W/g, '-');
+const toKebabCase = (s: string) =>
+  s
+    .toLowerCase()
+    .replaceAll(' ', '-')
+    .replace(/[^a-zA-Z0-9_-]/g, '');
 
 interface CopyFilesParams {
   srcDir: string;
@@ -78,9 +81,7 @@ const run = async () => {
     },
   ]);
 
-  const { name: enteredName, camelCaseName, typeName, urlPath } = answers;
-
-  const name = toTitleCase(enteredName);
+  const { name, camelCaseName, typeName, urlPath } = answers;
 
   const outDir = path.resolve('.', 'generators', typeName);
   const templateDir = path.resolve('.', 'scripts', 'new-generator', 'template');
