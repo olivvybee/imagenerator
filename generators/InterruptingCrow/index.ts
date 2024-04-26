@@ -7,6 +7,10 @@ export const interruptingCrowGenerator: Generator<InterruptingCrowSettings> = {
   name: 'Interrupting crow',
   description: 'This crow has a very important message for you.',
   helpText: 'Enter text for each of the speech bubbles.',
+  attribution: {
+    name: '"Juncrow" by False Knees',
+    href: 'http://falseknees.com/comics/158.html',
+  },
   generate,
   settings: {
     topLeftText: {

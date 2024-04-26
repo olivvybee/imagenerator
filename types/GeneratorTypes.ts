@@ -17,5 +17,6 @@ export type Generator<S extends Settings = Settings, C extends any = any> = {
   name: string;
   description: string;
   helpText: string;
+  attribution?: { name: string; href: string };
   settings: S;
 };

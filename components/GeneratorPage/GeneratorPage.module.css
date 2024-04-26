@@ -54,8 +54,22 @@
   font-size: 1.5em;
 }
 
-.helpText {
-  margin: 0;
+.attribution {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+}
+
+.attribution > a {
+  width: fit-content;
+}
+
+.sidebarText > p:first-child {
+  margin-top: 0;
+}
+
+.sidebarText > p:last-child {
+  margin-bottom: 0;
 }
 
 .shareSection {

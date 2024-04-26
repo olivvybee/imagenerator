@@ -8,6 +8,10 @@ export const tomScottGenerator: Generator<TomScottSettings, TomScottCache> = {
   name: 'Tom Scott thumbnail',
   description: 'Amazing memes you might not generate',
   helpText: 'Choose an image, enter some text, and choose where to place it.',
+  attribution: {
+    name: "Tom Scott's thumbnail style",
+    href: 'https://www.youtube.com/@TomScottGo',
+  },
   generate,
   settings: {
     image: {

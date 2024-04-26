@@ -176,7 +176,18 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
 
           <div className={styles.sidebar}>
             <h1 className={styles.generatorName}>{generator.name}</h1>
-            <p className={styles.helpText}>{generator.helpText}</p>
+
+            <div className={styles.sidebarText}>
+              <p className={styles.helpText}>{generator.helpText}</p>
+              {generator.attribution && (
+                <div className={styles.attribution}>
+                  <span>This generator is based on:</span>
+                  <a href={generator.attribution.href}>
+                    {generator.attribution.name}
+                  </a>
+                </div>
+              )}
+            </div>
 
             <div className={styles.shareSection}>
               {isSharingSupported && (
