@@ -7,6 +7,10 @@ export const sorryImLateGenerator: Generator<SorryImLateSettings> = {
   name: "Sorry I'm late",
   description: "Sorry I'm late, I was generating images.",
   helpText: 'Enter some text for each panel.',
+  attribution: {
+    name: `"Comics of Interest: Sorry I'm late" by Maarika`,
+    href: 'https://www.maarika.com/comicsofinterest/episode-016/',
+  },
   generate,
   settings: {
     panel1Text: {
