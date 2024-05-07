@@ -35,24 +35,32 @@ The easiest way to contribute is to
 generator idea, feature request, or bug report. Before doing so, have a quick
 search to make sure someone hasn't already opened a similar issue.
 
-You can also make pull requests, if you'd like to contribute more directly. I'm
-still working on improving the developer experience of creating new generators
-from scratch, but feel free to open requests with any changes, big or small.
+You can also make pull requests, if you'd like to contribute more directly. Feel
+free to open requests with any changes, big or small.
 
 ### Running locally
 
-This project uses yarn for dependency management, so if you don't have yarn
-installed you will need to install it with `npm install -g yarn`.
+This project uses npm for dependency management.
 
-Once you've cloned the project and installed yarn, install all the dependencies
-by running `yarn install`.
+Once you've cloned the project, install all the dependencies by running
+`npm install`.
 
-To run imagenerator locally, run `yarn dev`. The server will start at
+To run imagenerator locally, run `npm run dev`. The server will start at
 `http://localhost:3000`, which you can now open in your browser.
+
+### Creating a new generator
+
+To create a new generator from scratch, run `npm run new`. You'll be asked for a
+name and then some other things based on the name. In most cases these can be
+left as the default, unless the name of the generator contains punctuation.
+
+The script will create a new folder containing all the code for the generator,
+based on a template. The easiest way to understand how to write the code is to
+look at how other generators work.
 
 ### Testing
 
-Unit testing is done using jest. To run the tests, run `yarn test`. All
+Unit testing is done using jest. To run the tests, run `npm test`. All
 generators automatically have tests to ensure they have a unique name, a
 description, and suggest alt text when generating.
 
@@ -63,7 +71,7 @@ Browser compatibility for this project is tested with
 
 ESLint is set up on the project but doesn't currently run automatically on PRs.
 The ruleset is also not particularly strict. If you'd like to run linting just
-to double check, run `yarn lint`.
+to double check, run `npm run lint`.
 
 ### PR checks
 
