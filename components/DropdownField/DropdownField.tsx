@@ -3,7 +3,7 @@ import styles from './DropdownField.module.css';
 interface DropdownFieldProps {
   value?: string;
   onChange: (value: string) => void;
-  options: string[];
+  options: readonly string[];
 }
 
 export const DropdownField = ({
