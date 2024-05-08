@@ -1,4 +1,8 @@
 export const oxfordComma = (strings: string[]) => {
+  if (strings.length === 0) {
+    return '';
+  }
+
   if (strings.length === 1) {
     return strings[0];
   }
