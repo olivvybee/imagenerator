@@ -46,7 +46,7 @@ export type NumberSetting = Setting<
 export type DropdownSetting = Setting<
   SettingType.Dropdown,
   string,
-  { options: string[] }
+  { options: readonly string[] }
 >;
 export type StepperSetting<V> = Setting<
   SettingType.Stepper,
