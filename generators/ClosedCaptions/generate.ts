@@ -19,7 +19,7 @@ export const generate: GeneratorFunction<ClosedCaptionsSettings> = async (
   canvas,
   settings
 ) => {
-  const { image, text, font, textPosition } = settings;
+  const { image, text = '', font, textPosition } = settings;
 
   const chosenFont = FONTS[font];
   await loadChosenFont(font);
@@ -61,11 +61,13 @@ export const generate: GeneratorFunction<ClosedCaptionsSettings> = async (
   });
 
   const textToDraw = chosenFont.allCaps ? text.toUpperCase() : text;
+  const textX = chosenFont.x || 32;
+  const textWidth = canvas.width - 2 * textX;
 
   multilineText.drawText(textToDraw, {
-    x: 32,
+    x: textX,
     y: 32,
-    width: canvas.width - 64,
+    width: textWidth,
     height: canvas.height - 64,
   });
 

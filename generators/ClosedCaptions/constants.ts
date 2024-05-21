@@ -9,6 +9,7 @@ interface FontSettings extends Partial<MultilineTextOptions> {
   name: string;
   url?: string;
   allCaps?: boolean;
+  x?: number;
 }
 
 export const FONTS: { [key: string]: FontSettings } = {
@@ -23,6 +24,7 @@ export const FONTS: { [key: string]: FontSettings } = {
     opaqueBackground: true,
     align: 'left',
     backgroundPadding: 4,
+    x: 192,
   },
 };
 
