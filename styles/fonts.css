@@ -86,3 +86,31 @@
   font-weight: 400;
   src: local(''), url('/fonts/Momo.woff2') format('woff2');
 }
+
+@font-face {
+  font-family: 'SF Pro Display';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('/fonts/SF-Pro-Display.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Ember';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Amazon Ember'), url('/fonts/Ember.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'VCR OSD';
+  font-style: normal;
+  font-weight: 400;
+  src: local('VCR OSD Mono'), url('/fonts/VCR-OSD-Mono.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Netflix Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('/fonts/Netflix-Sans.woff2') format('woff2');
+}

@@ -15,7 +15,9 @@ export const calculateImageSize = (
     return { width: newWidth, height: newHeight };
   }
 
-  if (width > height) {
+  const targetRatio = targetSize.width / targetSize.height;
+
+  if (targetRatio < ratio) {
     return {
       width: targetSize.width,
       height: targetSize.width / ratio,
