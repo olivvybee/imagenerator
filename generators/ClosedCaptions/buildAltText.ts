@@ -6,16 +6,18 @@ export const buildAltText = (
 ) => {
   const { text, image } = settings;
 
+  const normalisedText = text?.split('\n').join(' ').trim();
+
   if (!image || !image.src) {
-    if (text) {
-      return `Subtitles that say "${text}".`;
+    if (normalisedText) {
+      return `Subtitles that say "${normalisedText}".`;
     } else {
       return 'A blank image.';
     }
   }
 
-  if (text) {
-    return `${image.description}, with subtitles that say "${text}".`;
+  if (normalisedText) {
+    return `${image.description}, with subtitles that say "${normalisedText}".`;
   } else {
     return image.description;
   }
