@@ -7,8 +7,16 @@ export const buildAltText = (
   const { text, image } = settings;
 
   if (!image || !image.src) {
-    return `Subtitles that say "${text}".`;
+    if (text) {
+      return `Subtitles that say "${text}".`;
+    } else {
+      return 'A blank image.';
+    }
   }
 
-  return `${image.description}, with subtitles that say "${text}".`;
+  if (text) {
+    return `${image.description}, with subtitles that say "${text}".`;
+  } else {
+    return image.description;
+  }
 };
