@@ -4,6 +4,7 @@ export interface Output<C extends any = any> {
   success?: boolean;
   suggestedAltText?: string;
   cache?: C;
+  error?: Error;
 }
 
 export type GeneratorFunction<S extends Settings, C extends any = any> = (

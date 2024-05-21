@@ -7,7 +7,7 @@ import { useDebounce } from 'use-debounce';
 import classNames from 'classnames';
 
 import { Settings, SettingType, SettingValues } from '../../types/SettingTypes';
-import { Generator } from '../../types/GeneratorTypes';
+import { Generator, Output } from '../../types/GeneratorTypes';
 import { Configurator } from '../Configurator';
 import { MetaTags } from '../MetaTags/MetaTags';
 import { Button } from '../Button';
@@ -85,15 +85,22 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
     async ({ queryKey }) => {
       const canvas = document.createElement('canvas');
 
-      const {
-        success = true,
-        cache,
-        suggestedAltText,
-      } = await generator.generate(
-        canvas,
-        queryKey[1] as SettingValues,
-        output?.cache || {}
-      );
+      let result: Output<any>;
+      try {
+        result = await generator.generate(
+          canvas,
+          queryKey[1] as SettingValues,
+          output?.cache || {}
+        );
+      } catch (err: unknown) {
+        const error = err as Error;
+        result = {
+          success: false,
+          error,
+        };
+      }
+
+      const { success = true, cache, suggestedAltText, error } = result;
 
       const imageData = canvas.toDataURL('image/png');
       const [header, data] = imageData.split(',');
@@ -108,7 +115,13 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
       });
       const newImageData = `${header},${newBuffer.toString('base64')}`;
 
-      return { success, cache, suggestedAltText, imageData: newImageData };
+      return {
+        success,
+        cache,
+        suggestedAltText,
+        imageData: newImageData,
+        error,
+      };
     },
     {
       networkMode: 'always',
@@ -168,6 +181,20 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
               src={output.imageData}
               alt={imageAltText || ''}
             />
+          ) : hasGenerated && output.error ? (
+            <div className={styles.error}>
+              <span className={styles.errorTitle}>
+                An error occurred while generating:
+              </span>
+              <span className={styles.errorText}>
+                {output.error.name}: {output.error.message}
+              </span>
+              {output.error.stack && (
+                <span className={styles.errorStackTrace}>
+                  {output.error.stack.split('\n')[1]}
+                </span>
+              )}
+            </div>
           ) : (
             <div className={styles.placeholder} />
           )}
