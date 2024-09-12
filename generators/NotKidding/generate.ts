@@ -3,13 +3,14 @@ import { MultilineText } from '../../utils/MultilineText';
 import { loadImage } from '../../utils/loadImage';
 
 import { buildAltText } from './buildAltText';
+import { FONTS } from './constants';
 import { NotKiddingSettings } from './types';
 
 export const generate: GeneratorFunction<NotKiddingSettings> = async (
   canvas,
   settings
 ) => {
-  const { text, fontSize } = settings;
+  const { text, fontSize, font } = settings;
 
   const image = await loadImage('/assets/not-kidding.png');
 
@@ -25,10 +26,15 @@ export const generate: GeneratorFunction<NotKiddingSettings> = async (
 
   ctx.drawImage(image, 0, 0);
 
-  const multilineText = new MultilineText(ctx, { fontSize });
+  const chosenFont = FONTS[font];
+
+  const multilineText = new MultilineText(ctx, {
+    fontSize,
+    fontFace: chosenFont,
+  });
 
   if (text) {
-    multilineText.drawText(`I want ${text}`, {
+    multilineText.drawText(text, {
       x: 25,
       y: 13,
       width: 550,
