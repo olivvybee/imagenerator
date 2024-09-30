@@ -19,6 +19,8 @@ import { createFileFromDataURL } from '../../utils/createFileFromDataUrl';
 import { Expander } from '../Expander';
 import { AltTextExplanation } from '../AltTextExplanation';
 import { PLACEHOLDER_DESCRIPTION } from '../ImageField/ImageField';
+import { useCopyImageToClipbaord } from '../../utils/useCopyImageToClipboard';
+import { canvasToBlob } from '../../utils/canvasToBlob';
 
 interface GeneratorPageProps {
   generator: Generator<any, any>;
@@ -121,6 +123,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
         suggestedAltText,
         imageData: newImageData,
         error,
+        canvas,
       };
     },
     {
@@ -138,6 +141,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   );
 
   const [copiedText, copyToClipboard] = useCopyToClipboard();
+  const [copyImageToClipboard, hasCopiedImage] = useCopyImageToClipbaord();
 
   const { isSharingSupported, share } = useNativeShare('image/png');
   const shareImage = () => {
@@ -152,6 +156,13 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
   const downloadImage = () => {
     if (output?.imageData) {
       saveAs(output?.imageData, `${generator.name}.png`);
+    }
+  };
+
+  const copyResultToClipboard = async () => {
+    if (output?.canvas) {
+      const blob = await canvasToBlob(output?.canvas);
+      copyImageToClipboard(blob);
     }
   };
 
@@ -217,13 +228,21 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({ generator }) => {
             </div>
 
             <div className={styles.shareSection}>
-              {isSharingSupported && (
+              {isSharingSupported ? (
                 <Button
                   className={styles.button}
                   icon={IoShareOutline}
                   onClick={shareImage}
                   disabled={!output?.success}>
                   Share result
+                </Button>
+              ) : (
+                <Button
+                  className={styles.button}
+                  icon={IoCopyOutline}
+                  onClick={copyResultToClipboard}
+                  disabled={!output?.success}>
+                  Copy result to clipboard
                 </Button>
               )}
               <Button
