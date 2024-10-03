@@ -35,7 +35,7 @@ export const generate: GeneratorFunction<LooksInsideSettings> = async (
   const { height: textHeight } = multilineText.drawText(textToDraw, {
     x: 0,
     y: 0,
-    width: 1000,
+    width,
     height: 1000,
   });
 
