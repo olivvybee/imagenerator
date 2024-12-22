@@ -32,8 +32,8 @@
   font-style: normal;
   font-weight: 400;
   src: local(''),
-    url('/fonts/Atkinson-HyperLegible-Regular.woff2') format('woff2'),
-    url('/fonts/Atkinson-HyperLegible-Regular.woff') format('woff');
+    url('/fonts/Atkinson-Hyperlegible-Regular.woff2') format('woff2'),
+    url('/fonts/Atkinson-Hyperlegible-Regular.woff') format('woff');
 }
 
 @font-face {
