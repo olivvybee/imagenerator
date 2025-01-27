@@ -27,7 +27,7 @@ export const generate: GeneratorFunction<TradeOfferSettings> = async (
   ctx.fillStyle = backgroundColour.hex;
   ctx.fillRect(0, 0, 650, 900);
 
-  const imagePath = `/assets/trade-offer-${character}.png`;
+  const imagePath = `/assets/trade-offer-${character.toLowerCase()}.png`;
   const image = await loadImage(imagePath);
 
   const { width: imageWidth, height: imageHeight } = image;
