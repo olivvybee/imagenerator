@@ -22,6 +22,7 @@ export interface MultilineTextOptions {
   background: boolean;
   opaqueBackground: boolean;
   backgroundPadding: number;
+  backgroundColour: string;
 }
 
 export interface DrawTextParams {
@@ -117,6 +118,7 @@ export class MultilineText {
     background: false,
     opaqueBackground: false,
     backgroundPadding: 8,
+    backgroundColour: '#000000',
   };
 
   constructor(
@@ -223,7 +225,7 @@ export class MultilineText {
       const backgroundWidth = boundingWidth + 2 * options.backgroundPadding;
       const backgroundHeight = totalHeight + 2 * options.backgroundPadding;
 
-      this.ctx.fillStyle = '#000000';
+      this.ctx.fillStyle = options.backgroundColour;
       this.ctx.globalAlpha = options.opaqueBackground ? 1 : 0.5;
 
       this.ctx.fillRect(
