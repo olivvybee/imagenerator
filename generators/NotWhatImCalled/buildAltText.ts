@@ -8,7 +8,7 @@ export const buildAltText = (
 
   return (
     `${image.description} saying "hey guys" with three people looking over and pointing. ` +
-    `The characters shout "${name}"` +
-    'and the response is "not what I\'m called.'
+    `The characters shout "${name}" ` +
+    'and the response is "not what I\'m called".'
   );
 };
