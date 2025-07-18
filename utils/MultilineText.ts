@@ -277,6 +277,6 @@ export class MultilineText {
     this.ctx.textBaseline = previousBaseline;
     this.ctx.fillStyle = previousFill;
 
-    return { height: totalHeight };
+    return { width: boundingWidth, height: totalHeight };
   };
 }
