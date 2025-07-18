@@ -3,6 +3,8 @@ import { loadImage } from './loadImage';
 interface DrawImageOptions {
   x?: number;
   y?: number;
+  width?: number;
+  height?: number;
 }
 
 export const drawImage = async (
