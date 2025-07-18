@@ -21,7 +21,6 @@ export const gboardTextStickerGenerator: Generator<GboardTextStickerSettings> =
         name: 'Colour',
         type: SettingType.Colour,
         params: {
-          allowCustom: true,
           presets: COLOURS,
         },
         defaultValue: COLOURS[0],
@@ -47,7 +46,6 @@ export const gboardTextStickerGenerator: Generator<GboardTextStickerSettings> =
         name: 'Decoration colour',
         type: SettingType.Colour,
         params: {
-          allowCustom: true,
           presets: COLOURS,
         },
         when: (settings: SettingValues<GboardTextStickerSettings>) =>
