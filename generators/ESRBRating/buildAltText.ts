@@ -1,6 +1,5 @@
 import { SettingValues } from '../../types/SettingTypes';
 import { oxfordComma } from '../../utils/oxfordComma';
-import { RATING_OPTIONS } from './constants';
 import { ESRBRatingSettings } from './types';
 import {
   hasCustomRating as settingsHaveCustomRating,

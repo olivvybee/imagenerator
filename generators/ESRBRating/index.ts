@@ -16,9 +16,9 @@ export const esrbRatingGenerator: Generator<ESRBRatingSettings> = {
       name: 'Rating',
       type: SettingType.Dropdown,
       params: {
-        options: RATING_OPTIONS,
+        options: Object.keys(RATING_OPTIONS),
       },
-      defaultValue: RATING_OPTIONS[0],
+      defaultValue: Object.keys(RATING_OPTIONS)[0],
     },
     customRating: {
       name: 'Custom rating text',
