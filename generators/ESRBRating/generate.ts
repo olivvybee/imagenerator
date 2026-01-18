@@ -10,6 +10,7 @@ import {
   DESCRIPTION_FONT_SIZE,
   INITIALS_FONT_SIZE,
   RATING_FONT_SIZE,
+  RATING_OPTIONS,
 } from './constants';
 import { ESRBRatingSettings } from './types';
 import {
@@ -19,7 +20,7 @@ import {
 
 export const generate: GeneratorFunction<ESRBRatingSettings> = async (
   canvas,
-  settings
+  settings,
 ) => {
   const { rating, customRating, text1, text2, text3, text4, text5 } = settings;
   const hasCustomRating = settingsHaveCustomRating(settings);
@@ -28,7 +29,8 @@ export const generate: GeneratorFunction<ESRBRatingSettings> = async (
     hasCustomRating ? customRating || '' : rating
   ).toUpperCase();
 
-  const ratingImage = await loadImage(`/assets/esrb/${rating}.svg`);
+  const imagePath = `/assets/esrb/${RATING_OPTIONS[rating]}.svg`;
+  const ratingImage = await loadImage(imagePath);
 
   await loadFont('Antonio', '/fonts/Antonio.woff2');
 

@@ -5,7 +5,7 @@ import { ESRBRatingSettings } from './types';
 export const hasCustomRating = (settings: SettingValues<ESRBRatingSettings>) =>
   settings.rating === 'Custom';
 
-export type Rating = (typeof RATING_OPTIONS)[number];
+export type Rating = keyof typeof RATING_OPTIONS;
 
 export const getInitials = (rating: Rating) => {
   switch (rating) {
