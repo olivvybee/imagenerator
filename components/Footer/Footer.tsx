@@ -5,10 +5,10 @@ export const Footer = () => (
     <div className={styles.footerContent}>
       <span>
         imagenerator by{' '}
-        <a rel="me" href="https://honeycomb.engineer/@olivvybee">
+        <a rel="me" href="https://beehive.city/@olivvybee">
           olivvybee
         </a>
-        . Support them and the site on{' '}
+        . Support her and the site on{' '}
         <a href="https://ko-fi.com/olivvybee">ko-fi</a>. Report issues and
         suggestions on{' '}
         <a href="https://github.com/olivvybee/imagenerator">github</a>.
