@@ -23,5 +23,13 @@ export const sorryImLateGenerator: Generator<SorryImLateSettings> = {
       type: SettingType.Text,
       params: {},
     },
+    tallGirl: {
+      name: 'Tall girl',
+      type: SettingType.Dropdown,
+      params: {
+        options: ['No', 'Yes'],
+      },
+      defaultValue: 'No',
+    },
   },
 };
