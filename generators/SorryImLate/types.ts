@@ -1,6 +1,7 @@
-import { TextSetting } from '../../types/SettingTypes';
+import { DropdownSetting, TextSetting } from '../../types/SettingTypes';
 
 export type SorryImLateSettings = {
   panel1Text: TextSetting;
   panel2Text: TextSetting;
+  tallGirl: DropdownSetting;
 };

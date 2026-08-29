@@ -8,9 +8,9 @@ import { SorryImLateSettings } from './types';
 
 export const generate: GeneratorFunction<SorryImLateSettings> = async (
   canvas,
-  settings
+  settings,
 ) => {
-  const { panel1Text = '', panel2Text } = settings;
+  const { panel1Text = '', panel2Text, tallGirl } = settings;
 
   const image = await loadImage('/assets/sorry-im-late.jpg');
   const { width, height } = image;
@@ -26,6 +26,10 @@ export const generate: GeneratorFunction<SorryImLateSettings> = async (
   }
 
   ctx.drawImage(image, 0, 0);
+
+  const girlImage = await loadImage('/assets/sorry-im-late-girl.png');
+  const girlY = tallGirl === 'Yes' ? 753 : 673;
+  ctx.drawImage(girlImage, 515, girlY);
 
   const multilineText = new MultilineText(ctx, { fontSize: FONT_SIZE });
 
