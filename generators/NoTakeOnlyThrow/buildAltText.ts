@@ -2,7 +2,7 @@ import { SettingValues } from '../../types/SettingTypes';
 import { NoTakeOnlyThrowSettings } from './types';
 
 export const buildAltText = (
-  settings: SettingValues<NoTakeOnlyThrowSettings>
+  settings: SettingValues<NoTakeOnlyThrowSettings>,
 ) => {
   const { panel1, panel2, panel3 } = settings;
 
@@ -14,9 +14,8 @@ export const buildAltText = (
     'In the final panel, the dog is still angry and still holding the frisbee.';
 
   const [panel1Text, panel2Text, panel3Text] = [panel1, panel2, panel3].map(
-    (panel) =>
-      panel ? `The text says "${panel}".` : "There's no text in the panel."
+    (panel) => (panel ? ` The dog is saying "${panel}".` : ''),
   );
 
-  return `A three panel comic featuring a dog with big floppy ears. ${panel1Image} ${panel1Text} ${panel2Image} ${panel2Text} ${panel3Image} ${panel3Text}`;
+  return `A three panel comic featuring a dog with big floppy ears. ${panel1Image}${panel1Text} ${panel2Image}${panel2Text} ${panel3Image}${panel3Text}`;
 };
