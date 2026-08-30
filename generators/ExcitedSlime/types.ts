@@ -1,10 +1,10 @@
-import { DropdownSetting, TextSetting } from '../../types/SettingTypes';
+import { BooleanSetting, TextSetting } from '../../types/SettingTypes';
 
 export type ExcitedSlimeSettings = {
   firstPanel: TextSetting;
   secondPanel: TextSetting;
   thirdPanel: TextSetting;
-  includeSadPanel: DropdownSetting;
+  includeSadPanel: BooleanSetting;
   fourthPanel: TextSetting;
 };
 
