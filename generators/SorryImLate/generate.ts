@@ -28,7 +28,7 @@ export const generate: GeneratorFunction<SorryImLateSettings> = async (
   ctx.drawImage(image, 0, 0);
 
   const girlImage = await loadImage('/assets/sorry-im-late-girl.png');
-  const girlY = tallGirl === 'Yes' ? 753 : 673;
+  const girlY = tallGirl ? 753 : 673;
   ctx.drawImage(girlImage, 515, girlY);
 
   const multilineText = new MultilineText(ctx, { fontSize: FONT_SIZE });

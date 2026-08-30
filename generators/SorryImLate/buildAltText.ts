@@ -9,7 +9,7 @@ export const buildAltText = (settings: SettingValues<SorryImLateSettings>) => {
     : 'and has an empty speech bubble';
   const panel2Description = panel2Text ? `"${panel2Text}"` : 'nothing';
 
-  const heightDescription = tallGirl === 'Yes' ? ', taller ' : '';
+  const heightDescription = tallGirl ? ', taller ' : '';
 
   return (
     'A two panel comic. ' +
