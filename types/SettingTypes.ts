@@ -7,6 +7,7 @@ export enum SettingType {
   Image,
   Text,
   Number,
+  Boolean,
   Dropdown,
   Stepper,
   Slider,
@@ -43,6 +44,7 @@ export type NumberSetting = Setting<
   number,
   { min?: number; max?: number }
 >;
+export type BooleanSetting = Setting<SettingType.Boolean, boolean, {}>;
 export type DropdownSetting = Setting<
   SettingType.Dropdown,
   string,
@@ -72,6 +74,7 @@ export type TypedSetting =
   | ImageSetting
   | TextSetting
   | NumberSetting
+  | BooleanSetting
   | DropdownSetting
   | StepperSetting<any>
   | SliderSetting

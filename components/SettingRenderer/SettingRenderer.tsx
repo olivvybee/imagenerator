@@ -1,4 +1,5 @@
 import { TypedSetting, SettingType } from '../../types/SettingTypes';
+import { BooleanField } from '../BooleanField';
 import { ColourField } from '../ColourField';
 import { DropdownField } from '../DropdownField';
 import { ImageField } from '../ImageField';
@@ -33,6 +34,17 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
           placeholder={setting.params.placeholder}
           disabled={disabled}
           multiline={setting.params.multiline}
+        />
+      );
+
+    case SettingType.Boolean:
+      return (
+        <BooleanField
+          id={id}
+          label={setting.name}
+          onChange={onChange}
+          value={value}
+          disabled={disabled}
         />
       );
 
