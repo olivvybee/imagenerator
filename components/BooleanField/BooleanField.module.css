@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+}
+
+.switchContainer {
+  position: relative;
+  cursor: pointer;
+}
+
+.track {
+  height: 24px;
+  width: 42px;
+  border-radius: 24px;
+  background-color: var(--primary-muted);
+}
+
+.thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: var(--primary);
+  transition: transform 100ms ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+}
+
+.thumb.checked {
+  transform: translateX(calc(100% - 2px));
+}
+
+.label {
+  cursor: pointer;
+}

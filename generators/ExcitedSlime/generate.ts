@@ -18,10 +18,10 @@ export const generate: GeneratorFunction<
     fourthPanel = '',
   } = settings;
 
-  const useSadPanel = includeSadPanel === 'Yes';
-
   const backgroundImage = await loadImage(
-    useSadPanel ? '/assets/excited-slime-sad.jpg' : '/assets/excited-slime.jpg'
+    includeSadPanel
+      ? '/assets/excited-slime-sad.jpg'
+      : '/assets/excited-slime.jpg',
   );
 
   const ctx = await setupCanvas(canvas, { backgroundImage });

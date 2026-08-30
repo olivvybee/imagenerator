@@ -6,11 +6,10 @@ export const buildAltText = (settings: SettingValues<ExcitedSlimeSettings>) => {
     settings;
 
   const descriptions = [firstPanel, secondPanel, thirdPanel, fourthPanel].map(
-    (panel) => (panel ? `says "${panel}"` : 'has a blank text panel')
+    (panel) => (panel ? `says "${panel}"` : 'has a blank text panel'),
   );
 
-  const hasSadPanel = includeSadPanel === 'Yes';
-  const rowCount = hasSadPanel ? 'four' : 'three';
+  const rowCount = includeSadPanel ? 'four' : 'three';
 
   let text =
     `A meme with ${rowCount} rows, where each row has some text and an image of a slime from dragon quest.` +
@@ -21,7 +20,7 @@ export const buildAltText = (settings: SettingValues<ExcitedSlimeSettings>) => {
     ' ' +
     `Row 3 ${descriptions[2]} and the slime has tilted back from excitement. Its mouth is stretched even wider with excitement.`;
 
-  if (hasSadPanel) {
+  if (includeSadPanel) {
     text +=
       ' ' +
       `Row 4 ${descriptions[3]} and the slime has returned to its original position and now looks sad.`;

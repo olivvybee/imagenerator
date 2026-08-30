@@ -27,19 +27,17 @@ export const excitedSlimeGenerator: Generator<ExcitedSlimeSettings> = {
       params: {},
     },
     includeSadPanel: {
-      type: SettingType.Dropdown,
+      type: SettingType.Boolean,
       name: 'Add sad slime',
-      params: {
-        options: ['No', 'Yes'],
-      },
-      defaultValue: 'No',
+      params: {},
+      defaultValue: false,
     },
     fourthPanel: {
       type: SettingType.Text,
       name: 'Fourth panel',
       params: {},
       when: (settings: SettingValues<ExcitedSlimeSettings>) =>
-        settings.includeSadPanel === 'Yes',
+        settings.includeSadPanel,
     },
   },
 };

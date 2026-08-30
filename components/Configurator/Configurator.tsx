@@ -1,7 +1,7 @@
 import { IoRefreshOutline } from 'react-icons/io5';
 
 import { Generator } from '../../types/GeneratorTypes';
-import { Settings, SettingValues } from '../../types/SettingTypes';
+import { Settings, SettingType, SettingValues } from '../../types/SettingTypes';
 import { Button } from '../Button';
 import { SettingRenderer } from '../SettingRenderer/SettingRenderer';
 
@@ -35,9 +35,12 @@ export const Configurator: React.FC<ConfiguratorProps> = ({
 
       return (
         <div className={styles.settingWrapper} key={key}>
-          <label className={styles.settingName} htmlFor={key}>
-            {setting.name}
-          </label>
+          {setting.type !== SettingType.Boolean && (
+            <label className={styles.settingName} htmlFor={key}>
+              {setting.name}
+            </label>
+          )}
+
           <SettingRenderer
             setting={setting}
             value={values[key]}
