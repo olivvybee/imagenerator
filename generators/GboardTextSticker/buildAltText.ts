@@ -1,11 +1,13 @@
+import { Colour } from '../../types/Colour';
 import { SettingValues } from '../../types/SettingTypes';
 import { Decoration } from './constants';
 import { GboardTextStickerSettings } from './types';
 
 export const buildAltText = (
-  settings: SettingValues<GboardTextStickerSettings>
+  settings: SettingValues<GboardTextStickerSettings>,
+  decorationColour: Colour,
 ) => {
-  const { text, colour, decoration, decorationColour } = settings;
+  const { text, colour, decoration } = settings;
 
   const textDesc = `"${text}" written in a bubbly font, in a pastel ${colour.name.toLowerCase()} colour`;
 
