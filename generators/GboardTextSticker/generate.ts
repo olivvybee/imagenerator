@@ -16,7 +16,7 @@ import { GboardTextStickerSettings } from './types';
 
 export const generate: GeneratorFunction<GboardTextStickerSettings> = async (
   canvas,
-  settings
+  settings,
 ) => {
   const {
     text = '',
@@ -61,22 +61,21 @@ export const generate: GeneratorFunction<GboardTextStickerSettings> = async (
       y: CANVAS_HEIGHT - maxHeight - 5,
       width: CANVAS_WIDTH - 10,
       height: maxHeight,
-    }
+    },
   );
 
   const colourIndex = COLOURS.findIndex(
-    (colourOption) => colourOption.hex === colour.hex
+    (colourOption) => colourOption.hex === colour.hex,
   );
   const decorationColourIndex = (colourIndex + 1) % COLOURS.length;
   const defaultDecorationColour = COLOURS[decorationColourIndex];
-  const decorationColourHex =
-    decorationColour?.hex || defaultDecorationColour.hex;
+  const selectedDecorationColour = decorationColour || defaultDecorationColour;
 
   if (decoration === Decoration.Underline) {
     const x = (CANVAS_WIDTH - textWidth) / 2;
     const y = CANVAS_HEIGHT / 2 + textHeight / 2;
 
-    ctx.fillStyle = decorationColourHex;
+    ctx.fillStyle = selectedDecorationColour.hex;
     ctx.beginPath();
     ctx.roundRect(x, y, textWidth, 30, 30);
     ctx.fill();
@@ -89,7 +88,7 @@ export const generate: GeneratorFunction<GboardTextStickerSettings> = async (
     });
   }
 
-  const suggestedAltText = buildAltText(settings);
+  const suggestedAltText = buildAltText(settings, selectedDecorationColour);
 
   return {
     success: true,
