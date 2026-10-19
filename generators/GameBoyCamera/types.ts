@@ -1,4 +1,8 @@
-import { ImageSetting, StepperSetting } from '../../types/SettingTypes';
+import {
+  BooleanSetting,
+  ImageSetting,
+  StepperSetting,
+} from '../../types/SettingTypes';
 
 export interface Palette {
   name: string;
@@ -8,6 +12,8 @@ export interface Palette {
 
 export type GameBoyCameraSettings = {
   image: ImageSetting;
+  aspectRatio: StepperSetting<string>;
+  horizontal: BooleanSetting;
   brightness: StepperSetting<number>;
   contrast: StepperSetting<number>;
   palette: StepperSetting<Palette>;
