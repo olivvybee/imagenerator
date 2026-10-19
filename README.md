@@ -35,8 +35,16 @@ The easiest way to contribute is to
 generator idea, feature request, or bug report. Before doing so, have a quick
 search to make sure someone hasn't already opened a similar issue.
 
-You can also make pull requests, if you'd like to contribute more directly. Feel
-free to open requests with any changes, big or small.
+If you'd like to open a pull request with a change, please make a note on an
+issue first to make sure your change is appropriate before putting in the effort
+of implementing the change!
+
+### AI usage
+
+This repository has a zero-tolerance policy on "AI" usage. Submitting an issue
+or PR that involved the use of AI, no matter how much or how little, will result
+in your contribution being deleted and ridiculed. Write it yourself, or don't
+write it at all.
 
 ### Running locally
 
@@ -64,9 +72,6 @@ Unit testing is done using jest. To run the tests, run `npm test`. All
 generators automatically have tests to ensure they have a unique name, a
 description, and suggest alt text when generating.
 
-Browser compatibility for this project is tested with
-[BrowserStack](https://www.browserstack.com).
-
 ### Linting
 
 ESLint is set up on the project but doesn't currently run automatically on PRs.
@@ -75,7 +80,7 @@ to double check, run `npm run lint`.
 
 ### PR checks
 
-When you open a PR, your branch will be deployed to a netlify preview branch so
+When you open a PR, your branch will be deployed to a vercel preview branch so
 your changes can be verified. A github action will also run unit tests against
 the PR.
 
@@ -83,4 +88,4 @@ the PR.
 
 I try to limit the number of third party dependencies wherever possible, but if
 there's something useful that allows a feature which would otherwise be
-extremely useful to implement, it can be added.
+extremely complicated to implement, it can be added.
