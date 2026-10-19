@@ -1,22 +1,23 @@
-import { OUTPUT_SIZE } from './constants';
+import { SCALE_FACTOR } from './constants';
 
 export const upscale = (pixels: ImageData) => {
   const oldData = pixels.data;
-  const oldSize = pixels.width;
+  const oldWidth = pixels.width;
 
-  const newPixels = new ImageData(OUTPUT_SIZE, OUTPUT_SIZE);
+  const newWidth = pixels.width * SCALE_FACTOR;
+  const newHeight = pixels.height * SCALE_FACTOR;
+
+  const newPixels = new ImageData(newWidth, newHeight);
   const newData = newPixels.data;
-
-  const scaleFactor = OUTPUT_SIZE / oldSize;
 
   let newIndex = 0;
 
-  for (let y = 0; y < OUTPUT_SIZE; y++) {
-    for (let x = 0; x < OUTPUT_SIZE; x++) {
-      const oldX = Math.floor(x / scaleFactor);
-      const oldY = Math.floor(y / scaleFactor);
+  for (let y = 0; y < newHeight; y++) {
+    for (let x = 0; x < newWidth; x++) {
+      const oldX = Math.floor(x / SCALE_FACTOR);
+      const oldY = Math.floor(y / SCALE_FACTOR);
 
-      const oldIndex = (oldX + oldY * oldSize) * 4;
+      const oldIndex = (oldX + oldY * oldWidth) * 4;
 
       newData[newIndex] = oldData[oldIndex];
       newData[newIndex + 1] = oldData[oldIndex + 1];

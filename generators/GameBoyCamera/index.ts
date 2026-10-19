@@ -3,7 +3,8 @@ import { SettingType } from '../../types/SettingTypes';
 
 import { GameBoyCameraSettings } from './types';
 import { generate } from './generate';
-import { PALETTES } from './constants';
+import { ASPECT_RATIOS, PALETTES } from './constants';
+import { getAspectRatio } from './getDimensions';
 import { renderPaletteLabel } from './renderPaletteLabel';
 
 export const gameboyCameraGenerator: Generator<GameBoyCameraSettings> = {
@@ -11,17 +12,33 @@ export const gameboyCameraGenerator: Generator<GameBoyCameraSettings> = {
   name: 'Game Boy Camera',
   description: 'Make any image look like it was taken with a Gameboy Camera.',
   helpText:
-    'Choose an image, then set the brightness, contrast, and colour palette to adjust the result.',
+    'Choose an image, then set the aspect ratio, brightness, contrast, and colour palette to adjust the result.',
   settings: {
     image: {
       type: SettingType.Image,
       name: 'Image',
       params: {
         allowCrop: true,
-        cropAspectRatio: 1,
+        cropAspectRatio: getAspectRatio,
         cropMinWidth: 128,
         cropMinHeight: 128,
       },
+    },
+    aspectRatio: {
+      type: SettingType.Stepper,
+      name: 'Aspect ratio',
+      defaultValue: ASPECT_RATIOS[0],
+      params: {
+        options: ASPECT_RATIOS,
+        allowWrapping: false,
+      },
+    },
+    horizontal: {
+      type: SettingType.Boolean,
+      name: 'Horizontal',
+      defaultValue: false,
+      params: {},
+      when: (settings) => settings.aspectRatio !== '1:1',
     },
     brightness: {
       type: SettingType.Stepper,

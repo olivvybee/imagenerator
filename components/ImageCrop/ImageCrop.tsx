@@ -1,4 +1,4 @@
-import { ReactEventHandler, useState } from 'react';
+import { ReactEventHandler, useEffect, useState } from 'react';
 import ReactCrop, {
   centerCrop,
   makeAspectCrop,
@@ -26,6 +26,10 @@ export const ImageCrop = ({
   minHeight,
   onSave,
 }: ImageCropProps) => {
+  const [imageSize, setImageSize] = useState<{
+    width: number;
+    height: number;
+  }>();
   const [defaultCrop, setDefaultCrop] = useState<PercentCrop>();
   const [crop, setCrop] = useState<PercentCrop>();
 
@@ -40,7 +44,17 @@ export const ImageCrop = ({
 
   const onImageLoad: ReactEventHandler<HTMLImageElement> = (e) => {
     const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
+    setImageSize({ width, height });
+  };
 
+  // Recalculate the crop when a new image loads or when the aspect ratio
+  // changes, so the saved crop always matches the requested aspect ratio
+  useEffect(() => {
+    if (!imageSize) {
+      return;
+    }
+
+    const { width, height } = imageSize;
     const aspect = aspectRatio || width / height;
 
     const defaultCrop = centerCrop(
@@ -52,7 +66,9 @@ export const ImageCrop = ({
     setDefaultCrop(defaultCrop);
     setCrop(defaultCrop);
     onSave(defaultCrop);
-  };
+    // onSave is recreated on every render, so including it would cause a loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imageSize, aspectRatio]);
 
   return (
     <div className={styles.cropWrapper}>
