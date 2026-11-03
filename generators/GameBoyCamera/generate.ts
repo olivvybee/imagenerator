@@ -4,12 +4,8 @@ import { loadImage } from '../../utils/loadImage';
 
 import { applyDithering } from './applyDithering';
 import { buildAltText } from './buildAltText';
-import {
-  BRIGHTNESS_MAP,
-  CONTRAST_MAP,
-  OUTPUT_SIZE,
-  TARGET_SIZE,
-} from './constants';
+import { BRIGHTNESS_MAP, CONTRAST_MAP, SCALE_FACTOR } from './constants';
+import { getDimensions } from './getDimensions';
 import { recolour } from './recolour';
 import { GameBoyCameraSettings } from './types';
 import { upscale } from './upscale';
@@ -24,8 +20,10 @@ export const generate: GeneratorFunction<GameBoyCameraSettings> = async (
     };
   }
 
-  canvas.width = OUTPUT_SIZE;
-  canvas.height = OUTPUT_SIZE;
+  const { width, height } = getDimensions(settings);
+
+  canvas.width = width * SCALE_FACTOR;
+  canvas.height = height * SCALE_FACTOR;
 
   const ctx = canvas.getContext('2d');
   if (!ctx) {
@@ -53,9 +51,9 @@ export const generate: GeneratorFunction<GameBoyCameraSettings> = async (
     };
   }
 
-  ctx.drawImage(croppedImage, 0, 0, TARGET_SIZE, TARGET_SIZE);
+  ctx.drawImage(croppedImage, 0, 0, width, height);
 
-  const pixels = ctx.getImageData(0, 0, TARGET_SIZE, TARGET_SIZE);
+  const pixels = ctx.getImageData(0, 0, width, height);
   const { brightness, contrast, palette } = settings;
 
   applyDithering(pixels, BRIGHTNESS_MAP[brightness], CONTRAST_MAP[contrast]);

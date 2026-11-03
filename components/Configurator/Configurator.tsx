@@ -46,6 +46,7 @@ export const Configurator: React.FC<ConfiguratorProps> = ({
             value={values[key]}
             id={key}
             onChange={(newValue) => onChange(key, newValue)}
+            values={values}
           />
         </div>
       );

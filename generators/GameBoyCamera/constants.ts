@@ -1,7 +1,10 @@
 import { Palette } from './types';
 
+// Size of the longest side of the image before upscaling
 export const TARGET_SIZE = 128;
-export const OUTPUT_SIZE = 512;
+export const SCALE_FACTOR = 4;
+
+export const ASPECT_RATIOS = ['1:1', '3:4', '9:16'];
 
 export const BRIGHTNESS_MAP = [2.5, 2, 1.5, 1, 0.8, 0.6, 0.4];
 export const CONTRAST_MAP = [0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4];

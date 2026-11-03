@@ -29,7 +29,7 @@ export type ImageSetting = Setting<
   Image,
   {
     allowCrop?: boolean;
-    cropAspectRatio?: number;
+    cropAspectRatio?: number | ((settings: SettingValues<any>) => number);
     cropMinWidth?: number;
     cropMinHeight?: number;
   }

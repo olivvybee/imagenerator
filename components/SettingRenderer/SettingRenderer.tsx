@@ -1,4 +1,8 @@
-import { TypedSetting, SettingType } from '../../types/SettingTypes';
+import {
+  TypedSetting,
+  SettingType,
+  SettingValues,
+} from '../../types/SettingTypes';
 import { BooleanField } from '../BooleanField';
 import { ColourField } from '../ColourField';
 import { DropdownField } from '../DropdownField';
@@ -13,6 +17,7 @@ interface SettingRendererProps {
   id: string;
   onChange: (newValue: any) => void;
   disabled?: boolean;
+  values: SettingValues;
 }
 
 export const SettingRenderer: React.FC<SettingRendererProps> = ({
@@ -21,6 +26,7 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
   id,
   onChange,
   disabled,
+  values,
 }) => {
   switch (setting.type) {
     case SettingType.Text:
@@ -66,7 +72,11 @@ export const SettingRenderer: React.FC<SettingRendererProps> = ({
           onChange={onChange}
           value={value}
           allowCrop={setting.params.allowCrop}
-          cropAspectRatio={setting.params.cropAspectRatio}
+          cropAspectRatio={
+            typeof setting.params.cropAspectRatio === 'function'
+              ? setting.params.cropAspectRatio(values)
+              : setting.params.cropAspectRatio
+          }
           cropMinWidth={setting.params.cropMinWidth}
           cropMinHeight={setting.params.cropMinHeight}
         />
